@@ -60,6 +60,13 @@ header h1 {
   letter-spacing: -0.035em;
 }
 
+.brand-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
 header p,
 .lead,
 .hero-subtitle {
@@ -73,6 +80,16 @@ header p,
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 800;
+}
+
+.eyebrow {
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  background: rgba(0, 0, 0, 0.12) !important;
+}
+
+.dot {
+  background: linear-gradient(135deg, #fff, var(--amber)) !important;
+  box-shadow: 0 0 24px rgba(255, 202, 99, 0.62) !important;
 }
 
 .suite-nav {
@@ -167,6 +184,44 @@ header p,
   background: linear-gradient(180deg, var(--card2), var(--card)) !important;
 }
 
+.stat {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--amber));
+}
+
+.stat strong {
+  color: #fff;
+}
+
+.chip,
+.pill,
+input,
+select,
+details,
+summary,
+.why,
+.empty {
+  border-color: var(--border) !important;
+}
+
+input,
+select {
+  background: rgba(27, 27, 31, 0.88) !important;
+}
+
+.ReleaseNotes { --accent: var(--orange) !important; }
+.TechCommunity { --accent: var(--amber) !important; }
+.Roadmap { --accent: var(--green) !important; }
+.MessageCenter { --accent: var(--purple) !important; }
+
 .badge.orange,
 .pill.source,
 .tab-btn.active,
@@ -200,5 +255,10 @@ button:hover,
 
   .suite-nav + .toolbar {
     top: 0;
+  }
+
+  .brand-row {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
