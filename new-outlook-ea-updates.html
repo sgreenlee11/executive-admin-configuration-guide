@@ -1,0 +1,799 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Outlook Updates for Executive Assistants</title>
+  <style>
+    :root {
+      --bg: #1B1B1F;
+      --bg-elev: #26262B;
+      --bg-elev-2: #2F2F36;
+      --border: #3A3A42;
+      --border-strong: #4A4A55;
+      --text: #F1F1F3;
+      --text-muted: #A8A8B3;
+      --text-faint: #7A7A85;
+      --orange: #F96302;
+      --orange-dark: #B84700;
+      --orange-soft: rgba(249, 99, 2, 0.16);
+      --blue: #4CC2FF;
+      --blue-soft: rgba(76, 194, 255, 0.14);
+      --green: #6CCB5F;
+      --green-soft: rgba(108, 203, 95, 0.14);
+      --amber: #FFCA63;
+      --amber-soft: rgba(255, 202, 99, 0.15);
+      --purple: #C9A6FF;
+      --purple-soft: rgba(201, 166, 255, 0.14);
+      --red: #FF7A7A;
+      --red-soft: rgba(255, 122, 122, 0.14);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.5);
+      --shadow-lg: 0 18px 46px rgba(0,0,0,0.55);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { background: var(--bg); scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255,255,255,0.22), transparent 18rem),
+        linear-gradient(135deg, var(--orange) 0%, #C75912 58%, #6F3213 100%);
+      padding: 34px 48px 30px;
+      box-shadow: var(--shadow-md);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .thd-mark {
+      width: 58px;
+      height: 58px;
+      border: 3px solid #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      transform: rotate(-6deg);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.24);
+      flex: 0 0 auto;
+    }
+    .kicker {
+      margin: 0 0 7px;
+      color: rgba(255,255,255,0.78);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-weight: 800;
+    }
+    h1 { margin: 0; color: #fff; font-size: clamp(30px, 5vw, 54px); line-height: 1; letter-spacing: -1px; }
+    .hero-subtitle { max-width: 980px; margin: 14px 0 0; color: rgba(255,255,255,0.86); font-size: 17px; }
+    .hero-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+
+    .container { max-width: 1320px; margin: 0 auto; padding: 28px 40px 72px; }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(27, 27, 31, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+    }
+    .toolbar-inner {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    nav { display: flex; gap: 5px; flex-wrap: wrap; }
+    nav a, .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-elev);
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    nav a:hover, .btn:hover {
+      color: var(--text);
+      border-color: var(--orange);
+      background: var(--orange-soft);
+      text-decoration: none;
+    }
+    .btn { white-space: nowrap; }
+
+    .slide {
+      min-height: 620px;
+      margin: 0 0 28px;
+      padding: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012)),
+        var(--bg-elev);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 7px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--orange), var(--amber));
+    }
+    .slide-header { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-bottom: 24px; }
+    .slide-title { margin: 0 0 8px; font-size: clamp(24px, 3vw, 38px); line-height: 1.08; letter-spacing: -0.3px; }
+    .slide-subtitle { margin: 0; color: var(--text-muted); max-width: 900px; }
+    .slide-number { color: var(--text-faint); font-size: 12px; font-weight: 800; letter-spacing: 1px; white-space: nowrap; }
+
+    .grid { display: grid; gap: 16px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    @media (max-width: 1080px) {
+      .grid.cols-4, .grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      header { padding: 28px 22px; }
+      .container { padding: 20px 16px 46px; }
+      .toolbar-inner { padding: 10px 16px; align-items: flex-start; flex-direction: column; }
+      .grid.cols-4, .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; }
+      .slide { min-height: auto; padding: 22px 18px 22px 24px; }
+      .slide-header { flex-direction: column; gap: 8px; }
+    }
+
+    .card {
+      background: var(--bg-elev-2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    }
+    .card h3 { margin: 0 0 8px; font-size: 18px; }
+    .card p { margin: 0 0 10px; color: var(--text-muted); font-size: 14px; }
+    .card ul { margin: 10px 0 0; padding-left: 18px; color: var(--text-muted); }
+    .card li { margin: 6px 0; }
+    .highlight {
+      background: linear-gradient(135deg, rgba(249,99,2,0.18), rgba(255,202,99,0.08));
+      border-color: rgba(249,99,2,0.42);
+    }
+    .ea-card {
+      border-left: 4px solid var(--green);
+      background: linear-gradient(135deg, rgba(108,203,95,0.12), rgba(47,47,54,1));
+    }
+    .risk-card {
+      border-left: 4px solid var(--amber);
+      background: linear-gradient(135deg, rgba(255,202,99,0.12), rgba(47,47,54,1));
+    }
+    .gap-card {
+      border-left: 4px solid var(--red);
+      background: linear-gradient(135deg, rgba(255,122,122,0.12), rgba(47,47,54,1));
+    }
+    .copilot-card {
+      border-left: 4px solid var(--purple);
+      background: linear-gradient(135deg, rgba(201,166,255,0.12), rgba(47,47,54,1));
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      background: var(--bg-elev-2);
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .badge.orange { background: var(--orange-soft); color: #FFB78B; border-color: rgba(249,99,2,0.45); }
+    .badge.green { background: var(--green-soft); color: var(--green); border-color: rgba(108,203,95,0.4); }
+    .badge.blue { background: var(--blue-soft); color: var(--blue); border-color: rgba(76,194,255,0.4); }
+    .badge.amber { background: var(--amber-soft); color: var(--amber); border-color: rgba(255,202,99,0.4); }
+    .badge.purple { background: var(--purple-soft); color: var(--purple); border-color: rgba(201,166,255,0.4); }
+    .badge.red { background: var(--red-soft); color: var(--red); border-color: rgba(255,122,122,0.4); }
+    .badge-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 12px; }
+
+    .big-stat {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 14px;
+      align-items: center;
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      background: var(--orange-soft);
+      border: 1px solid rgba(249,99,2,0.42);
+    }
+    .stat-title { margin: 0; font-size: 17px; font-weight: 800; }
+    .stat-copy { margin: 4px 0 0; color: var(--text-muted); font-size: 13px; }
+
+    .timeline { position: relative; display: grid; gap: 14px; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      bottom: 18px;
+      left: 16px;
+      width: 2px;
+      background: var(--border-strong);
+    }
+    .milestone {
+      position: relative;
+      padding: 14px 16px 14px 52px;
+      background: var(--bg-elev-2);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+    .milestone::before {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 18px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--orange);
+      border: 3px solid var(--bg-elev);
+      box-shadow: 0 0 0 2px rgba(249,99,2,0.35);
+    }
+    .milestone h3 { margin: 0 0 4px; font-size: 16px; }
+    .milestone p { margin: 0; color: var(--text-muted); font-size: 13.5px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--bg-elev-2);
+    }
+    th, td { padding: 12px 13px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+    th { background: rgba(249,99,2,0.18); color: #FFE3D1; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { color: var(--text-muted); font-size: 13.5px; }
+    td strong { color: var(--text); }
+    tr:last-child td { border-bottom: none; }
+
+    .source-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .source-list a {
+      display: block;
+      padding: 12px 13px;
+      background: var(--bg-elev-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .source-list a span { display: block; color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+    @media (max-width: 760px) { .source-list { grid-template-columns: 1fr; } }
+
+    .callout {
+      margin: 18px 0 0;
+      padding: 14px 16px;
+      border-radius: 13px;
+      border: 1px solid rgba(249,99,2,0.42);
+      background: var(--orange-soft);
+      color: #FFE3D1;
+    }
+    .callout strong { color: #fff; }
+    .presenter-note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 13px;
+      border: 1px dashed var(--border-strong);
+      color: var(--text-muted);
+      background: rgba(0,0,0,0.16);
+      font-size: 13px;
+    }
+    .presenter-note strong { color: var(--amber); }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      header, .toolbar { display: none; }
+      .container { max-width: none; padding: 0; }
+      .slide {
+        break-after: page;
+        min-height: 0;
+        box-shadow: none;
+        border-color: #ddd;
+        background: #fff;
+        color: #111;
+      }
+      .card, .milestone, table, .source-list a {
+        background: #fff;
+        color: #111;
+        border-color: #ddd;
+        box-shadow: none;
+      }
+      .card p, .card ul, td, .slide-subtitle, .presenter-note, .milestone p { color: #333; }
+      a { color: #0645ad; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand-row">
+      <div>
+        <p class="kicker">Executive admin enablement</p>
+        <h1>Latest New Outlook Updates</h1>
+        <p class="hero-subtitle">A presentation-ready view of current New Outlook capabilities, roadmap signals, adoption guidance, and EA-specific impact areas for calendar, mailbox, meeting, and Copilot workflows.</p>
+        <div class="hero-meta">
+          <span class="badge orange">Home Depot inspired branding</span>
+          <span class="badge green">EA audience</span>
+          <span class="badge blue">Support links included</span>
+          <span class="badge amber">Refreshed May 7, 2026</span>
+        </div>
+      </div>
+      <div class="thd-mark">THD<br>EA</div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <nav aria-label="Presentation sections">
+        <a href="#headline">Headline</a>
+        <a href="#migration">Migration</a>
+        <a href="#ea-workflows">EA workflows</a>
+        <a href="#copilot">Copilot</a>
+        <a href="#gaps">Watchouts</a>
+        <a href="#admin">Admin</a>
+        <a href="#resources">Resources</a>
+      </nav>
+      <button class="btn" type="button" onclick="window.print()">Print / save PDF</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="slide" id="headline">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">Executive summary: New Outlook is ready for many EA workflows, but delegation depth still needs validation.</h2>
+          <p class="slide-subtitle">Microsoft's feature matrix for New Outlook was last updated April 14, 2026. The app is generally available, continues to receive feature updates, and is the direction of travel for Outlook on Windows.</p>
+        </div>
+        <div class="slide-number">01 / HEADLINE</div>
+      </div>
+
+      <div class="grid cols-4">
+        <div class="card highlight">
+          <div class="big-stat">
+            <div class="icon">GA</div>
+            <div>
+              <p class="stat-title">Generally available</p>
+              <p class="stat-copy">New Outlook moved out of preview in August 2024 and is supported for eligible Microsoft 365 customers.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card ea-card">
+          <div class="big-stat">
+            <div class="icon">EA</div>
+            <div>
+              <p class="stat-title">Calendar delegation is available</p>
+              <p class="stat-copy">New Outlook supports assigning calendar delegate access, private-event visibility, category management, and delegate routing choices.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card copilot-card">
+          <div class="big-stat">
+            <div class="icon">AI</div>
+            <div>
+              <p class="stat-title">Copilot meeting flows are stronger</p>
+              <p class="stat-copy">EAs can benefit from thread summaries, meeting agenda drafting, meeting prep, and recap access where licensing and permissions allow.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card risk-card">
+          <div class="big-stat">
+            <div class="icon">!</div>
+            <div>
+              <p class="stat-title">Some classic gaps remain</p>
+              <p class="stat-copy">Shared mailbox delegate access is partial; PST, offline, rules, Quick Steps, and legacy add-in patterns should be checked before broad rollout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout"><strong>Recommended EA framing:</strong> position New Outlook as a modern daily-driver candidate for core scheduling, email triage, meeting prep, and Copilot-assisted work, while keeping a readiness checklist for assistants who rely on advanced classic Outlook workflows.</div>
+    </section>
+
+    <section class="slide" id="migration">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">Migration roadmap: opt-in today, opt-out and cutover later with notice.</h2>
+          <p class="slide-subtitle">Microsoft describes three progressive stages for New Outlook migration: opt-in, opt-out, and cutover. Managed Enterprise plans receive at least 12 months notice before opt-out and cutover stages in production rings.</p>
+        </div>
+        <div class="slide-number">02 / ROADMAP</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="timeline">
+          <div class="milestone">
+            <h3>Stage 1: Opt-in</h3>
+            <p>Users can try New Outlook with the toggle, switch back if needed, and in some cases run classic and New Outlook side-by-side for comparison.</p>
+          </div>
+          <div class="milestone">
+            <h3>General availability</h3>
+            <p>New Outlook became generally available in August 2024, with feature development continuing after GA.</p>
+          </div>
+          <div class="milestone">
+            <h3>Stage 2: Opt-out</h3>
+            <p>New Outlook becomes on by default after notice; users can still revert to classic Outlook while the opt-out stage applies.</p>
+          </div>
+          <div class="milestone">
+            <h3>Stage 3: Cutover</h3>
+            <p>Users can no longer switch back. Existing classic Outlook installations remain supported until at least 2029.</p>
+          </div>
+        </div>
+
+        <div class="card ea-card">
+          <div class="badge-row">
+            <span class="badge green">EA impact</span>
+            <span class="badge amber">Adoption planning</span>
+          </div>
+          <h3>What EAs should hear</h3>
+          <ul>
+            <li><strong>No surprise cliff:</strong> enterprise tenants should receive advance notice before disruptive stage changes.</li>
+            <li><strong>Try with guardrails:</strong> EAs can pilot New Outlook while keeping classic Outlook available for critical edge workflows.</li>
+            <li><strong>Feedback matters:</strong> Microsoft points users to Help &gt; Give Feedback to influence feature prioritization.</li>
+            <li><strong>Plan around role complexity:</strong> assistants with high-volume delegation, shared mailboxes, custom forms, macros, or COM add-ins need targeted validation.</li>
+          </ul>
+          <div class="presenter-note"><strong>Presenter cue:</strong> emphasize that readiness is workflow-based, not persona-based. A general employee may be ready before an EA who manages multiple executives and shared resources.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="ea-workflows">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">EA workflow updates: where New Outlook helps day-to-day execution.</h2>
+          <p class="slide-subtitle">The most relevant changes for executive assistants are in calendar delegation, meeting response handling, meeting recap, mailbox organization, and rapid task capture.</p>
+        </div>
+        <div class="slide-number">03 / EA WORKFLOWS</div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card ea-card">
+          <div class="badge-row"><span class="badge green">Available</span><span class="badge blue">Calendar</span></div>
+          <h3>Delegate calendar access</h3>
+          <p>New Outlook supports editor and delegate calendar access for work or school accounts in Microsoft 365 / Exchange Online.</p>
+          <ul>
+            <li>Delegates can schedule and respond to meetings on behalf of the executive.</li>
+            <li>Owners can allow private-event visibility and category management.</li>
+            <li>Meeting request routing can be delegate only, delegate plus copy, or both owner and delegate.</li>
+          </ul>
+        </div>
+
+        <div class="card ea-card">
+          <div class="badge-row"><span class="badge green">Available</span><span class="badge blue">Meetings</span></div>
+          <h3>Follow a meeting</h3>
+          <p>Attendees who cannot join can choose Follow, signaling they want recordings, transcripts, and follow-up while showing the time as free.</p>
+          <ul>
+            <li>Useful when an executive wants awareness without blocking the calendar.</li>
+            <li>Organizers receive a visible Follow response and are reminded to record.</li>
+            <li>Classic Outlook organizers may see the response as tentative.</li>
+          </ul>
+        </div>
+
+        <div class="card ea-card">
+          <div class="badge-row"><span class="badge green">Available</span><span class="badge purple">Teams + Outlook</span></div>
+          <h3>Meeting recap in calendar</h3>
+          <p>Past Teams meetings can show links to files, transcript, and recording directly from the Outlook calendar event.</p>
+          <ul>
+            <li>Helps EAs find outcomes without searching Teams manually.</li>
+            <li>Does not store content in Outlook; it links to original locations.</li>
+            <li>Each meeting asset retains its own access permissions.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="badge-row"><span class="badge green">Available</span><span class="badge amber">Productivity</span></div>
+          <h3>My Day with Calendar and To Do</h3>
+          <p>My Day keeps upcoming events and tasks visible from Mail, Calendar, and People, including quick task and event creation.</p>
+          <ul>
+            <li>Drag an email into To Do to create a task.</li>
+            <li>Join Teams meetings without switching to full calendar view.</li>
+            <li>Show additional calendars in the My Day pane.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="badge-row"><span class="badge green">Available</span><span class="badge blue">Mail</span></div>
+          <h3>Modern message management</h3>
+          <p>New Outlook includes pin, snooze, sweep, schedule send, reactions, and category favorites that can streamline executive mailbox triage.</p>
+          <ul>
+            <li>Pin high-priority asks while processing mail.</li>
+            <li>Snooze messages until a decision window.</li>
+            <li>Use Sweep for recurring low-value mail.</li>
+          </ul>
+        </div>
+
+        <div class="card risk-card">
+          <div class="badge-row"><span class="badge amber">Validate</span><span class="badge blue">Shared mailbox</span></div>
+          <h3>Shared mailbox improvements</h3>
+          <p>Shared mailboxes and shared folders are available. Shared mailbox archive is listed as available as of March 2026, while shared mailbox delegate access is partially available as of April 2026.</p>
+          <ul>
+            <li>Test executive/team shared mailbox scenarios before switching primary workstations.</li>
+            <li>Confirm Send As / Send on Behalf behavior with IT where required.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="copilot">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">Copilot in New Outlook: the biggest EA productivity accelerators.</h2>
+          <p class="slide-subtitle">Copilot features depend on licensing and permissions. For EAs, the value is strongest when they already have access to the relevant mailbox, thread, calendar event, file, transcript, or meeting content.</p>
+        </div>
+        <div class="slide-number">04 / COPILOT</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card copilot-card">
+          <div class="badge-row"><span class="badge purple">Copilot</span><span class="badge green">Available</span></div>
+          <h3>Summarize email threads and attachments</h3>
+          <p>Copilot can summarize email conversations and cite source messages. In New Outlook, users can also summarize supported Word, PowerPoint, and PDF attachments from the email.</p>
+          <ul>
+            <li><strong>EA use:</strong> create a quick brief from long scheduling, travel, or approval threads.</li>
+            <li><strong>Watchout:</strong> Copilot only summarizes content the user can access.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card">
+          <div class="badge-row"><span class="badge purple">Copilot</span><span class="badge green">Available</span></div>
+          <h3>Schedule with Copilot from an email thread</h3>
+          <p>New Outlook can analyze a thread, create a meeting invitation, add the people on the thread, draft a title and agenda, and attach the email thread.</p>
+          <ul>
+            <li><strong>EA use:</strong> convert a messy back-and-forth into a structured meeting draft.</li>
+            <li><strong>Watchout:</strong> confidential or low-context discussions may not generate agenda content.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card">
+          <div class="badge-row"><span class="badge purple">Copilot</span><span class="badge green">Available</span></div>
+          <h3>Prepare for your meeting</h3>
+          <p>Copilot can surface meeting context, related tasks, documents, and insights in Outlook meeting details, with deeper chat prompts available.</p>
+          <ul>
+            <li><strong>EA use:</strong> assemble pre-reads or last-minute context for executives.</li>
+            <li><strong>Admin note:</strong> Microsoft documents a Meeting Insights tenant setting in the Microsoft 365 admin center.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card">
+          <div class="badge-row"><span class="badge purple">Copilot</span><span class="badge green">Available</span></div>
+          <h3>Draft and coach email</h3>
+          <p>Copilot can draft messages, summarize, coach tone, and help refine executive communications inside Outlook.</p>
+          <ul>
+            <li><strong>EA use:</strong> move from rough executive intent to polished draft faster.</li>
+            <li><strong>Governance:</strong> verify appropriate delegation and mailbox access before relying on assistant-driven Copilot flows.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="status">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">Feature status snapshot for EA decision makers.</h2>
+          <p class="slide-subtitle">Use this as a readiness discussion guide, not as a replacement for tenant-specific testing.</p>
+        </div>
+        <div class="slide-number">05 / STATUS</div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Latest status signal</th>
+            <th>EA relevance</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Calendar delegation</strong></td>
+            <td>Available for work/school accounts with delegate routing controls.</td>
+            <td>Core executive scheduling workflow.</td>
+            <td>Validate each executive/delegate pair, private-event visibility, and category management.</td>
+          </tr>
+          <tr>
+            <td><strong>Shared mailbox delegation</strong></td>
+            <td>Partially available; status updated April 2026 in the comparison matrix.</td>
+            <td>Important for team-managed inboxes and executive support pods.</td>
+            <td>Pilot with real shared mailbox scenarios before broad migration.</td>
+          </tr>
+          <tr>
+            <td><strong>Shared mailbox archive</strong></td>
+            <td>Available; status updated March 2026.</td>
+            <td>Useful for historical executive/team mailbox lookup.</td>
+            <td>Confirm archive discovery and search workflows.</td>
+          </tr>
+          <tr>
+            <td><strong>Meeting recap</strong></td>
+            <td>Available for supported private scheduled Teams meetings.</td>
+            <td>Reduces time spent hunting recordings, transcripts, and files.</td>
+            <td>Set expectations that non-Teams, ad-hoc Teams, channel, and group-calendar meetings are excluded.</td>
+          </tr>
+          <tr>
+            <td><strong>Mail productivity</strong></td>
+            <td>Schedule send, snooze, sweep, pin messages, reactions, .msg support, Quick Parts, and many mail features are available.</td>
+            <td>Supports high-volume triage and response preparation.</td>
+            <td>Map classic triage patterns to New Outlook equivalents.</td>
+          </tr>
+          <tr>
+            <td><strong>Rules and Quick Steps</strong></td>
+            <td>Partially available.</td>
+            <td>Potential blocker for assistants with heavy automation.</td>
+            <td>Inventory existing rules and Quick Steps before switching primary workflow.</td>
+          </tr>
+          <tr>
+            <td><strong>Legacy extensibility</strong></td>
+            <td>COM add-ins, VBA macros, Outlook Object Model, MAPI, and custom forms are not supported.</td>
+            <td>May affect specialized EA workflows, line-of-business tools, or custom executive processes.</td>
+            <td>Identify replacements with web add-ins or process changes.</td>
+          </tr>
+          <tr>
+            <td><strong>Offline / PST</strong></td>
+            <td>Both are partially available in New Outlook.</td>
+            <td>Relevant for travel, intermittent connectivity, archive lookup, and long-lived PST dependencies.</td>
+            <td>Test travel scenarios and legacy archive access before cutover.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="slide" id="gaps">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">Watchouts: the classic Outlook workflows most likely to affect executive assistants.</h2>
+          <p class="slide-subtitle">These are the areas to ask about before telling an EA that New Outlook is their new default.</p>
+        </div>
+        <div class="slide-number">06 / WATCHOUTS</div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card gap-card">
+          <div class="badge-row"><span class="badge red">Not supported</span></div>
+          <h3>COM add-ins, VBA, MAPI/OOM, custom forms</h3>
+          <p>New Outlook uses a modern web add-in model and does not support several classic Outlook extension patterns.</p>
+          <ul>
+            <li>Ask EAs which add-ins or macros they rely on daily.</li>
+            <li>Check vendor availability for web add-ins.</li>
+          </ul>
+        </div>
+        <div class="card risk-card">
+          <div class="badge-row"><span class="badge amber">Partial</span></div>
+          <h3>Rules, Quick Steps, offline, PST</h3>
+          <p>Several classic productivity and resilience features are partially available rather than fully equivalent.</p>
+          <ul>
+            <li>Capture top automation flows.</li>
+            <li>Confirm offline behavior during travel or in stores/facilities with variable connectivity.</li>
+          </ul>
+        </div>
+        <div class="card risk-card">
+          <div class="badge-row"><span class="badge amber">Upcoming / investigating</span></div>
+          <h3>Calendar power-user features</h3>
+          <p>Schedule View, multi-select calendar events, copy/cut/paste calendar events, and conditional formatting are marked upcoming; custom holidays are under investigation.</p>
+          <ul>
+            <li>Ask EAs how they manipulate complex calendars today.</li>
+            <li>Keep classic Outlook available if gaps block critical scheduling.</li>
+          </ul>
+        </div>
+        <div class="card gap-card">
+          <div class="badge-row"><span class="badge red">Not supported</span></div>
+          <h3>Network shares and SharePoint calendar sync</h3>
+          <p>Accessing files on network shares and classic SharePoint calendar sync are listed as not supported.</p>
+          <ul>
+            <li>Move repeat workflows to supported cloud file links or group calendars where appropriate.</li>
+          </ul>
+        </div>
+        <div class="card gap-card">
+          <div class="badge-row"><span class="badge red">Not supported</span></div>
+          <h3>Voting buttons</h3>
+          <p>Voting buttons are listed as not supported in New Outlook.</p>
+          <ul>
+            <li>Use Forms, approvals, or other survey patterns for executive polling.</li>
+          </ul>
+        </div>
+        <div class="card risk-card">
+          <div class="badge-row"><span class="badge amber">Partial</span></div>
+          <h3>Public folders and search folders</h3>
+          <p>Both are partially available, which may matter for legacy team processes.</p>
+          <ul>
+            <li>Check if executive offices use public folders for shared reference or routing.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" id="admin">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">Admin controls: how IT can pace New Outlook adoption.</h2>
+          <p class="slide-subtitle">Microsoft documents controls for toggles, installation, automatic migration, mailbox access, and conditional access. These controls matter when EAs need a phased migration.</p>
+        </div>
+        <div class="slide-number">07 / ADMIN</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <div class="badge-row"><span class="badge amber">Admin control</span></div>
+          <h3>Control access and install paths</h3>
+          <ul>
+            <li>Hide the "Try the new Outlook" toggle using Cloud Policy in the Microsoft 365 Apps admin center.</li>
+            <li>Remove or block New Outlook app installation patterns where the organization is not ready.</li>
+            <li>Block Microsoft Store acquisition if required by policy.</li>
+            <li>Use Exchange mailbox policy to block work/school mailbox access as a final app-access control.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="badge-row"><span class="badge amber">Admin control</span></div>
+          <h3>Control migration timing</h3>
+          <ul>
+            <li>Admins can opt out of automatic migration by policy.</li>
+            <li>New Outlook automatic migration settings can be controlled through registry, Group Policy, or Cloud Policy.</li>
+            <li>Conditional Access and OWA mailbox policies can enforce device, MFA, and attachment-related controls.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout"><strong>EA rollout recommendation:</strong> create an EA pilot ring with named executive/delegate pairs, shared mailbox scenarios, Copilot license coverage, required add-ins, and calendar power-user workflows. Promote only the scenarios that pass real-world validation.</div>
+    </section>
+
+    <section class="slide" id="resources">
+      <div class="slide-header">
+        <div>
+          <h2 class="slide-title">End-user and admin resources to include with the deck.</h2>
+          <p class="slide-subtitle">The links below point to Microsoft support, learning, admin, and roadmap documentation used to build this summary.</p>
+        </div>
+        <div class="slide-number">08 / RESOURCES</div>
+      </div>
+
+      <div class="source-list">
+        <a href="https://support.microsoft.com/en-us/office/compare-new-outlook-for-windows-and-classic-outlook-for-windows-de453583-1e76-48bf-975a-2e9cd2ee16dd" target="_blank" rel="noopener">Compare New Outlook and classic Outlook <span>Feature matrix; last updated April 14, 2026</span></a>
+        <a href="https://aka.ms/newoutlookwhatsnew" target="_blank" rel="noopener">What's new in New Outlook <span>Monthly update landing page</span></a>
+        <a href="https://aka.ms/newOutlookforWindows" target="_blank" rel="noopener">Microsoft 365 Roadmap: New Outlook for Windows <span>Roadmap-filtered feature list</span></a>
+        <a href="https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/get-started/guide-product-availability" target="_blank" rel="noopener">New Outlook product availability guidance <span>Admin migration stages and roadmap timing</span></a>
+        <a href="https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/get-started/control-install" target="_blank" rel="noopener">Control installation and access <span>Admin controls for toggle, install, migration, CA, and mailbox access</span></a>
+        <a href="https://support.microsoft.com/en-us/office/getting-started-with-the-new-outlook-for-windows-4395454d-cb2f-4c16-bb24-fa4bb36650ae" target="_blank" rel="noopener">Getting started with New Outlook <span>End-user install and setup guidance</span></a>
+        <a href="https://support.microsoft.com/en-us/office/share-and-access-a-calendar-with-edit-or-delegate-permissions-in-outlook-532e6410-ee80-42b5-9b1b-a09345ccef1b" target="_blank" rel="noopener">Calendar edit and delegate permissions <span>End-user delegate setup guidance</span></a>
+        <a href="https://support.microsoft.com/en-us/office/about-delegates-allow-someone-to-manage-your-mail-and-calendar-in-outlook-41c40c04-3bd1-4d22-963a-28eafec25926" target="_blank" rel="noopener">About delegates in Outlook <span>Delegate permission concepts and levels</span></a>
+        <a href="https://support.microsoft.com/en-us/office/follow-a-meeting-in-outlook-4dd196ec-b4ae-4fca-9577-cb9c297723be" target="_blank" rel="noopener">Follow a meeting in Outlook <span>Meeting response behavior for non-attendees</span></a>
+        <a href="https://support.microsoft.com/en-us/office/meeting-recap-with-outlook-cd391f5b-7f41-4419-814d-2e5a81c3fbcb" target="_blank" rel="noopener">Meeting recap with Outlook <span>Calendar access to files, transcript, and recording</span></a>
+        <a href="https://support.microsoft.com/en-us/office/use-my-day-with-to-do-in-outlook-6de6ee52-751b-4405-b389-850572b15306" target="_blank" rel="noopener">Use My Day with To Do in Outlook <span>Calendar and task pane guidance</span></a>
+        <a href="https://support.microsoft.com/en-us/office/summarize-an-email-thread-with-copilot-in-outlook-a79873f2-396b-46dc-b852-7fe5947ab640" target="_blank" rel="noopener">Summarize email threads with Copilot <span>End-user Copilot summary guidance</span></a>
+        <a href="https://support.microsoft.com/en-us/office/create-a-meeting-agenda-with-copilot-in-outlook-31a44dfa-62bb-4751-82c4-14327a26759f" target="_blank" rel="noopener">Create a meeting agenda with Copilot <span>Schedule with Copilot and agenda drafting</span></a>
+        <a href="https://support.microsoft.com/en-us/topic/prepare-for-your-meeting-with-copilot-f23326fc-7721-45f1-875e-23e77aaf3d89" target="_blank" rel="noopener">Prepare for your meeting with Copilot <span>Meeting prep insights and permissions</span></a>
+      </div>
+
+      <div class="presenter-note"><strong>Source note:</strong> Roadmap dates and feature states can change. Re-check the Microsoft 365 roadmap and the New Outlook comparison matrix before presenting to a production rollout audience.</div>
+    </section>
+  </main>
+</body>
+</html>

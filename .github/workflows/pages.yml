@@ -32,7 +32,7 @@ jobs:
       - name: Prepare site artifact
         run: |
           mkdir _site
-          cp index.html exec-ea-delegation-config-guide2.html m365-copilot-exec-admin-features.html .nojekyll _site/
+          cp *.html .nojekyll _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
