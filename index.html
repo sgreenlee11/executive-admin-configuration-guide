@@ -20,7 +20,7 @@
     .splash {
       width: min(1180px, calc(100vw - 36px));
       margin: 0 auto;
-      padding: 54px 0 72px;
+      padding: 46px 0 56px;
     }
     .hero {
       display: grid;
@@ -75,18 +75,20 @@
     .cards {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 26px;
+      gap: 16px;
+      margin-top: 22px;
     }
     .guide-card {
       display: flex;
       flex-direction: column;
-      min-height: 300px;
-      padding: 24px;
+      gap: 12px;
+      min-height: 0;
+      padding: 22px;
       border: 1px solid var(--border, #3A3A42);
-      border-radius: 22px;
+      border-radius: 18px;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.065)),
+        radial-gradient(circle at 100% 0%, rgba(249, 99, 2, 0.16), transparent 11rem),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.055)),
         #26262B;
       box-shadow: var(--shadow, 0 18px 46px rgba(0, 0, 0, 0.46));
       color: var(--text, #F5F5F2);
@@ -114,18 +116,19 @@
       text-transform: uppercase;
     }
     .guide-card h2 {
-      margin: 16px 0 10px;
-      font-size: 24px;
-      line-height: 1.12;
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.16;
       color: #fff;
     }
     .guide-card p {
       margin: 0;
       color: var(--text-muted, #BDBDB7);
       line-height: 1.55;
+      font-size: 14.5px;
     }
     .button {
-      margin-top: auto;
+      margin-top: 6px;
       display: inline-flex;
       width: fit-content;
       align-items: center;
@@ -158,7 +161,6 @@
         grid-template-columns: 1fr;
       }
       .hero { padding: 30px; }
-      .guide-card { min-height: auto; }
     }
   </style>
 </head>
