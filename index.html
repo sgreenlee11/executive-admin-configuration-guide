@@ -3,14 +3,167 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=exec-ea-delegation-config-guide2.html">
-  <link rel="canonical" href="exec-ea-delegation-config-guide2.html">
-  <title>Executive EA Delegation Configuration Guide</title>
+  <title>Executive Admin Enablement Guide</title>
+  <link rel="stylesheet" href="shared-brand.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    }
+    .splash {
+      width: min(1180px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 54px 0 72px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: start;
+      padding: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.16), transparent 18rem),
+        linear-gradient(135deg, rgba(249, 99, 2, 0.96), rgba(91, 42, 18, 0.96));
+      box-shadow: var(--shadow-lg);
+    }
+    .kicker {
+      margin: 0 0 12px;
+      font-size: 13px;
+    }
+    h1 {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      color: #fff;
+    }
+    .lead {
+      max-width: 820px;
+      margin: 18px 0 0;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 26px;
+    }
+    .guide-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      box-shadow: var(--shadow);
+      color: var(--text);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .guide-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: linear-gradient(90deg, var(--orange), var(--amber));
+    }
+    .guide-card:hover {
+      border-color: rgba(249, 99, 2, 0.66);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+    .guide-card span {
+      color: #FFB78B;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .guide-card h2 {
+      margin: 16px 0 10px;
+      font-size: 24px;
+      line-height: 1.12;
+      color: #fff;
+    }
+    .guide-card p {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .button {
+      margin-top: auto;
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(249, 99, 2, 0.55);
+      border-radius: 999px;
+      color: #fff;
+      background: var(--orange-soft);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    footer {
+      margin-top: 28px;
+      color: var(--text-faint);
+      font-size: 13px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .hero,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .hero { padding: 30px; }
+      .guide-card { min-height: auto; }
+    }
+  </style>
 </head>
 <body>
-  <p>
-    Redirecting to
-    <a href="exec-ea-delegation-config-guide2.html">Executive EA Delegation Configuration Guide</a>.
-  </p>
+  <main class="splash">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="kicker">Executive admin enablement</p>
+        <h1 id="page-title">Executive Admin Enablement Guide</h1>
+        <p class="lead">A cohesive reference hub for Microsoft 365 Copilot, New Outlook, and delegated executive assistant workflows.</p>
+      </div>
+      <div class="suite-mark">THD<br>EA</div>
+    </section>
+
+    <section class="cards" aria-label="Guide pages">
+      <a class="guide-card" href="exec-ea-delegation-config-guide2.html">
+        <span>Configuration guide</span>
+        <h2>Microsoft 365 Copilot for Executive Assistant Delegation</h2>
+        <p>Explore delegated email and calendar models, Copilot scenarios, Frontier experiences, setup steps, and day-in-the-life workflows.</p>
+        <div class="button">Open guide <span aria-hidden="true">-></span></div>
+      </a>
+
+      <a class="guide-card" href="m365-copilot-exec-admin-features.html">
+        <span>Feature briefing</span>
+        <h2>Microsoft 365 Copilot Features for Executive Admins</h2>
+        <p>Review recent and announced Copilot capabilities most relevant to executive assistants, chiefs of staff, and IT enablement teams.</p>
+        <div class="button">Open briefing <span aria-hidden="true">-></span></div>
+      </a>
+
+      <a class="guide-card" href="new-outlook-ea-updates.html">
+        <span>Outlook briefing</span>
+        <h2>New Outlook Updates for Executive Assistants</h2>
+        <p>Use a presentation-ready view of New Outlook readiness, roadmap signals, EA impacts, admin controls, and migration watchouts.</p>
+        <div class="button">Open updates <span aria-hidden="true">-></span></div>
+      </a>
+    </section>
+
+    <footer>Designed as a unified executive assistant enablement suite.</footer>
+  </main>
 </body>
 </html>
