@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Microsoft 365 Copilot features for executive admins</title>
+  <style>
+    :root {
+      --bg: #09111f;
+      --bg2: #0f1d33;
+      --card: rgba(255, 255, 255, 0.08);
+      --card2: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fb;
+      --muted: #b9c4d8;
+      --line: rgba(255, 255, 255, 0.16);
+      --blue: #60a5fa;
+      --cyan: #22d3ee;
+      --green: #6ee7b7;
+      --yellow: #fde68a;
+      --pink: #f0abfc;
+      --red: #fca5a5;
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(34, 211, 238, 0.22), transparent 34rem),
+        radial-gradient(circle at top right, rgba(96, 165, 250, 0.22), transparent 38rem),
+        linear-gradient(135deg, var(--bg), var(--bg2));
+    }
+
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100vw - 36px)); margin: 0 auto; }
+
+    header {
+      padding: 56px 0 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      box-shadow: 0 0 24px var(--cyan);
+    }
+
+    h1 {
+      max-width: 920px;
+      margin: 22px 0 12px;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+    }
+
+    .lead {
+      max-width: 850px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 30px 0 0;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .panel {
+      margin: 22px 0 24px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1.3fr repeat(3, minmax(150px, 0.45fr));
+      gap: 12px;
+      align-items: center;
+    }
+
+    input, select, button {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      color: var(--text);
+      background: rgba(4, 12, 24, 0.68);
+      outline: none;
+      font: inherit;
+    }
+
+    input::placeholder { color: #8795ad; }
+    button { cursor: pointer; transition: 160ms ease; }
+    button:hover { transform: translateY(-1px); background: rgba(255, 255, 255, 0.13); }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      padding-bottom: 48px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 332px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 15px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      width: fit-content;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 9px;
+      color: var(--muted);
+      background: rgba(0, 0, 0, 0.16);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .source { color: #eff6ff; }
+    .ReleaseNotes { --accent: var(--blue); }
+    .TechCommunity { --accent: var(--pink); }
+    .Roadmap { --accent: var(--green); }
+    .MessageCenter { --accent: var(--yellow); }
+
+    h2 {
+      margin: 0 0 9px;
+      font-size: 20px;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+    }
+
+    .summary {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.48;
+      font-size: 14.5px;
+    }
+
+    .why {
+      margin-top: auto;
+      padding: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.18);
+      color: #dde7f7;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      color: #e0f2fe;
+      font-weight: 650;
+      font-size: 13.5px;
+    }
+
+    .relevance {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 34px;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    details {
+      margin: 0 0 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 17px 20px;
+      cursor: pointer;
+      color: #e0f2fe;
+      font-weight: 700;
+    }
+
+    .method {
+      padding: 0 20px 18px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-grid { grid-template-columns: repeat(2, 1fr); }
+      .controls { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .grid, .hero-grid, .controls { grid-template-columns: 1fr; }
+      header { padding-top: 34px; }
+      .card { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> Compiled May 6, 2026 | Window: March 6-May 6, 2026</div>
+      <h1>Microsoft 365 Copilot features for executive admins</h1>
+      <p class="lead">A curated briefing of recently released or newly announced Microsoft 365 Copilot capabilities that matter most to executive assistants, chiefs of staff, admins supporting leaders, and the IT teams enabling them.</p>
+      <div class="hero-grid">
+        <div class="stat"><strong id="statItems">0</strong><span>curated feature items</span></div>
+        <div class="stat"><strong>4</strong><span>source families included</span></div>
+        <div class="stat"><strong id="statTop">0</strong><span>high relevance items</span></div>
+        <div class="stat"><strong>62</strong><span>days reviewed</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel" aria-label="Filters">
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search by feature, app, workflow, or admin impact..." />
+        <select id="source">
+          <option value="all">All sources</option>
+          <option value="Release Notes">Release Notes</option>
+          <option value="Tech Community">Tech Community</option>
+          <option value="M365 Roadmap">M365 Roadmap</option>
+          <option value="Message Center">Message Center</option>
+        </select>
+        <select id="impact">
+          <option value="all">All impacts</option>
+          <option value="Calendar & meetings">Calendar & meetings</option>
+          <option value="Email & communications">Email & communications</option>
+          <option value="Briefings & content">Briefings & content</option>
+          <option value="Admin & adoption">Admin & adoption</option>
+          <option value="Agents & automation">Agents & automation</option>
+        </select>
+        <select id="sort">
+          <option value="relevance">Sort by relevance</option>
+          <option value="date">Sort by date</option>
+          <option value="source">Sort by source</option>
+        </select>
+      </div>
+      <div class="chips">
+        <span class="chip">Tip: filter to Calendar & meetings for EA-specific wins</span>
+        <span class="chip">Message Center links require tenant admin access</span>
+        <span class="chip">Roadmap dates are feature availability timing</span>
+      </div>
+    </section>
+
+    <section id="cards" class="grid" aria-live="polite"></section>
+
+    <details>
+      <summary>Source and curation notes</summary>
+      <div class="method">
+        <p>This page combines: Microsoft 365 Copilot release notes, Microsoft 365 Copilot Tech Community blog posts, M365 Roadmap items returned by Microsoft Release Communications, and Message Center posts returned from Microsoft Graph service announcements.</p>
+        <p>Items were selected for relevance to executive admin workflows: calendar coordination, meeting prep and recap, inbox triage, executive briefings, presentation/document creation, delegated work, adoption analytics, governance, and agent automation. Some roadmap and Message Center items are announced or rolling out inside the review window rather than fully available to every tenant.</p>
+      </div>
+    </details>
+  </main>
+
+  <script>
+    const items = [
+      {
+        title: "Delegates can search another user's meetings in Copilot Chat",
+        date: "2026-03-24",
+        source: "Release Notes",
+        impact: "Calendar & meetings",
+        relevance: 5,
+        summary: "Delegates with calendar access can use Copilot Chat to search for meetings on behalf of the person whose calendar they manage, including upcoming meetings, attendees, topics, and details.",
+        why: "This is directly relevant for executive assistants managing leader calendars, reducing manual Outlook navigation and speeding up meeting prep.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Calendar Agentic capabilities in Microsoft 365 Copilot",
+        date: "2026-04-30",
+        source: "Message Center",
+        impact: "Calendar & meetings",
+        relevance: 5,
+        summary: "Message Center post MC1296874 says users can automate calendar actions with natural-language instructions across Outlook and Teams. Rollout spans April-May 2026 and respects existing compliance settings.",
+        why: "A high-value EA scenario: ask Copilot to take action on calendar coordination instead of only answering questions.",
+        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1296874"
+      },
+      {
+        title: "Smart Calendar for Classic Outlook Copilot users",
+        date: "2026-05-04",
+        source: "Message Center",
+        impact: "Calendar & meetings",
+        relevance: 5,
+        summary: "Message Center post MC1181279 describes AI-powered scheduling, coordination, and meeting recaps in Classic Outlook for Microsoft 365 Copilot users, with GA by May 2026.",
+        why: "Classic Outlook remains common for executive support teams; this brings Copilot calendar help into an existing workflow.",
+        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1181279"
+      },
+      {
+        title: "Search for meetings by organizer in Copilot Chat",
+        date: "2026-03-10",
+        source: "Release Notes",
+        impact: "Calendar & meetings",
+        relevance: 5,
+        summary: "Copilot Chat can search your calendar for meetings organized by a specific person and answer prompts like finding next week's meetings or summarizing recent action items from meetings by an organizer.",
+        why: "Useful for preparing leaders for recurring stakeholder meetings or quickly finding decision history tied to a specific organizer.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Catch up on important emails in Copilot Chat",
+        date: "2026-03",
+        source: "M365 Roadmap",
+        impact: "Email & communications",
+        relevance: 5,
+        summary: "Roadmap item 494515 says Copilot Chat highlights important and actionable emails, including messages from managers, leadership, top collaborators, or messages containing tasks.",
+        why: "A practical inbox triage aid for executive admins who need to surface high-priority messages and action items quickly.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=494515"
+      },
+      {
+        title: "List email attachments in Microsoft 365 Copilot",
+        date: "2026-05",
+        source: "M365 Roadmap",
+        impact: "Email & communications",
+        relevance: 5,
+        summary: "Roadmap item 497909 says users will be able to list file attachments they received or sent over email in Microsoft 365 Copilot.",
+        why: "Helps admins find sent decks, contracts, travel docs, and briefing materials without manually searching mailbox folders.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=497909"
+      },
+      {
+        title: "Copilot Notebooks adds SharePoint grounding, group sharing, Word/PowerPoint agents, and mind maps",
+        date: "2026-03-17",
+        source: "Message Center",
+        impact: "Briefings & content",
+        relevance: 5,
+        summary: "Message Center post MC1254552 says Copilot Notebooks features include chat interactivity, study guides, SharePoint grounding, PowerPoint and Word agents, group sharing, and mind maps, rolling out from late March with GA by June.",
+        why: "Strong fit for executive briefing books, project notebooks, reusable prep hubs, and turning collected notes into polished outputs.",
+        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1254552"
+      },
+      {
+        title: "Share OneDrive files with a Copilot-generated summary",
+        date: "2026-04-07",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 5,
+        summary: "Windows users can generate a Copilot summary from File Explorer or OneDrive Activity Center and include it directly in the file share dialog.",
+        why: "Useful when sending reports, decks, meeting notes, or decision packets to executives who need the key points before opening the file.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Generate PowerPoint from a Copilot page",
+        date: "2026-03",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 5,
+        summary: "Copilot can generate a PowerPoint presentation grounded on a Copilot page so users can quickly turn organized page content into slides.",
+        why: "A direct time-saver for turning leader notes, launch plans, QBR outlines, or briefing content into an executive-ready deck draft.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Viva Glint Copilot Highlights in Executive Summary reports",
+        date: "2026-05-05",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Copilot in Viva Glint now generates AI-powered summaries in Team Summary and Executive Summary reports, including score changes, benchmarks, response-rate confidence, and multilingual summaries.",
+        why: "Helps EAs and chiefs of staff prepare leadership summaries from employee survey data without manual synthesis.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Summarize and Explain actions in the Microsoft Edge PDF reader",
+        date: "2026-03-24",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Microsoft Edge PDF reader adds Copilot actions to summarize or explain PDF content directly in the browser under existing enterprise controls.",
+        why: "Speeds up review of board packets, contracts, policy PDFs, event briefs, and research materials before leadership meetings.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Contextual nudges in Edge for webpage summaries",
+        date: "2026-05-05",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Microsoft Edge for Business adds contextual nudges that make it easier to ask Microsoft 365 Copilot Chat to summarize the open webpage.",
+        why: "Helps admins quickly digest event pages, vendor content, travel details, news, or policy pages while preparing concise updates.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Ground Copilot Chat in open OneDrive and SharePoint documents in Edge",
+        date: "2026-04",
+        source: "M365 Roadmap",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Roadmap item 499423 says Copilot Chat in Edge for Business can answer questions about open cloud documents from OneDrive and SharePoint.",
+        why: "Makes it easier to ask questions about a briefing doc or slide deck already open in the browser.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=499423"
+      },
+      {
+        title: "Capture voice notes in the Microsoft 365 Copilot mobile app",
+        date: "2026-05",
+        source: "M365 Roadmap",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Roadmap item 498640 says Microsoft 365 Copilot can transform offline discussions into structured, actionable, searchable content using voice notes in the mobile app.",
+        why: "Good for capturing hallway conversations, post-meeting takeaways, travel notes, or verbal instructions from leaders.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=498640"
+      },
+      {
+        title: "OneNote mobile Summary and Q&A with Copilot",
+        date: "2026-05",
+        source: "M365 Roadmap",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Roadmap items 422323 and 422324 add short summaries and Q&A for longer OneNote mobile pages with Copilot.",
+        why: "Supports mobile review of meeting notes, planning notes, and event prep while away from the desk.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=422323"
+      },
+      {
+        title: "Microsoft 365 Copilot Chat in Teams chats, channels, and meetings",
+        date: "2026-04-07",
+        source: "Release Notes",
+        impact: "Calendar & meetings",
+        relevance: 4,
+        summary: "Microsoft 365 Copilot Chat is available across Teams chats, channels, calling, and meetings, expanding where users can invoke Copilot in Teams.",
+        why: "EAs can use Copilot where collaboration already happens, including real-time meeting and channel workflows.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Expand declarative agents with Mail, People, and Meeting Insights",
+        date: "2026-03",
+        source: "Tech Community",
+        impact: "Agents & automation",
+        relevance: 4,
+        summary: "Microsoft 365 Copilot agents can integrate with richer Microsoft 365 data sources such as email, people data, Teams chats, and meeting transcripts to deliver more context-aware answers and tasks.",
+        why: "Enables assistant-style agents that reason across the inbox, meeting history, and people context.",
+        link: "https://techcommunity.microsoft.com/blog/microsoft365copilotblog/what%E2%80%99s-new-in-microsoft-365-copilot--march-2026/4506322"
+      },
+      {
+        title: "Share agents directly to Microsoft Teams",
+        date: "2026-04-21",
+        source: "Release Notes",
+        impact: "Agents & automation",
+        relevance: 3,
+        summary: "Users can share an agent with a Microsoft Teams team, optionally notifying the team's main channel so members can discover, install, and use it together.",
+        why: "Helps distribute department or leadership-support agents into the team workspace where admins coordinate daily work.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Chat one-on-one with SharePoint agents in Teams",
+        date: "2026-05",
+        source: "M365 Roadmap",
+        impact: "Agents & automation",
+        relevance: 3,
+        summary: "Roadmap item 481825 says users can chat one-on-one with a SharePoint agent directly within Teams chat.",
+        why: "Potentially useful for policy, HR, travel, or department knowledge agents used by admin teams.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=481825"
+      },
+      {
+        title: "M365 Copilot Cowork expands with plugins, connectors, and partner integrations",
+        date: "2026-05-05",
+        source: "Message Center",
+        impact: "Agents & automation",
+        relevance: 3,
+        summary: "Message Center post MC1301832 says Microsoft 365 Copilot Cowork is expanding for Frontier participants with plugins, connectors, and partner integrations while respecting existing permissions.",
+        why: "Signals broader automation and integration options for cross-system assistant workflows.",
+        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1301832"
+      },
+      {
+        title: "Content Sources in Copilot Chat",
+        date: "2026-05",
+        source: "M365 Roadmap",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Roadmap item 496596 says users can select content sources in Copilot Chat so generated responses are limited to selected sources.",
+        why: "Important for focused executive prep where answers should be grounded only in selected files, teams, or sources.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=496596"
+      },
+      {
+        title: "Scope Copilot Chat prompts to Teams channels with Context IQ",
+        date: "2026-03-10",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 4,
+        summary: "Context IQ lets users search for and select Microsoft Teams channels to ground Copilot Chat prompts in specific conversations and content.",
+        why: "Helps admins ask for updates from the right leadership or project channel without broad, noisy results.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Lists in Context IQ",
+        date: "2026-03",
+        source: "M365 Roadmap",
+        impact: "Briefings & content",
+        relevance: 3,
+        summary: "Roadmap item 422308 says users can search for and select SharePoint Lists through Context IQ to ground prompts in Copilot Chat.",
+        why: "Useful when admin teams track events, travel, requests, approvals, or leader commitments in SharePoint Lists.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=422308"
+      },
+      {
+        title: "Intelligent summaries in Copilot Dashboard",
+        date: "2026-03-31",
+        source: "Message Center",
+        impact: "Admin & adoption",
+        relevance: 4,
+        summary: "Message Center post MC1266912 says Copilot Dashboard will generate AI summaries of adoption trends and usage insights for admins, with suggested prompts for deeper analysis.",
+        why: "Helps admin and adoption leads brief executives on Copilot usage and value without manual dashboard analysis.",
+        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1266912"
+      },
+      {
+        title: "Comprehensive Copilot metrics in Copilot Analytics",
+        date: "2026-03-30",
+        source: "Message Center",
+        impact: "Admin & adoption",
+        relevance: 4,
+        summary: "Message Center post MC1266023 adds usage metrics across Copilot app, Edge, OneNote, Outlook, Word, Excel, and PowerPoint in Copilot Dashboard and Analytics.",
+        why: "Gives leaders and adoption teams a stronger view of where Copilot is being used across productivity apps.",
+        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1266023"
+      },
+      {
+        title: "Copilot Dashboard enhanced scope drilldown",
+        date: "2026-03",
+        source: "M365 Roadmap",
+        impact: "Admin & adoption",
+        relevance: 4,
+        summary: "Roadmap item 495463 says leaders and managers can drill down in Copilot Dashboard by indirect groups to understand adoption and impact.",
+        why: "Useful for executive reporting across departments, leadership spans, or management hierarchies.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=495463"
+      },
+      {
+        title: "Satisfaction-rate metric for Microsoft 365 Copilot",
+        date: "2026-03",
+        source: "M365 Roadmap",
+        impact: "Admin & adoption",
+        relevance: 3,
+        summary: "Roadmap item 496655 tracks user sentiment for Microsoft 365 Copilot by analyzing thumbs-up and thumbs-down ratings after Copilot interactions.",
+        why: "Provides a lightweight signal for whether executive teams and broader users perceive Copilot as valuable.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=496655"
+      },
+      {
+        title: "Branded footer customization in the Microsoft 365 Copilot app",
+        date: "2026-05-04",
+        source: "Message Center",
+        impact: "Admin & adoption",
+        relevance: 3,
+        summary: "Message Center post MC1238432 lets admins add an organizational logo/footer to the Microsoft 365 Copilot app, confirming a trusted Copilot environment.",
+        why: "Helps reinforce approved AI usage and reduce confusion for high-profile executive users.",
+        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1238432"
+      },
+      {
+        title: "Agent lifecycle management automation rules",
+        date: "2026-05",
+        source: "M365 Roadmap",
+        impact: "Admin & adoption",
+        relevance: 3,
+        summary: "Roadmap item 481518 says admins will be able to define rules to auto-block risky agents, auto-delete inactive agents, and reassign ownerless agents.",
+        why: "Important governance capability as executive/admin teams begin relying on agents for sensitive work.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=481518"
+      },
+      {
+        title: "Agents usage report in Microsoft 365 admin center",
+        date: "2026-05",
+        source: "M365 Roadmap",
+        impact: "Admin & adoption",
+        relevance: 3,
+        summary: "Roadmap item 497999 adds an agents usage report scoped to agents in M365 Copilot and Copilot Chat, including usage by licensed and unlicensed Copilot users.",
+        why: "Supports governance, rollout decisions, and executive visibility into which agents are actually being used.",
+        link: "https://www.microsoft.com/microsoft-365/roadmap?featureid=497999"
+      },
+      {
+        title: "Tech Community March 2026 monthly update",
+        date: "2026-03",
+        source: "Tech Community",
+        impact: "Briefings & content",
+        relevance: 3,
+        summary: "The March 2026 Microsoft 365 Copilot blog roundup highlights meeting search, expanded connectors, agent improvements, document generation, PDF summaries, and Microsoft 365 data grounding.",
+        why: "Useful as a human-readable monthly digest for admins preparing adoption or executive-readiness updates.",
+        link: "https://techcommunity.microsoft.com/blog/microsoft365copilotblog/what%E2%80%99s-new-in-microsoft-365-copilot--march-2026/4506322"
+      },
+      {
+        title: "Tech Community April 2026 monthly update",
+        date: "2026-04",
+        source: "Tech Community",
+        impact: "Admin & adoption",
+        relevance: 3,
+        summary: "The April 2026 Microsoft 365 Copilot blog roundup covers Teams availability, Copilot Notebooks enhancements, Office and agent improvements, admin controls, and usage analytics.",
+        why: "A useful narrative source for rollout communications and admin enablement updates.",
+        link: "https://techcommunity.microsoft.com/blog/microsoft365copilotblog/what%E2%80%99s-new-in-microsoft-365-copilot--april-2026/4510935"
+      }
+    ];
+
+    const sourceClass = {
+      "Release Notes": "ReleaseNotes",
+      "Tech Community": "TechCommunity",
+      "M365 Roadmap": "Roadmap",
+      "Message Center": "MessageCenter"
+    };
+
+    const cards = document.getElementById("cards");
+    const search = document.getElementById("search");
+    const source = document.getElementById("source");
+    const impact = document.getElementById("impact");
+    const sort = document.getElementById("sort");
+
+    document.getElementById("statItems").textContent = items.length;
+    document.getElementById("statTop").textContent = items.filter(item => item.relevance >= 5).length;
+
+    function render() {
+      const q = search.value.trim().toLowerCase();
+      let filtered = items.filter(item => {
+        const text = [item.title, item.summary, item.why, item.source, item.impact].join(" ").toLowerCase();
+        return (!q || text.includes(q))
+          && (source.value === "all" || item.source === source.value)
+          && (impact.value === "all" || item.impact === impact.value);
+      });
+
+      filtered.sort((a, b) => {
+        if (sort.value === "date") return b.date.localeCompare(a.date) || b.relevance - a.relevance;
+        if (sort.value === "source") return a.source.localeCompare(b.source) || b.relevance - a.relevance;
+        return b.relevance - a.relevance || b.date.localeCompare(a.date);
+      });
+
+      cards.innerHTML = filtered.length ? filtered.map(item => `
+        <article class="card ${sourceClass[item.source]}">
+          <div class="meta">
+            <span class="pill source">${item.source}</span>
+            <span class="pill">${item.impact}</span>
+            <span class="pill">${item.date}</span>
+          </div>
+          <h2>${item.title}</h2>
+          <p class="summary">${item.summary}</p>
+          <div class="why"><strong>Why it matters:</strong> ${item.why}</div>
+          <div class="card-footer">
+            <a class="link" href="${item.link}" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">-></span></a>
+            <span class="relevance">Relevance ${item.relevance}/5</span>
+          </div>
+        </article>
+      `).join("") : `<div class="empty">No items match the current filters.</div>`;
+    }
+
+    [search, source, impact, sort].forEach(control => control.addEventListener("input", render));
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,3672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M365 Copilot - Executive 2 EA with AI</title>
+<style>
+  :root {
+    --bg: #1B1B1F;
+    --bg-elev: #26262B;
+    --bg-elev-2: #2F2F36;
+    --border: #3A3A42;
+    --border-strong: #4A4A55;
+    --text: #F1F1F3;
+    --text-muted: #A8A8B3;
+    --text-faint: #7A7A85;
+    --blue: #4CC2FF;
+    --blue-dark: #2196E0;
+    --blue-soft: rgba(76, 194, 255, 0.12);
+    --purple: #C9A6FF;
+    --purple-soft: rgba(201, 166, 255, 0.14);
+    --green: #6CCB5F;
+    --green-soft: rgba(108, 203, 95, 0.15);
+    --amber: #FFCA63;
+    --amber-soft: rgba(255, 202, 99, 0.15);
+    --red: #FF7A7A;
+    --red-soft: rgba(255, 122, 122, 0.15);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+    --shadow-md: 0 4px 14px rgba(0,0,0,0.5);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.6);
+    --surf-chat: #4CC2FF;
+    --surf-chat-soft: rgba(76, 194, 255, 0.18);
+    --surf-outlook: #5BD0B4;
+    --surf-outlook-soft: rgba(91, 208, 180, 0.18);
+    --surf-cowork: #FF8FD1;
+    --surf-cowork-soft: rgba(255, 143, 209, 0.18);
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  a { color: var(--blue); }
+  header {
+    background: linear-gradient(135deg, #F96302 0%, #bf6f3a 100%);
+    padding: 32px 48px;
+    box-shadow: var(--shadow-md);
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 { margin: 0 0 6px 0; font-size: 28px; font-weight: 600; color: #FFF; }
+  header p { margin: 0; color: rgba(255,255,255,0.78); font-size: 14px; }
+  .container { max-width: 1320px; margin: 0 auto; padding: 28px 40px 64px; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .section-title { font-size: 20px; font-weight: 600; margin: 0 0 6px 0; }
+  .section-subtitle { color: var(--text-muted); font-size: 13.5px; margin: 0 0 20px 0; }
+
+  /* Surface pills */
+  .surf-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+  }
+  .surf-pill.chat { background: var(--surf-chat-soft); color: var(--surf-chat); border: 1px solid rgba(76,194,255,0.4); }
+  .surf-pill.outlook { background: var(--surf-outlook-soft); color: var(--surf-outlook); border: 1px solid rgba(91,208,180,0.4); }
+  .surf-pill.cowork { background: var(--surf-cowork-soft); color: var(--surf-cowork); border: 1px solid rgba(255,143,209,0.4); }
+  .surf-pill.dot::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    display: inline-block;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--bg-elev-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .badge.frontier { background: var(--purple-soft); color: var(--purple); border-color: rgba(201,166,255,0.35); }
+  .badge.exec { background: var(--blue-soft); color: var(--blue); border-color: rgba(76,194,255,0.35); }
+  .badge.ea { background: var(--green-soft); color: var(--green); border-color: rgba(108,203,95,0.35); }
+  .badge.admin { background: var(--amber-soft); color: var(--amber); border-color: rgba(255,202,99,0.35); }
+
+  /* Two-column experiences layout */
+  .exp-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+  .exp-columns.cols-3 { grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+  @media (max-width: 1180px) {
+    .exp-columns.cols-3 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 980px) {
+    .exp-columns { grid-template-columns: 1fr; }
+    .exp-columns.cols-3 { grid-template-columns: 1fr; }
+  }
+  .exp-col-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 10px 10px 0 0;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    border-bottom: none;
+  }
+  .exp-col-header.email {
+    background: linear-gradient(135deg, rgba(91,208,180,0.18), rgba(91,208,180,0.06));
+    color: var(--surf-outlook);
+  }
+  .exp-col-header.calendar {
+    background: linear-gradient(135deg, rgba(76,194,255,0.18), rgba(76,194,255,0.06));
+    color: var(--blue);
+  }
+  .exp-col-header.instructions {
+    background: linear-gradient(135deg, rgba(201,166,255,0.18), rgba(201,166,255,0.06));
+    color: var(--purple);
+  }
+
+  /* Calendar instruction cards (Frontier tab, third column) */
+  .instr-group { margin-bottom: 16px; }
+  .instr-group h4 {
+    margin: 0 0 6px 0;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--purple);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .instr-card {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--purple);
+    border-radius: 8px;
+    padding: 10px 12px 12px 12px;
+    margin-bottom: 10px;
+  }
+  .instr-card .instr-why {
+    font-size: 11.5px;
+    color: var(--text-muted);
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+  }
+  .instr-card .prompt-box {
+    margin-top: 0;
+  }
+  .instr-card .prompt-box pre {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .instr-card.gold {
+    border-left-color: var(--amber);
+    background: rgba(255,202,99,0.06);
+  }
+  /* Section tab buttons (3rd Frontier column) */
+  .section-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 16px 0 12px 0;
+    padding: 4px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .section-tab-btn {
+    flex: 1 1 auto;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .section-tab-btn:hover { color: var(--text); }
+  .section-tab-btn.active {
+    background: var(--purple-soft);
+    color: var(--purple);
+    border-color: rgba(201,166,255,0.45);
+    box-shadow: var(--shadow-sm);
+  }
+  .section-content { display: none; }
+  .section-content.active { display: block; }
+
+  /* All-Hands tab — path selector */
+  .path-selector {
+    display: inline-flex;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 18px;
+  }
+  .path-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    padding: 10px 18px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .path-btn:hover { color: var(--text); }
+  .path-btn.active.standard {
+    background: var(--blue-soft);
+    color: var(--blue);
+    border-color: rgba(76,194,255,0.45);
+  }
+  .path-btn.active.upscaled {
+    background: linear-gradient(135deg, rgba(201,166,255,0.18), rgba(255,143,209,0.18));
+    color: var(--purple);
+    border-color: rgba(201,166,255,0.45);
+  }
+  .path-panel { display: none; }
+  .path-panel.active { display: block; }
+  .path-banner {
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    border: 1px solid var(--border-strong);
+  }
+  .path-banner.standard {
+    background: var(--blue-soft);
+    border-color: rgba(76,194,255,0.35);
+    color: var(--text);
+  }
+  .path-banner.upscaled {
+    background: linear-gradient(135deg, rgba(201,166,255,0.12), rgba(255,143,209,0.10));
+    border-color: rgba(201,166,255,0.45);
+  }
+  .path-banner strong.std { color: var(--blue); }
+  .path-banner strong.ups { color: var(--purple); }
+  .path-banner .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 10px;
+  }
+  .path-banner .stat {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .path-banner .stat .num {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .path-banner.upscaled .stat .num { color: var(--purple); }
+  .path-banner.standard .stat .num { color: var(--blue); }
+  .path-banner .stat .lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    font-weight: 600;
+  }
+
+  .ah-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+  }
+  .ah-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.18s;
+  }
+  .ah-card.standard { border-top: 3px solid var(--blue); }
+  .ah-card.upscaled { border-top: 3px solid var(--purple); }
+  .ah-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .ah-step-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ah-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .ah-card.standard .ah-num { background: var(--blue); color: #0E1A24; }
+  .ah-card.upscaled .ah-num { background: var(--purple); color: #1F1330; }
+  .ah-card h3 {
+    margin: 0;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+  }
+  .ah-when {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-faint);
+    font-weight: 700;
+  }
+  .ah-card.upscaled .ah-when { color: var(--purple); }
+  .ah-card.standard .ah-when { color: var(--blue); }
+  .ah-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .tool-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    background: var(--bg-elev-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .tool-pill.skill { background: var(--purple-soft); color: var(--purple); border-color: rgba(201,166,255,0.4); }
+  .tool-pill.sched { background: var(--amber-soft); color: var(--amber); border-color: rgba(255,202,99,0.4); }
+  .tool-pill.app { background: var(--blue-soft); color: var(--blue); border-color: rgba(76,194,255,0.4); }
+  .ah-desc {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .ah-output {
+    background: var(--bg-elev-2);
+    border: 1px dashed var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: auto;
+  }
+  .ah-output strong { color: var(--text); }
+  .ah-card.upscaled .ah-output { border-color: rgba(201,166,255,0.35); background: rgba(201,166,255,0.05); }
+
+  .upscale-hero {
+    background: linear-gradient(135deg, rgba(76,194,255,0.10), rgba(201,166,255,0.12), rgba(255,143,209,0.10));
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .upscale-hero .hero-text { flex: 1 1 380px; }
+  .upscale-hero h3 {
+    margin: 0 0 6px 0;
+    font-size: 17px;
+    color: var(--text);
+  }
+  .upscale-hero p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .upscale-btn {
+    background: linear-gradient(135deg, var(--purple) 0%, #FF8FD1 100%);
+    color: #1F1330;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all 0.18s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .upscale-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .upscale-btn .arr {
+    font-size: 18px;
+    transition: transform 0.18s;
+  }
+  .upscale-btn:hover .arr { transform: translateX(4px); }
+  .instr-banner {
+    background: var(--amber-soft);
+    color: var(--amber);
+    border: 1px solid rgba(255,202,99,0.4);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+  .instr-banner strong { color: var(--amber); }
+  .instr-banner .sub { color: var(--text); display: block; margin-top: 4px; }
+  .instr-gold-banner {
+    background: linear-gradient(135deg, rgba(255,202,99,0.18), rgba(255,202,99,0.05));
+    border: 1px solid rgba(255,202,99,0.4);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .instr-gold-banner strong { color: var(--amber); }
+  .exp-col-body {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 18px;
+  }
+
+  /* Prompt card */
+  .prompt-card {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+  }
+  .prompt-card.frontier { border-left-color: var(--purple); }
+  .prompt-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .prompt-card .action-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-faint);
+    font-weight: 700;
+    margin: 4px 0 4px 0;
+  }
+  .prompt-card .action-list {
+    margin: 0 0 10px 0;
+    padding-left: 20px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .prompt-card .action-list li { margin-bottom: 3px; }
+  .prompt-box {
+    position: relative;
+    background: rgba(0,0,0,0.32);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 50px 10px 12px;
+    margin-top: 6px;
+  }
+  .prompt-box pre {
+    margin: 0;
+    font-family: 'Cascadia Mono', 'Consolas', 'SF Mono', monospace;
+    font-size: 12.5px;
+    color: #D4E5F5;
+    white-space: pre-wrap;
+    line-height: 1.5;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--blue);
+    color: #0E1A24;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: var(--blue-dark); color: white; }
+  .copy-btn.copied { background: var(--green); color: #0E1F09; }
+
+  /* Tab availability banner */
+  .availability-banner {
+    background: var(--purple-soft);
+    color: var(--purple);
+    border: 1px solid rgba(201,166,255,0.35);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .availability-banner.green {
+    background: var(--green-soft);
+    color: var(--green);
+    border-color: rgba(108,203,95,0.35);
+  }
+
+  /* Learn tab cards */
+  .learn-section {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .learn-section h2 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .learn-section .lede { color: var(--text-muted); font-size: 13px; margin: 0 0 16px 0; }
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .learn-card {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .learn-card.email { border-top: 3px solid var(--surf-outlook); }
+  .learn-card.calendar { border-top: 3px solid var(--blue); }
+  .learn-card.frontier { border-top: 3px solid var(--purple); }
+  .learn-card h3 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .learn-card p, .learn-card ul {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .learn-card ul { padding-left: 18px; }
+  .learn-card li { margin-bottom: 3px; }
+  .learn-card .meta {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .perspective-banner {
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .perspective-banner.ea {
+    background: var(--green-soft);
+    color: var(--green);
+    border: 1px solid rgba(108,203,95,0.35);
+  }
+  .perspective-banner.exec {
+    background: var(--blue-soft);
+    color: var(--blue);
+    border: 1px solid rgba(76,194,255,0.35);
+  }
+  .perspective-banner.overlap {
+    background: linear-gradient(90deg, rgba(108,203,95,0.15), rgba(76,194,255,0.15));
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+  }
+
+  /* Perspective selector (segmented control) */
+  .persp-selector {
+    display: inline-flex;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .persp-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    padding: 9px 18px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid transparent;
+  }
+  .persp-btn:hover { color: var(--text); }
+  .persp-btn.active {
+    background: var(--bg-elev-2);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+  }
+  .persp-btn.active.ea { color: var(--green); border-color: rgba(108,203,95,0.45); }
+  .persp-btn.active.exec { color: var(--blue); border-color: rgba(76,194,255,0.45); }
+  .persp-btn.active.delegate { color: var(--amber); border-color: rgba(255,202,99,0.45); }
+  .persp-panel { display: none; }
+  .persp-panel.active { display: block; }
+
+  /* WorkIQ callout */
+  .workiq-callout {
+    background: linear-gradient(135deg, rgba(76,194,255,0.10), rgba(201,166,255,0.10));
+    border: 1px solid var(--border-strong);
+    border-left: 3px solid var(--blue);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .workiq-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--blue-soft);
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .workiq-text { font-size: 13px; color: var(--text); line-height: 1.55; }
+  .workiq-text strong { color: var(--blue); }
+  .workiq-text .sub { color: var(--text-muted); margin-top: 4px; display: block; font-size: 12.5px; }
+
+  /* License / Frontier requirement chips inside learn cards */
+  .req-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+  }
+  .req-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .req-chip.license {
+    background: var(--blue-soft);
+    color: var(--blue);
+    border: 1px solid rgba(76,194,255,0.4);
+  }
+  .req-chip.frontier {
+    background: var(--purple-soft);
+    color: var(--purple);
+    border: 1px solid rgba(201,166,255,0.4);
+  }
+  .req-chip.delegate-needed {
+    background: var(--amber-soft);
+    color: var(--amber);
+    border: 1px solid rgba(255,202,99,0.4);
+  }
+  .req-chip.no-license {
+    background: var(--bg-elev-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  .surface-line {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .surface-line strong { color: var(--text); font-weight: 600; }
+
+  /* Day-in-the-life flowchart */
+  .flow-legend {
+    display: flex;
+    gap: 14px;
+    margin: 4px 0 10px 0;
+    flex-wrap: wrap;
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+  .flow-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+  .flow-legend-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg-elev-2);
+    flex-shrink: 0;
+  }
+  .flow-legend-item strong { color: var(--text); font-weight: 700; }
+
+  .flowchart-wrap {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 320px);
+    min-height: 440px;
+    max-height: 620px;
+    background: linear-gradient(180deg, rgba(76,194,255,0.04), rgba(201,166,255,0.04));
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm) inset;
+  }
+  .flow-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .flow-node {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 128px;
+    background: var(--bg-elev-2);
+    border: 2px solid var(--border-strong);
+    border-radius: 12px;
+    padding: 6px 10px 7px;
+    cursor: pointer;
+    text-align: center;
+    font-family: inherit;
+    color: var(--text);
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    box-shadow: var(--shadow-sm);
+  }
+  .flow-node:hover {
+    transform: translate(-50%, -50%) scale(1.07);
+    box-shadow: var(--shadow-md);
+    z-index: 5;
+  }
+  .flow-node .fn-time {
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+  .flow-node .fn-icon {
+    font-size: 16px;
+    margin: 1px 0 0 0;
+    line-height: 1;
+  }
+  .flow-node .fn-label {
+    font-size: 10.5px;
+    color: var(--text);
+    margin-top: 2px;
+    line-height: 1.2;
+    font-weight: 600;
+  }
+  .flow-node .fn-tag {
+    display: inline-block;
+    margin-top: 3px;
+    padding: 1px 6px;
+    border-radius: 8px;
+    font-size: 8.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .flow-node.live { border-color: rgba(76,194,255,0.55); }
+  .flow-node.live .fn-time { color: var(--blue); }
+  .flow-node.live .fn-tag { background: var(--blue-soft); color: var(--blue); }
+  .flow-node.live:hover { border-color: var(--blue); }
+
+  .flow-node.scheduled { border-color: rgba(255,202,99,0.55); background: rgba(255,202,99,0.05); }
+  .flow-node.scheduled .fn-time { color: var(--amber); }
+  .flow-node.scheduled .fn-tag { background: var(--amber-soft); color: var(--amber); }
+  .flow-node.scheduled:hover { border-color: var(--amber); }
+
+  .flow-node.autonomous { border-color: rgba(108,203,95,0.55); background: rgba(108,203,95,0.05); }
+  .flow-node.autonomous .fn-time { color: var(--green); }
+  .flow-node.autonomous .fn-tag { background: var(--green-soft); color: var(--green); }
+  .flow-node.autonomous:hover { border-color: var(--green); }
+
+  .flow-node.eod { border-color: rgba(201,166,255,0.55); background: rgba(201,166,255,0.05); }
+  .flow-node.eod .fn-time { color: var(--purple); }
+  .flow-node.eod .fn-tag { background: var(--purple-soft); color: var(--purple); }
+  .flow-node.eod:hover { border-color: var(--purple); }
+
+  .flow-endcap {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: var(--bg-elev);
+    border: 2px dashed var(--border-strong);
+    border-radius: 999px;
+    padding: 6px 12px;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 820px) {
+    .flowchart-wrap { height: auto; min-height: 600px; max-height: none; padding-top: 180%; }
+    .flow-node { width: 110px; }
+    .flow-node .fn-label { font-size: 10px; }
+  }
+
+  /* Surfaces tab — 3-column overview */
+  .surf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 1080px) { .surf-grid { grid-template-columns: 1fr; } }
+  .surf-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+  }
+  .surf-card.outlook { border-top: 4px solid var(--surf-outlook); }
+  .surf-card.chat { border-top: 4px solid var(--surf-chat); }
+  .surf-card.cowork { border-top: 4px solid var(--surf-cowork); }
+  .surf-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .surf-header h3 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .surf-card.outlook .surf-header h3 { color: var(--surf-outlook); }
+  .surf-card.chat .surf-header h3 { color: var(--surf-chat); }
+  .surf-card.cowork .surf-header h3 { color: var(--surf-cowork); }
+  .surf-header .surf-tagline {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  .surf-prompts {
+    padding: 14px 18px;
+    background: var(--bg-elev-2);
+    border-bottom: 1px solid var(--border);
+  }
+  .surf-prompts .prompts-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: var(--text-faint);
+  }
+  .surf-prompts ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .surf-prompts li {
+    font-size: 12.5px;
+    line-height: 1.4;
+    padding: 8px 10px 8px 28px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    position: relative;
+  }
+  .surf-prompts li::before {
+    content: '"';
+    position: absolute;
+    left: 10px;
+    top: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .surf-card.outlook .surf-prompts li::before { color: var(--surf-outlook); }
+  .surf-card.chat .surf-prompts li::before { color: var(--surf-chat); }
+  .surf-card.cowork .surf-prompts li::before { color: var(--surf-cowork); }
+  .surf-mock {
+    padding: 16px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.05));
+    flex: 1;
+  }
+  .mock-window {
+    background: #14141A;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 11px;
+    box-shadow: var(--shadow-sm);
+  }
+  .mock-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: #1F1F25;
+    border-bottom: 1px solid var(--border);
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .mock-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--border-strong);
+  }
+  .mock-dot.r { background: #FF6058; }
+  .mock-dot.y { background: #FFBD2E; }
+  .mock-dot.g { background: #28C940; }
+  .mock-titlebar .mock-app { margin-left: 8px; font-weight: 700; }
+  .mock-body { display: grid; }
+
+  /* Outlook mock */
+  .outlook-mock-body { grid-template-columns: 90px 1fr 130px; min-height: 240px; }
+  .ol-folders {
+    background: #18181E;
+    border-right: 1px solid var(--border);
+    padding: 8px 6px;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .ol-folders div { padding: 4px 6px; border-radius: 4px; margin-bottom: 2px; }
+  .ol-folders div.active { background: var(--surf-outlook-soft); color: var(--surf-outlook); font-weight: 600; }
+  .ol-thread {
+    padding: 10px 12px;
+    border-right: 1px solid var(--border);
+    background: #14141A;
+  }
+  .ol-thread .ol-from { font-weight: 700; color: var(--text); font-size: 11px; }
+  .ol-thread .ol-subj { font-size: 11.5px; color: var(--text); margin: 2px 0 6px 0; font-weight: 600; }
+  .ol-thread .ol-snippet { font-size: 10.5px; color: var(--text-muted); line-height: 1.45; }
+  .ol-copilot {
+    background: linear-gradient(180deg, rgba(91,208,180,0.15), rgba(91,208,180,0.04));
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+  .ol-copilot .ol-cp-h {
+    color: var(--surf-outlook);
+    font-weight: 700;
+    margin-bottom: 6px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ol-copilot .ol-cp-bullet {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(91,208,180,0.25);
+    border-radius: 4px;
+    padding: 4px 6px;
+    margin-bottom: 4px;
+    color: var(--text);
+    line-height: 1.35;
+    font-size: 9.5px;
+  }
+
+  /* Chat mock */
+  .chat-mock-body {
+    padding: 12px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #14141A;
+  }
+  .chat-bubble {
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 10.5px;
+    line-height: 1.4;
+    max-width: 85%;
+  }
+  .chat-bubble.user {
+    background: var(--surf-chat-soft);
+    color: var(--text);
+    border: 1px solid rgba(76,194,255,0.3);
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+  }
+  .chat-bubble.assistant {
+    background: var(--bg-elev-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+  }
+  .chat-bubble.assistant strong { color: var(--surf-chat); }
+  .chat-cite {
+    display: inline-block;
+    font-size: 9px;
+    background: rgba(76,194,255,0.15);
+    color: var(--surf-chat);
+    border: 1px solid rgba(76,194,255,0.3);
+    border-radius: 8px;
+    padding: 1px 6px;
+    margin-right: 3px;
+    margin-top: 4px;
+  }
+  .chat-input-mock {
+    margin-top: auto;
+    background: #1A1A20;
+    border: 1px solid var(--border-strong);
+    border-radius: 18px;
+    padding: 7px 12px;
+    font-size: 10px;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Cowork mock */
+  .cowork-mock-body {
+    padding: 12px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #14141A;
+  }
+  .cw-task {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--surf-cowork);
+    border-radius: 6px;
+    padding: 7px 10px;
+    font-size: 10.5px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .cw-task.scheduled { border-left-color: var(--amber); }
+  .cw-task.skill { border-left-color: var(--purple); }
+  .cw-task .cw-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cw-task .cw-title { font-weight: 700; color: var(--text); flex: 1; font-size: 10.5px; }
+  .cw-task .cw-meta { font-size: 9.5px; color: var(--text-muted); }
+  .cw-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    padding: 1px 6px;
+    border-radius: 7px;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .cw-tag.skill { background: var(--purple-soft); color: var(--purple); }
+  .cw-tag.sched { background: var(--amber-soft); color: var(--amber); }
+  .cw-tag.live { background: var(--surf-cowork-soft); color: var(--surf-cowork); }
+
+  .surf-bestfor {
+    padding: 12px 18px 16px 18px;
+    border-top: 1px solid var(--border);
+    background: var(--bg-elev);
+  }
+  .surf-bestfor .bf-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: var(--text-faint);
+  }
+  .surf-bestfor p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* Surfaces — at-a-glance comparison */
+  .surf-compare {
+    margin-top: 8px;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 22px;
+  }
+  .surf-compare h3 {
+    margin: 0 0 12px 0;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .surf-compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .surf-compare-table th, .surf-compare-table td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .surf-compare-table th {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .surf-compare-table th:first-child { width: 180px; }
+
+  /* Event modal styling for body content */
+  .event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .event-scenario {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    margin: 0 0 14px 0;
+    font-style: italic;
+    padding: 12px 14px;
+    background: var(--bg-elev-2);
+    border-radius: 8px;
+    border-left: 3px solid var(--blue);
+  }
+  .event-action-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-faint);
+    font-weight: 700;
+    margin: 14px 0 6px 0;
+  }
+  .event-actions {
+    margin: 0 0 10px 0;
+    padding-left: 22px;
+    font-size: 13.5px;
+  }
+  .event-actions li { margin-bottom: 5px; }
+  .schedule-block {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--purple-soft);
+    border: 1px solid rgba(201,166,255,0.4);
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--text);
+  }
+  .schedule-block strong { color: var(--purple); }
+
+  /* Day-in-the-life timeline (legacy, retained) */
+  .timeline {
+    position: relative;
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 18px;
+    padding: 18px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-time {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--blue);
+    padding-top: 2px;
+    text-align: right;
+  }
+  .timeline-content {
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .timeline-content h3 {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .timeline-content .scenario {
+    color: var(--text-muted);
+    font-size: 12.5px;
+    margin: 0 0 8px 0;
+    font-style: italic;
+  }
+  .timeline-content .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 6px 0 8px 0;
+  }
+  @media (max-width: 720px) {
+    .timeline-item { grid-template-columns: 1fr; }
+    .timeline-time { text-align: left; }
+  }
+
+  /* Setup tab — preserved from prior version */
+  .config-bar {
+    background: var(--bg-elev);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+  }
+  .config-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .compare-btn {
+    background: var(--blue);
+    color: #0E1A24;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .compare-btn:hover { background: var(--blue-dark); color: white; }
+  .config-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    position: relative;
+    background: var(--blue-soft);
+    color: var(--blue);
+    border: 1px solid rgba(76, 194, 255, 0.35);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: help;
+    transition: all 0.15s;
+  }
+  .chip.frontier { background: var(--purple-soft); color: var(--purple); border-color: rgba(201,166,255,0.4); }
+  .chip.admin { background: var(--amber-soft); color: var(--amber); border-color: rgba(255,202,99,0.4); }
+  .tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0E0E12;
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    white-space: normal;
+    width: 260px;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    transition: opacity 0.15s;
+    pointer-events: none;
+    text-align: left;
+    line-height: 1.5;
+    border: 1px solid var(--border-strong);
+  }
+  .chip:hover .tooltip { visibility: visible; opacity: 1; }
+
+  .intake {
+    background: linear-gradient(135deg, rgba(76,194,255,0.08), rgba(201,166,255,0.08));
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  .intake h2 { margin: 0 0 6px 0; font-size: 18px; font-weight: 600; }
+  .intake p { margin: 0 0 18px 0; color: var(--text-muted); font-size: 13px; }
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--bg-elev-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .check-row:hover { border-color: var(--blue); background: rgba(76,194,255,0.06); }
+  .check-row input { margin-top: 3px; accent-color: var(--blue); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+  .check-row .label { font-size: 14px; font-weight: 600; color: var(--text); }
+  .check-row .desc { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+  .check-row.checked { border-color: var(--blue); background: var(--blue-soft); }
+
+  .progress-wrap {
+    background: var(--bg-elev);
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 8px;
+    background: var(--bg-elev-2);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--green)); width: 0%; transition: width 0.4s ease; }
+  .progress-text { font-size: 13px; font-weight: 600; color: var(--text-muted); min-width: 110px; text-align: right; }
+
+  .steps { display: grid; gap: 14px; }
+  .step-card {
+    background: var(--bg-elev);
+    border-radius: 10px;
+    padding: 22px 26px;
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+  .step-card.hidden { display: none; }
+  .step-card.active {
+    border: 1px solid var(--blue);
+    box-shadow: 0 0 0 2px rgba(76,194,255,0.25), var(--shadow-md);
+  }
+  .step-card.complete {
+    background: rgba(108, 203, 95, 0.07);
+    border-color: rgba(108, 203, 95, 0.4);
+  }
+  .step-card.complete .step-number { background: var(--green); color: #0E1F09; }
+  .step-card.complete .step-title::after { content: ' ✓'; color: var(--green); font-weight: 700; }
+  .step-number {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    background: var(--blue);
+    color: #0E1A24;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .step-body { flex: 1; min-width: 0; }
+  .step-title { font-size: 16px; font-weight: 600; margin: 0 0 4px 0; }
+  .step-meta { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .step-content { font-size: 14px; }
+  .step-content ul, .step-content ol { margin: 8px 0; padding-left: 22px; }
+  .step-content li { margin-bottom: 4px; }
+  .step-actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-complete { background: var(--green); color: #0E1F09; }
+  .btn-next { background: var(--blue); color: #0E1A24; }
+  .btn-undo { background: var(--bg-elev-2); color: var(--text); border: 1px solid var(--border-strong); }
+  .step-card.complete .btn-complete { display: none; }
+  .step-card:not(.complete) .btn-undo { display: none; }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 1000;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-y: auto;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg-elev);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    max-width: 1120px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .modal-header {
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #1A2B4D 0%, #3D2154 100%);
+    color: white;
+  }
+  .modal-header h2 { margin: 0; font-size: 18px; font-weight: 600; }
+  .modal-close {
+    background: rgba(255,255,255,0.18);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .modal-body { padding: 24px 28px; max-height: 75vh; overflow-y: auto; }
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    color: var(--text);
+  }
+  table.compare th, table.compare td {
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+  }
+  table.compare th {
+    background: var(--bg-elev-2);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+    position: sticky;
+    top: 0;
+  }
+  table.compare th:first-child { width: 180px; }
+  table.compare tr:hover td { background: var(--blue-soft); }
+  table.compare tr.ai-row td {
+    background: linear-gradient(90deg, rgba(76,194,255,0.06), rgba(91,208,180,0.06), rgba(255,143,209,0.06));
+    border-top: 1px solid rgba(76,194,255,0.3);
+    border-bottom: 1px solid rgba(255,143,209,0.3);
+  }
+  table.compare tr.ai-row td:first-child { font-weight: 700; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .pill-yes { background: var(--green-soft); color: var(--green); border: 1px solid rgba(108,203,95,0.35); }
+  .pill-no { background: var(--red-soft); color: var(--red); border: 1px solid rgba(255,122,122,0.35); }
+  .pill-partial { background: var(--amber-soft); color: var(--amber); border: 1px solid rgba(255,202,99,0.35); }
+
+  .sources {
+    margin-top: 32px;
+    padding: 18px 22px;
+    background: var(--bg-elev);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .sources h3 { margin: 0 0 10px 0; font-size: 14px; color: var(--text); }
+  .sources ul { margin: 0; padding-left: 20px; }
+  .sources li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>M365 Copilot - Executive 2 EA with AI</h1>
+  <p>How an executive and their assistant use Copilot together across email and calendar — today, in the Frontier program, and through a delegated working day.</p>
+</header>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="learn" onclick="showTab('learn')">📘 Learn</button>
+    <button class="tab-btn" data-tab="surfaces" onclick="showTab('surfaces')">🧭 Where do you manage emails and events?</button>
+    <button class="tab-btn" data-tab="copilot" onclick="showTab('copilot')">✨ Copilot Experiences &amp; Prompts</button>
+    <button class="tab-btn" data-tab="frontier" onclick="showTab('frontier')">🚀 Copilot (Frontier) Experiences &amp; Prompts</button>
+    <button class="tab-btn" data-tab="day" onclick="showTab('day')">🗓️ EA for Executive — Day in the Life</button>
+    <button class="tab-btn" data-tab="allhands" onclick="showTab('allhands')">🎤 Executive + EA + Copilot Cowork Example</button>
+    <button class="tab-btn" data-tab="setup" onclick="showTab('setup')">⚙️ Setup Steps</button>
+  </div>
+
+  <!-- ============ TAB: LEARN ============ -->
+  <div class="tab-panel active" id="tab-learn">
+
+    <h2 class="section-title">How Copilot works for you — choose your perspective</h2>
+    <p class="section-subtitle">See how M365 Copilot in Outlook and Copilot Chat accelerate email and calendar work — for the EA, the executive, or the EA acting on the exec's behalf.</p>
+
+    <!-- Perspective selector -->
+    <div class="persp-selector" role="tablist">
+      <button class="persp-btn active ea" data-persp="ea" onclick="showPersp('ea')">👤 EA</button>
+      <button class="persp-btn exec" data-persp="exec" onclick="showPersp('exec')">🧑‍💼 Executive</button>
+      <button class="persp-btn delegate" data-persp="delegate" onclick="showPersp('delegate')">🤝 EA on behalf of Exec</button>
+    </div>
+
+    <!-- WorkIQ grounding callout -->
+    <div class="workiq-callout">
+      <div class="workiq-icon">🧠</div>
+      <div class="workiq-text">
+        <strong>Grounded in your work with WorkIQ.</strong> Every Copilot response is built on the WorkIQ graph — the connected understanding of your emails, meetings, chats, files, and people across Microsoft 365. That's why summaries cite the right thread, drafts pick up your tone, and prep cards surface the customer's open issue instead of generic advice.
+        <span class="sub">No setup required — WorkIQ is on for every M365 Copilot user. Outputs honor your existing permissions: Copilot can only see what you can see.</span>
+      </div>
+    </div>
+
+    <!-- ===== PERSPECTIVE: EA ===== -->
+    <div class="persp-panel active" id="persp-ea">
+      <div class="learn-section">
+        <span class="perspective-banner ea">👤 EA perspective — using Copilot in your own Outlook</span>
+        <h2>Run your own day faster with Copilot</h2>
+        <p class="lede">Before you ever act on the executive's behalf, Copilot in Outlook and Copilot Chat accelerate <em>your</em> day. Open Copilot inline in Outlook to summarize a thread or draft a reply, or open Copilot Chat (in Teams, the M365 app, or chat.microsoft.com) to catch up across email + Teams + files in a single prompt. Every action below works on items you own — no delegate setup needed.</p>
+
+        <div class="learn-grid">
+          <div class="learn-card email">
+            <h3>📨 Email — your inbox</h3>
+            <div class="surface-line">Use it in: <strong>Outlook</strong> (web, Windows, Mac, mobile) · <strong>Copilot Chat</strong></div>
+            <ul>
+              <li><strong>Summarize</strong> long threads in one click — Copilot reads the entire chain and cites which messages each point came from</li>
+              <li><strong>Draft replies</strong> from a single bullet — pick tone (formal / direct / casual) and length</li>
+              <li><strong>Coach your writing</strong> — Copilot reviews tone, clarity, and reader sentiment before you hit send</li>
+              <li><strong>Catch up</strong> across email + Teams — "what did I miss on the Aurora launch in the last 48 hours?"</li>
+              <li><strong>Find emails by meaning</strong> — describe a message by topic instead of guessing keywords</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip license">🔑 M365 Copilot license required</span>
+              <span class="badge">Available today</span>
+            </div>
+          </div>
+          <div class="learn-card calendar">
+            <h3>📅 Calendar — your schedule</h3>
+            <div class="surface-line">Use it in: <strong>Outlook calendar</strong> · <strong>Copilot Chat</strong></div>
+            <ul>
+              <li><strong>Find a time</strong> across multiple attendees with natural language — "30 min next week with Priya, James, and Lin, mornings only"</li>
+              <li><strong>Schedule via chat</strong> — describe the meeting; Copilot drafts the invite, including a Teams link, for your approval</li>
+              <li><strong>Prep for upcoming meetings</strong> — Copilot pulls past threads, files, and decisions tied to the attendees and the topic</li>
+              <li><strong>Summarize the week ahead</strong> — flag where you're the decision-maker or where prep is needed</li>
+              <li><strong>Draft agendas</strong> grounded in last week's action items and open Teams threads</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip license">🔑 M365 Copilot license required</span>
+              <span class="badge">Available today</span>
+            </div>
+          </div>
+          <div class="learn-card frontier">
+            <h3>🚀 Always-on agents — Frontier</h3>
+            <div class="surface-line">Use it in: <strong>Outlook for Windows + web</strong> (Calendar agent / Time alignment) · all Outlook surfaces (Inbox agent)</div>
+            <ul>
+              <li><strong>Inbox agent</strong> — proactively identifies non-replies after 24h and drafts polite follow-ups for your review</li>
+              <li><strong>Calendar agent</strong> — manages a recurring 1:1 series, auto-rebooks when conflicts hit</li>
+              <li><strong>Time alignment</strong> — reviews next week and recommends what to decline, follow, delegate, or convert to async</li>
+              <li><strong>Vacation catch-up</strong> — one prompt produces a briefing, archive suggestions, and 1–2 focus tasks</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip license">🔑 M365 Copilot license</span>
+              <span class="req-chip frontier">🚀 Frontier opt-in required</span>
+              <span class="badge">GA Apr 27, 2026 (rolling out)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PERSPECTIVE: EXECUTIVE ===== -->
+    <div class="persp-panel" id="persp-exec">
+      <div class="learn-section">
+        <span class="perspective-banner exec">🧑‍💼 Executive perspective — using Copilot directly</span>
+        <h2>Reclaim time across email and calendar</h2>
+        <p class="lede">Use M365 Copilot in Outlook for inline drafting, summarization, and prep — or open Copilot Chat to catch up on a project across Outlook, Teams, and files in a single prompt. Frontier agents extend this further with always-on triage and proactive scheduling. Because everything is grounded in WorkIQ, Copilot answers in the context of <em>your</em> meetings, customers, and team — not generic advice.</p>
+
+        <div class="learn-grid">
+          <div class="learn-card email">
+            <h3>📨 Exec — email triage &amp; drafting</h3>
+            <div class="surface-line">Use it in: <strong>Outlook</strong> · <strong>Copilot Chat</strong></div>
+            <ul>
+              <li><strong>One-click thread summaries</strong> — get the decision, the open questions, and who owns what without reading 30 replies</li>
+              <li><strong>Draft replies in your voice</strong> — Copilot learns from your past sent items so the tone stays yours</li>
+              <li><strong>Catch up in one prompt</strong> — "summarize everything on Project Aurora across my email and Teams in the last week"</li>
+              <li><strong>Coach before sending</strong> — make tough messages clearer, more direct, and reader-aware</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip license">🔑 M365 Copilot license required</span>
+              <span class="badge">Available today</span>
+            </div>
+          </div>
+          <div class="learn-card calendar">
+            <h3>📅 Exec — calendar &amp; meeting prep</h3>
+            <div class="surface-line">Use it in: <strong>Outlook calendar</strong> · <strong>Copilot Chat</strong></div>
+            <ul>
+              <li><strong>Auto-prep before each meeting</strong> — Copilot pulls the customer history, recent threads, and likely talking points</li>
+              <li><strong>Find time conversationally</strong> — "find 45 min this week with the CFO and head of CS"</li>
+              <li><strong>Draft agendas</strong> tied to last week's actions and open work items</li>
+              <li><strong>Summarize the week ahead</strong> — see at a glance where you're a decision-maker</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip license">🔑 M365 Copilot license required</span>
+              <span class="badge">Available today</span>
+            </div>
+          </div>
+          <div class="learn-card frontier">
+            <h3>🚀 Exec — agentic Copilot (Frontier)</h3>
+            <div class="surface-line">Use it in: <strong>Outlook for Windows + web</strong> (Calendar agent / Time alignment) · all Outlook surfaces (Inbox agent)</div>
+            <ul>
+              <li><strong>Inbox agent</strong> works while you're heads-down — surfaces what you must read, drafts the rest</li>
+              <li><strong>Calendar agent</strong> auto-resolves routine conflicts, protects working hours, blocks focus time before priority meetings</li>
+              <li><strong>Time alignment</strong> recommends what to decline, follow, delegate, or convert to async — before the week starts</li>
+              <li><strong>Audit-friendly</strong> — every proposed action is shown for review before it executes</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip license">🔑 M365 Copilot license</span>
+              <span class="req-chip frontier">🚀 Frontier opt-in required</span>
+              <span class="badge">GA Apr 27, 2026 (rolling out)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="learn-grid" style="margin-top: 18px;">
+          <div class="learn-card">
+            <span class="perspective-banner overlap" style="margin-bottom:8px;">🤝 The compounding value when your EA also has Copilot</span>
+            <ul>
+              <li><strong>Shared context</strong> — you and your EA see the same WorkIQ-grounded summaries on shared items, so nothing gets re-explained</li>
+              <li><strong>Clean hand-offs</strong> — you draft a quick bullet, your EA refines and sends; Copilot keeps the voice consistent</li>
+              <li><strong>Audit trail</strong> — Frontier shows each step before acting; either of you can intervene</li>
+              <li><strong>Time alignment as a duo</strong> — you review the recommendations; your EA executes the reschedules and sends the polite explanations</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PERSPECTIVE: EA ON BEHALF OF EXEC ===== -->
+    <div class="persp-panel" id="persp-delegate">
+      <div class="learn-section">
+        <span class="perspective-banner ea">🤝 EA on behalf of the Executive — with full configuration</span>
+        <h2>Run the exec's email and calendar with Copilot at your side</h2>
+        <p class="lede">Once delegate access and Copilot licensing are in place, every Copilot action you use on your own mailbox works on the exec's mailbox too. Copilot honors the same item-level permissions as native delegation — including Send-on-Behalf-of and Send-As — and uses WorkIQ to ground each summary, draft, and prep card in the exec's actual conversations, files, and customers.</p>
+
+        <div class="learn-grid">
+          <div class="learn-card email">
+            <h3>📨 Acting on the exec's mail</h3>
+            <div class="surface-line">Use it in: <strong>Outlook</strong> (delegated mailbox view) · <strong>Copilot Chat</strong> · <strong>Cowork</strong></div>
+            <ul>
+              <li><strong>Summarize threads</strong> inside the exec's mailbox without reading every reply</li>
+              <li><strong>Draft replies</strong> on behalf of <em>or</em> as the exec — tone tuned to their past sent items</li>
+              <li><strong>Coach drafts</strong> to match the exec's voice before placing in their drafts folder</li>
+              <li><strong>Cross-source catch-up</strong> — "what's been happening on Aurora across the exec's email and Teams over the last 48 hours?"</li>
+              <li><strong>Triage</strong> — separate exec-must-read from EA-can-handle from archive-now</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip delegate-needed">📬 Mailbox delegate access</span>
+              <span class="req-chip license">🔑 Copilot license (EA)</span>
+              <span class="badge">Available today</span>
+            </div>
+          </div>
+          <div class="learn-card calendar">
+            <h3>📅 Acting on the exec's calendar</h3>
+            <div class="surface-line">Use it in: <strong>Outlook calendar</strong> (delegated) · <strong>Copilot Chat</strong></div>
+            <ul>
+              <li><strong>Find a time</strong> across the exec + invitees, respecting protected blocks</li>
+              <li><strong>Schedule, accept, decline</strong> invites — all sent from the exec</li>
+              <li><strong>Prep the exec</strong> with a one-page card before each meeting</li>
+              <li><strong>Draft agendas</strong> in the exec's voice that go out with the invite</li>
+              <li><strong>Resolve conflicts</strong> — Copilot proposes reschedules; the EA approves and sends from the exec</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip delegate-needed">📅 Calendar delegate (Editor)</span>
+              <span class="req-chip license">🔑 Copilot license (EA)</span>
+              <span class="badge">Available today</span>
+            </div>
+          </div>
+          <div class="learn-card frontier">
+            <h3>🚀 Always-on agents for the exec</h3>
+            <div class="surface-line">Use it in: <strong>Outlook for Windows + web</strong> (Calendar agent / Time alignment) · all Outlook surfaces (Inbox agent)</div>
+            <ul>
+              <li><strong>Always-on inbox triage</strong> on the exec's mail — drafts staged for EA review</li>
+              <li><strong>Calendar agent</strong> resolves 1:1 conflicts, rebooks rooms, blocks focus time before priority meetings</li>
+              <li><strong>Time alignment</strong> stages weekly decline / follow / delegate / async recommendations for the EA + exec to review together</li>
+              <li><strong>Auditable hand-offs</strong> — each proposed action shown before send; EA approves in one pass</li>
+            </ul>
+            <div class="req-row">
+              <span class="req-chip delegate-needed">📬 Delegate + 📅 Editor</span>
+              <span class="req-chip license">🔑 Copilot license (EA + Exec)</span>
+              <span class="req-chip frontier">🚀 Frontier opt-in (Exec)</span>
+              <span class="badge">GA Apr 27, 2026 (rolling out)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="learn-grid" style="margin-top: 18px;">
+          <div class="learn-card">
+            <span class="perspective-banner overlap" style="margin-bottom:8px;">🧠 Why WorkIQ grounding matters when acting for the exec</span>
+            <ul>
+              <li><strong>Right tone</strong> — drafts pick up the exec's actual writing style from their past sent items, not a generic template</li>
+              <li><strong>Right context</strong> — prep cards reference the customer's open issue, the chair's last question, the postmortem your team published</li>
+              <li><strong>Right permissions</strong> — Copilot only sees what your delegated access already allows; nothing leaks across boundaries</li>
+              <li><strong>Right consistency</strong> — when both exec and EA use Copilot, both sides see the same WorkIQ-grounded summaries and drafts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB: SURFACES — WHERE DO YOU MANAGE EMAIL/EVENTS? ============ -->
+  <div class="tab-panel" id="tab-surfaces">
+    <h2 class="section-title">Where do you manage emails and events?</h2>
+    <p class="section-subtitle">Three primary surfaces for email and calendar work — each with a distinct strength. Top prompts are highlighted above each surface; the visualization below shows what the experience looks like in practice.</p>
+
+    <div class="surf-grid">
+
+      <!-- ===== OUTLOOK WITH COPILOT ===== -->
+      <div class="surf-card outlook">
+        <div class="surf-header">
+          <h3>📨 Outlook with Copilot</h3>
+          <p class="surf-tagline">Inline assistance right where the email or calendar item lives — summarize, draft, coach, prep, and schedule without leaving the thread.</p>
+        </div>
+        <div class="surf-prompts">
+          <div class="prompts-label">⭐ Top prompts</div>
+          <ul>
+            <li>Summarize this thread, including decisions, open questions, and what each person committed to.</li>
+            <li>Draft a reply on behalf of [exec] confirming the meeting and asking for the latest forecast.</li>
+            <li>Find 30 minutes next week with Priya, James, and Lin — mornings only.</li>
+            <li>Prepare me for tomorrow's customer save call — pull history, concerns, and likely talking points.</li>
+            <li>Coach this draft to sound more direct and confident before I send it.</li>
+          </ul>
+        </div>
+        <div class="surf-mock">
+          <div class="mock-window">
+            <div class="mock-titlebar">
+              <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+              <span class="mock-app">Outlook — Inbox</span>
+            </div>
+            <div class="mock-body outlook-mock-body">
+              <div class="ol-folders">
+                <div class="active">📥 Inbox</div>
+                <div>⭐ Flagged</div>
+                <div>📤 Sent</div>
+                <div>📁 Aurora</div>
+                <div>📁 Board</div>
+              </div>
+              <div class="ol-thread">
+                <div class="ol-from">Contoso · CIO</div>
+                <div class="ol-subj">Re: Renewal — pricing concerns &amp; product gap</div>
+                <div class="ol-snippet">Thanks for the time yesterday. We need to align on the licensing tier before legal can sign — three open items below…</div>
+                <div class="ol-snippet" style="margin-top:6px;color:var(--text-faint)">12 messages · 3 attachments</div>
+              </div>
+              <div class="ol-copilot">
+                <div class="ol-cp-h">✨ Copilot</div>
+                <div class="ol-cp-bullet">Decision: tiered pricing rejected; flat-rate proposed</div>
+                <div class="ol-cp-bullet">Open: SSO timeline, data residency, audit logs</div>
+                <div class="ol-cp-bullet">Action: schedule CTO call before Friday</div>
+                <button style="background:var(--surf-outlook); color:#0E1F1A; border:none; padding:4px 8px; border-radius:4px; font-size:9.5px; font-weight:700; margin-top:4px; cursor:pointer; width:100%;">Draft reply</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="surf-bestfor">
+          <div class="bf-label">Best for</div>
+          <p>Acting on a single thread or meeting — when the item is open in front of you and you want the AI to operate on <em>that</em> specific context.</p>
+        </div>
+      </div>
+
+      <!-- ===== COPILOT CHAT ===== -->
+      <div class="surf-card chat">
+        <div class="surf-header">
+          <h3>💬 Copilot Chat</h3>
+          <p class="surf-tagline">Conversational, cross-source. Ask in plain language and Copilot answers across email, Teams, files, and calendar — with citations.</p>
+        </div>
+        <div class="surf-prompts">
+          <div class="prompts-label">⭐ Top prompts</div>
+          <ul>
+            <li>Catch me up on the Aurora launch across [exec]'s email and Teams over the last 48 hours.</li>
+            <li>What did I miss yesterday while I was in back-to-backs?</li>
+            <li>Find the email where the CFO shared the Q1 close numbers and customer concentration footnote.</li>
+            <li>Summarize what's on [exec]'s calendar next week and flag where they're the decision-maker.</li>
+            <li>Who has [exec] not replied to in the last 3 days that probably matters?</li>
+          </ul>
+        </div>
+        <div class="surf-mock">
+          <div class="mock-window">
+            <div class="mock-titlebar">
+              <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+              <span class="mock-app">Copilot Chat</span>
+            </div>
+            <div class="mock-body chat-mock-body">
+              <div class="chat-bubble user">Catch me up on Aurora across email and Teams from the last 48h.</div>
+              <div class="chat-bubble assistant">
+                <strong>Aurora launch — last 48h</strong><br>
+                • Eng: GA cut moved to Fri (build #4271)<br>
+                • Marketing: blog post in legal review<br>
+                • Risk: 2 open P1s on auth flow<br>
+                <span class="chat-cite">📨 3 emails</span><span class="chat-cite">💬 7 chats</span>
+              </div>
+              <div class="chat-bubble user">Who's blocking the auth fix?</div>
+              <div class="chat-input-mock">💬 Ask anything across your work…</div>
+            </div>
+          </div>
+        </div>
+        <div class="surf-bestfor">
+          <div class="bf-label">Best for</div>
+          <p>Catching up, finding things across surfaces, and answering broad questions where context spans email + Teams + files + calendar.</p>
+        </div>
+      </div>
+
+      <!-- ===== COWORK ===== -->
+      <div class="surf-card cowork">
+        <div class="surf-header">
+          <h3>🤖 Copilot Cowork</h3>
+          <p class="surf-tagline">Autonomous skills + scheduled tasks. Set it once, Cowork runs the work on its own — drafts, briefings, and triage land staged for review.</p>
+        </div>
+        <div class="surf-prompts">
+          <div class="prompts-label">⭐ Top prompts</div>
+          <ul>
+            <li>Every morning at 6 AM, brief me on [exec]'s day and email it to me before they arrive.</li>
+            <li>At 6:30 AM, triage [exec]'s inbox overnight — stage drafts and archive suggestions for my approval.</li>
+            <li>Every Friday at 3 PM, draft this week's leadership update from [exec] and place it in their drafts.</li>
+            <li>Every Sunday evening, book two 90-minute focus blocks for [exec]'s upcoming week.</li>
+            <li>Prep a one-pager for every customer meeting on tomorrow's calendar.</li>
+          </ul>
+        </div>
+        <div class="surf-mock">
+          <div class="mock-window">
+            <div class="mock-titlebar">
+              <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+              <span class="mock-app">Cowork — Tasks</span>
+            </div>
+            <div class="mock-body cowork-mock-body">
+              <div class="cw-task scheduled">
+                <div class="cw-row"><span class="cw-title">Daily exec briefing</span><span class="cw-tag sched">⏰ Scheduled</span></div>
+                <div class="cw-meta">Runs daily · 6:00 AM · daily-briefing skill</div>
+              </div>
+              <div class="cw-task scheduled">
+                <div class="cw-row"><span class="cw-title">Overnight inbox triage</span><span class="cw-tag sched">⏰ Scheduled</span></div>
+                <div class="cw-meta">Runs daily · 6:30 AM · stages drafts for review</div>
+              </div>
+              <div class="cw-task skill">
+                <div class="cw-row"><span class="cw-title">Weekly leadership digest</span><span class="cw-tag skill">🧠 Skill</span></div>
+                <div class="cw-meta">Runs Fri 3 PM · stakeholder-comms · drafts to [exec]</div>
+              </div>
+              <div class="cw-task">
+                <div class="cw-row"><span class="cw-title">All-Hands prep bundle</span><span class="cw-tag live">▶ In progress</span></div>
+                <div class="cw-meta">3 parallel skills · speech, deck, prep card</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="surf-bestfor">
+          <div class="bf-label">Best for</div>
+          <p>Recurring or background work — anything you want to happen automatically on a schedule, or any prep that should be staged before you sit down.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- At-a-glance comparison -->
+    <div class="surf-compare">
+      <h3>At a glance — when to reach for which</h3>
+      <table class="surf-compare-table">
+        <thead>
+          <tr>
+            <th>You want to…</th>
+            <th><span class="surf-pill outlook dot">Outlook</span></th>
+            <th><span class="surf-pill chat dot">Chat</span></th>
+            <th><span class="surf-pill cowork dot">Cowork</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Act on the thread or meeting in front of me</td>
+            <td><span class="pill pill-yes">Best</span></td>
+            <td><span class="pill pill-partial">OK</span></td>
+            <td><span class="pill pill-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Catch up across email + Teams + files</td>
+            <td><span class="pill pill-partial">Limited</span></td>
+            <td><span class="pill pill-yes">Best</span></td>
+            <td><span class="pill pill-partial">Scheduled</span></td>
+          </tr>
+          <tr>
+            <td>Find a specific email or file by description</td>
+            <td><span class="pill pill-partial">Inline</span></td>
+            <td><span class="pill pill-yes">Best</span></td>
+            <td><span class="pill pill-no">No</span></td>
+          </tr>
+          <tr>
+            <td>Schedule, accept, or decline an invite</td>
+            <td><span class="pill pill-yes">Best</span></td>
+            <td><span class="pill pill-yes">Yes</span></td>
+            <td><span class="pill pill-partial">Via skill</span></td>
+          </tr>
+          <tr>
+            <td>Run the same prep work every morning</td>
+            <td><span class="pill pill-no">No</span></td>
+            <td><span class="pill pill-no">No</span></td>
+            <td><span class="pill pill-yes">Best</span></td>
+          </tr>
+          <tr>
+            <td>Compose a multi-source deliverable (deck, doc, brief)</td>
+            <td><span class="pill pill-no">No</span></td>
+            <td><span class="pill pill-partial">One-shot</span></td>
+            <td><span class="pill pill-yes">Best</span></td>
+          </tr>
+          <tr>
+            <td>Triage a queue overnight before I arrive</td>
+            <td><span class="pill pill-no">No</span></td>
+            <td><span class="pill pill-no">No</span></td>
+            <td><span class="pill pill-yes">Best</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ============ TAB: COPILOT (TODAY) ============ -->
+  <div class="tab-panel" id="tab-copilot">
+    <h2 class="section-title">Copilot Experiences &amp; Prompts</h2>
+    <p class="section-subtitle">Available today in Outlook (web, Windows, Mac, mobile). Copy any prompt and paste it into the Copilot composer in your tenant.</p>
+    <div class="availability-banner green">✅ Available today · Outlook for web, Windows, Mac, and mobile</div>
+
+    <div class="exp-columns">
+      <!-- LEFT: Email -->
+      <div>
+        <div class="exp-col-header email">📨 Outlook Email — Experiences &amp; Prompts</div>
+        <div class="exp-col-body">
+
+          <div class="prompt-card">
+            <h3>1. Summarize a long thread</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open a thread with 5+ replies</li>
+              <li>Click <em>Summary by Copilot</em> at the top, or paste the prompt</li>
+              <li>Review the bullet summary with cited messages</li>
+            </ul>
+            <div class="prompt-box"><pre>Summarize this thread, including any decisions made, open questions, and what each participant has committed to.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>2. Draft a reply</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open a message, click <em>Draft with Copilot</em></li>
+              <li>Provide the bullet you want communicated</li>
+              <li>Choose tone (formal / direct / casual) and length</li>
+            </ul>
+            <div class="prompt-box"><pre>Draft a reply that confirms attendance at the budget review on Thursday, asks for the latest forecast doc to be sent in advance, and offers two questions I plan to ask. Keep it concise and professional.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>3. Coach &amp; rewrite a draft</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Compose a draft, then click <em>Coaching by Copilot</em></li>
+              <li>Review tone, clarity, and reader-sentiment feedback</li>
+              <li>Apply the rewrite or revise manually</li>
+            </ul>
+            <div class="prompt-box"><pre>Rewrite this email so it sounds more direct and confident. Cut filler words, lead with the ask, and end with a clear next step.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>4. Catch me up across email and Teams</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open Copilot pane in Outlook (or Copilot Chat)</li>
+              <li>Submit prompt — Copilot pulls from email + Teams</li>
+              <li>Review summary with linked sources</li>
+            </ul>
+            <div class="prompt-box"><pre>Catch me up on everything related to the Aurora launch from the past 5 days. Include decisions made, open risks, and anything that needs my attention before tomorrow.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>5. Find a specific email</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open Copilot Chat</li>
+              <li>Describe the message by topic, sender, or context</li>
+              <li>Click through to the original email</li>
+            </ul>
+            <div class="prompt-box"><pre>Find the email where the CFO shared the Q1 close numbers and the customer concentration footnote. Show me the exact thread.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RIGHT: Calendar -->
+      <div>
+        <div class="exp-col-header calendar">📅 Outlook Calendar — Experiences &amp; Prompts</div>
+        <div class="exp-col-body">
+
+          <div class="prompt-card">
+            <h3>1. Find a time that works</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open Copilot in Outlook calendar</li>
+              <li>Provide attendees, duration, and time window</li>
+              <li>Pick from suggested slots; Copilot drafts the invite</li>
+            </ul>
+            <div class="prompt-box"><pre>Find 30 minutes next week with Priya, James, and Lin. Avoid Mondays and Friday afternoons. Prefer mornings.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>2. Schedule a meeting via chat</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open Copilot Chat or the meeting form</li>
+              <li>Describe the meeting in plain language</li>
+              <li>Approve the proposed invite before it sends</li>
+            </ul>
+            <div class="prompt-box"><pre>Schedule a 45-minute Aurora launch readiness review for Thursday afternoon with the engineering, marketing, and customer success leads. Add a Teams link.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>3. Prepare for an upcoming meeting</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open the meeting on your calendar</li>
+              <li>Click <em>Prepare with Copilot</em> or paste the prompt</li>
+              <li>Review the prep card with cited sources</li>
+            </ul>
+            <div class="prompt-box"><pre>Help me prepare for tomorrow's customer save call with Contoso. What's the history, what concerns has their team raised, and what should I be ready to commit to?</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>4. Summarize my schedule</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open Copilot Chat from any surface</li>
+              <li>Ask for a window — today, tomorrow, next week</li>
+              <li>Use the summary to plan prep time</li>
+            </ul>
+            <div class="prompt-box"><pre>Summarize what's on my calendar next week. Flag anything that needs prep or where I'm the decision-maker.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card">
+            <h3>5. Draft a meeting agenda</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open the meeting form</li>
+              <li>Click Copilot → <em>Draft agenda</em></li>
+              <li>Review and trim before sending</li>
+            </ul>
+            <div class="prompt-box"><pre>Draft an agenda for tomorrow's exec staff meeting. Pull from last week's action items and any open Teams threads. Keep it to 5 lines max.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB: FRONTIER ============ -->
+  <div class="tab-panel" id="tab-frontier">
+    <h2 class="section-title">Copilot (Frontier) Experiences &amp; Prompts</h2>
+    <p class="section-subtitle">Released April 27, 2026 via the Frontier program. Always-on agentic experiences — Copilot proactively triages, schedules, and aligns time on your behalf.</p>
+    <div class="availability-banner">🚀 Frontier program · Inbox agent on web/Windows/Mac/mobile · Calendar &amp; Time-alignment on Windows + web</div>
+
+    <div class="workiq-callout" style="border-left-color: var(--purple); background: linear-gradient(135deg, rgba(201,166,255,0.10), rgba(76,194,255,0.08));">
+      <div class="workiq-icon" style="background: var(--purple-soft); color: var(--purple);">🚀</div>
+      <div class="workiq-text">
+        <strong style="color: var(--purple);">What is the Frontier program?</strong> Frontier is Microsoft's early-access channel for the newest Copilot capabilities — including the agentic Inbox, Calendar, and Time-alignment experiences shown on this tab. Users in the Frontier group get these features ahead of broad GA so they can pilot and provide feedback. Enrollment is managed by your tenant admin.
+        <span class="sub">📄 Share this guide with your admin to request access: <a href="https://adoption.microsoft.com/files/copilot/Frontier_Getting-started-guide.pdf" target="_blank" rel="noopener" style="color: var(--purple); font-weight: 600;">Frontier Getting-started guide (PDF) ↗</a></span>
+      </div>
+    </div>
+
+    <div class="exp-columns cols-3">
+      <!-- LEFT: Email -->
+      <div>
+        <div class="exp-col-header email">📨 Email — Inbox Agent (Frontier)</div>
+        <div class="exp-col-body">
+
+          <div class="prompt-card frontier">
+            <h3>1. Help me with follow-ups</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open the Copilot pane in Outlook (Frontier enabled)</li>
+              <li>Paste the prompt and review the proposed list</li>
+              <li>Approve drafts one-by-one or in bulk</li>
+            </ul>
+            <div class="prompt-box"><pre>Identify people who haven't replied to my emails after 24 hours, prioritize the ones that matter most, and draft polite follow-up emails for me.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>2. Draft complex emails</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Replace [project name] with a real project</li>
+              <li>Submit; review cited sources before drafting</li>
+              <li>Confirm tone &amp; flags, then send</li>
+            </ul>
+            <div class="prompt-box"><pre>Pull the latest updates on [project name] over the last week. Draft a confidential, high-importance update email for my manager.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>3. Stay on top of important emails</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Submit prompt — Copilot resolves your manager via the org chart</li>
+              <li>Confirm the manager identity Copilot detected</li>
+              <li>Approve the rule preview</li>
+            </ul>
+            <div class="prompt-box"><pre>Create an inbox rule that assigns the "High Priority" category to all new emails from my manager where I'm on the "To:" line.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>4. Catch up after vacation</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Set Outlook calendar to show your time-out window</li>
+              <li>Run the prompt; review the briefing card</li>
+              <li>Accept archive suggestions in batches; add focus tasks to To Do</li>
+            </ul>
+            <div class="prompt-box"><pre>I just returned from vacation. Help me catch up: summarize what I've missed, highlight what's most urgent, and draft a short briefing email. Then suggest emails I can safely archive and 1-2 tasks I should focus on first.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Calendar -->
+      <div>
+        <div class="exp-col-header calendar">📅 Calendar — Calendar Agent &amp; Time Alignment (Frontier)</div>
+        <div class="exp-col-body">
+
+          <div class="prompt-card frontier">
+            <h3>1. Schedule a Copilot-managed 1:1</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Submit prompt; Copilot finds Monday slots and proposes a 30-min recurring invite</li>
+              <li>Approve the recurring invite preview</li>
+              <li>From this point on, Copilot detects conflicts and proposes reschedules automatically</li>
+            </ul>
+            <div class="prompt-box"><pre>Schedule a weekly 1:1 with my manager for Monday afternoons. Reschedule when conflicts occur.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>2. Protect my time</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Confirm working hours in Outlook → Settings → Calendar</li>
+              <li>Submit prompt; Copilot reads working hours + leadership chain from your org chart</li>
+              <li>Approve the standing rule</li>
+            </ul>
+            <div class="prompt-box"><pre>Automatically follow all large meetings if they are outside my working hours, unless sent by my leadership team.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>3. Adjust my schedule</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Submit prompt; Copilot identifies your direct reports + their 1:1 series</li>
+              <li>Review the proposed Friday slot grid (stacked with buffers)</li>
+              <li>Approve all reschedules; updated invites send in one batch</li>
+            </ul>
+            <div class="prompt-box"><pre>Reschedule all of my 1:1s with my direct reports for next week to the Friday afternoon that week.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>4. Draft an agenda from the meeting form</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open the meeting form for tomorrow's standup</li>
+              <li>Click Copilot → <em>Draft agenda</em>, paste the prompt</li>
+              <li>Copilot pulls notes, Teams threads, and open work items into the agenda</li>
+            </ul>
+            <div class="prompt-box"><pre>Create an agenda for tomorrow's product launch standup. Focus on open blockers, owner assignments, and a go/no-go decision.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>5. Prioritize next week (Time Alignment)</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Make sure next week has 10+ meetings to review</li>
+              <li>Submit prompt; review the four buckets: <em>Decline · Follow · Delegate · Convert to async</em></li>
+              <li>Accept individual recommendations; Copilot drafts polite explanations</li>
+            </ul>
+            <div class="prompt-box"><pre>Review my calendar next week and recommend which meetings I should decline, follow, delegate or convert to async in order to reduce meeting load while maintaining output quality.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card frontier">
+            <h3>6. Prepare for meetings (Time Alignment)</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Replace [customer name] with a real account</li>
+              <li>Submit; Copilot pulls account history, last touchpoints, open issues, news</li>
+              <li>Optionally request a 30-min focus block before the meeting</li>
+            </ul>
+            <div class="prompt-box"><pre>Help me prepare for my meeting with [customer name] tomorrow. What do I need to know, what should I ask, and what risks should I watch for?</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- THIRD: Calendar instructions -->
+      <div>
+        <div class="exp-col-header instructions">⚙️ Outlook Calendar Instructions (Frontier) - Exec &amp; EA</div>
+        <div class="exp-col-body">
+
+          <div class="instr-banner">
+            <strong>⚠️ EA note — Calendar instructions are per-user.</strong>
+            <span class="sub">Calendar instructions can only be configured by the mailbox owner directly on their own calendar — they do not flow through delegate access. To get these onto the executive's calendar, the EA either (a) sits with the exec to add them via Outlook → Settings → Calendar → Calendar Copilot instructions, or (b) shares this list so the exec can copy the ones they want into their own settings. Once set, the Calendar agent applies them automatically to all incoming invites.</span>
+          </div>
+
+          <div class="prompt-card frontier" style="border-left-color: var(--amber);">
+            <h3>🏆 Executive Calendar Instructions</h3>
+            <div class="action-label">Recommended bundle — copy &amp; paste as one set</div>
+            <ul class="action-list">
+              <li>Open Outlook → Settings → Calendar → Calendar Copilot instructions</li>
+              <li>Paste the full block below; each line becomes a separate instruction</li>
+              <li>Calendar agent applies them automatically to incoming invites</li>
+            </ul>
+            <div class="prompt-box"><pre>Automatically remove canceled meetings.
+Automatically accept meetings if my calendar is free.
+Automatically decline meetings only if my calendar has a conflict.
+Automatically accept meetings from my Executive Assistant if my calendar is free.
+Automatically accept recurring 1:1 meetings.
+Automatically follow All Hands meetings.
+Automatically follow optional meetings.
+Automatically decline meetings with no subject.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy All</button></div>
+          </div>
+
+          <div class="section-tabs" role="tablist">
+            <button class="section-tab-btn active" data-section="hygiene" onclick="showSection('hygiene')">🧹 Hygiene</button>
+            <button class="section-tab-btn" data-section="accept" onclick="showSection('accept')">✅ Auto-accept</button>
+            <button class="section-tab-btn" data-section="boundary" onclick="showSection('boundary')">🚫 Boundary</button>
+            <button class="section-tab-btn" data-section="follow" onclick="showSection('follow')">👀 Stay informed</button>
+            <button class="section-tab-btn" data-section="pattern" onclick="showSection('pattern')">🧠 Patterns</button>
+            <button class="section-tab-btn" data-section="focus" onclick="showSection('focus')">⏱️ Focus time</button>
+            <button class="section-tab-btn" data-section="filters" onclick="showSection('filters')">🎛️ Filter Ideas</button>
+          </div>
+
+          <div class="section-content active" id="section-hygiene">
+            <div class="prompt-card frontier">
+              <h3>🧹 Calendar hygiene</h3>
+              <div class="action-label">To perform this action:</div>
+              <ul class="action-list">
+                <li>Open Outlook → Settings → Calendar → Calendar Copilot instructions</li>
+                <li>Paste the block below — each line becomes a separate instruction</li>
+                <li>Calendar agent applies them automatically to incoming invites</li>
+              </ul>
+              <div class="prompt-box"><pre>Automatically remove canceled meetings.
+Automatically decline meetings only if my calendar has a conflict.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            </div>
+          </div>
+
+          <div class="section-content" id="section-accept">
+            <div class="prompt-card frontier">
+              <h3>✅ Auto-accept (trusted meetings)</h3>
+              <div class="action-label">To perform this action:</div>
+              <ul class="action-list">
+                <li>Open Outlook → Settings → Calendar → Calendar Copilot instructions</li>
+                <li>Paste the block below — each line becomes a separate instruction</li>
+                <li>Calendar agent applies them automatically to incoming invites</li>
+              </ul>
+              <div class="prompt-box"><pre>Automatically accept meetings if my calendar is free.
+Automatically accept meetings from my Executive Assistant if my calendar is free.
+Automatically accept meetings from my manager / leadership team if my calendar is free.
+Automatically accept recurring 1:1 meetings.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            </div>
+          </div>
+
+          <div class="section-content" id="section-boundary">
+            <div class="prompt-card frontier">
+              <h3>🚫 Boundary &amp; protection</h3>
+              <div class="action-label">To perform this action:</div>
+              <ul class="action-list">
+                <li>Open Outlook → Settings → Calendar → Calendar Copilot instructions</li>
+                <li>Paste the block below — each line becomes a separate instruction</li>
+                <li>Calendar agent applies them automatically to incoming invites</li>
+              </ul>
+              <div class="prompt-box"><pre>Automatically decline meetings that conflict with existing events.
+Automatically decline meetings with no subject.
+Automatically decline meetings scheduled outside standard business hours.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            </div>
+          </div>
+
+          <div class="section-content" id="section-follow">
+            <div class="prompt-card frontier">
+              <h3>👀 Stay informed but don't attend</h3>
+              <div class="action-label">To perform this action:</div>
+              <ul class="action-list">
+                <li>Open Outlook → Settings → Calendar → Calendar Copilot instructions</li>
+                <li>Paste the block below — each line becomes a separate instruction</li>
+                <li>Calendar agent applies them automatically to incoming invites</li>
+              </ul>
+              <div class="prompt-box"><pre>Automatically follow All Hands meetings.
+Automatically follow town halls or large broadcast meetings.
+Automatically follow optional meetings.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            </div>
+          </div>
+
+          <div class="section-content" id="section-pattern">
+            <div class="prompt-card frontier">
+              <h3>🧠 Pattern-based filters</h3>
+              <div class="action-label">To perform this action:</div>
+              <ul class="action-list">
+                <li>Open Outlook → Settings → Calendar → Calendar Copilot instructions</li>
+                <li>Paste the block below — each line becomes a separate instruction</li>
+                <li>Calendar agent applies them automatically to incoming invites</li>
+              </ul>
+              <div class="prompt-box"><pre>Automatically accept meetings with subject containing "Board".
+Automatically accept meetings with subject containing "Quarterly Review".
+Automatically follow meetings with subject containing "FYI".</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            </div>
+          </div>
+
+          <div class="section-content" id="section-filters">
+            <div class="prompt-card frontier">
+              <h3>🎛️ Filter ideas</h3>
+              <div class="action-label">Filters you can combine in any calendar instruction:</div>
+              <ul class="action-list">
+                <li><strong>Organizer</strong> — specific person or group</li>
+                <li><strong>Subject</strong> — keyword or exact match</li>
+                <li><strong>Time</strong> — day of week, time of day, working hours</li>
+                <li><strong>Duration</strong> — short (≤30 min), long (≥60 min)</li>
+                <li><strong>Attendee count</strong> — small (≤5), large (≥10), 1:1 (exactly 2)</li>
+                <li><strong>Cancellation status</strong></li>
+                <li><strong>Calendar conflicts</strong></li>
+              </ul>
+              <div class="prompt-box"><pre>Filters you can use:
+- Organizer (specific person or group)
+- Subject (keyword or exact match)
+- Time (day of week, time of day, working hours)
+- Duration (short ≤30 min, long ≥60 min)
+- Attendee count (small ≤5, large ≥10, 1:1 = exactly 2)
+- Cancellation status
+- Calendar conflicts</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            </div>
+          </div>
+
+          <div class="section-content" id="section-focus">
+            <div class="prompt-card frontier">
+              <h3>⏱️ Create Focus Time</h3>
+              <div class="action-label">To perform this action:</div>
+              <ul class="action-list">
+                <li>Open Outlook → Settings → Calendar → Calendar Copilot instructions</li>
+                <li>Paste the instruction below to block focus time around meetings</li>
+                <li>Calendar agent reserves focus blocks automatically when matching meetings appear</li>
+              </ul>
+              <div class="prompt-box"><pre>Block 30 min of focus time before meetings with external attendees.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB: DAY IN THE LIFE ============ -->
+  <div class="tab-panel" id="tab-day">
+    <h2 class="section-title" style="margin-bottom:2px;font-size:18px">Copilot for Email and Calendar — EA for Executive</h2>
+    <p class="section-subtitle" style="margin-bottom:8px;font-size:12.5px">A day in the life of an EA configured to act on the executive's behalf. Click any node for action details and the prompt.</p>
+
+    <div class="flow-legend">
+      <span class="flow-legend-item"><span class="flow-legend-dot" style="border-color:#6CCB5F"></span><strong>Autonomous result</strong> — last night's scheduled task delivered</span>
+      <span class="flow-legend-item"><span class="flow-legend-dot" style="border-color:#4CC2FF"></span><strong>Live action</strong> — EA does it now</span>
+      <span class="flow-legend-item"><span class="flow-legend-dot" style="border-color:#FFCA63"></span><strong>Scheduled task</strong> — EA sets it up to run on its own</span>
+      <span class="flow-legend-item"><span class="flow-legend-dot" style="border-color:#C9A6FF"></span><strong>End-of-day setup</strong> — staging tomorrow's prep</span>
+    </div>
+
+    <div class="flowchart-wrap" id="flowchartWrap">
+      <svg class="flow-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="flow-grad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#6CCB5F"/>
+            <stop offset="25%" stop-color="#4CC2FF"/>
+            <stop offset="60%" stop-color="#4CC2FF"/>
+            <stop offset="80%" stop-color="#FFCA63"/>
+            <stop offset="100%" stop-color="#C9A6FF"/>
+          </linearGradient>
+        </defs>
+        <path d="M15,12 H85 C92,12 92,36 85,36 H15 C8,36 8,60 15,60 H85 C92,60 92,84 85,84 H38"
+              stroke="url(#flow-grad)" stroke-width="0.7" fill="none"
+              stroke-dasharray="1.6,1" stroke-linecap="round"
+              vector-effect="non-scaling-stroke" />
+        <circle cx="15" cy="12" r="0.9" fill="#6CCB5F" vector-effect="non-scaling-stroke"/>
+        <circle cx="38" cy="84" r="0.9" fill="#C9A6FF" vector-effect="non-scaling-stroke"/>
+      </svg>
+
+      <!-- Row 1: 7AM (autonomous), 8, 9, 10 (live) -->
+      <button class="flow-node autonomous" style="left:15%; top:12%" onclick="openEvent(1)">
+        <div class="fn-time">7:00 AM</div><div class="fn-icon">✨</div>
+        <div class="fn-label">Briefing waiting</div>
+        <span class="fn-tag">Auto-delivered</span>
+      </button>
+      <button class="flow-node live" style="left:38%; top:12%" onclick="openEvent(2)">
+        <div class="fn-time">8:00 AM</div><div class="fn-icon">📨</div>
+        <div class="fn-label">Triage inbox</div>
+        <span class="fn-tag">Live</span>
+      </button>
+      <button class="flow-node live" style="left:62%; top:12%" onclick="openEvent(3)">
+        <div class="fn-time">9:00 AM</div><div class="fn-icon">📋</div>
+        <div class="fn-label">Board prep card</div>
+        <span class="fn-tag">Live</span>
+      </button>
+      <button class="flow-node live" style="left:85%; top:12%" onclick="openEvent(4)">
+        <div class="fn-time">10:00 AM</div><div class="fn-icon">🤝</div>
+        <div class="fn-label">Schedule save call</div>
+        <span class="fn-tag">Live</span>
+      </button>
+
+      <!-- Row 2 (RTL): 11, 12 (scheduled), 1PM, 2PM -->
+      <button class="flow-node live" style="left:85%; top:36%" onclick="openEvent(5)">
+        <div class="fn-time">11:00 AM</div><div class="fn-icon">✍️</div>
+        <div class="fn-label">Draft customer reply</div>
+        <span class="fn-tag">Live</span>
+      </button>
+      <button class="flow-node scheduled" style="left:62%; top:36%" onclick="openEvent(6)">
+        <div class="fn-time">12:00 PM</div><div class="fn-icon">⏰</div>
+        <div class="fn-label">Schedule weekly focus blocks</div>
+        <span class="fn-tag">Scheduled</span>
+      </button>
+      <button class="flow-node live" style="left:38%; top:36%" onclick="openEvent(7)">
+        <div class="fn-time">1:00 PM</div><div class="fn-icon">🔍</div>
+        <div class="fn-label">Aurora catch-up</div>
+        <span class="fn-tag">Live</span>
+      </button>
+      <button class="flow-node live" style="left:15%; top:36%" onclick="openEvent(8)">
+        <div class="fn-time">2:00 PM</div><div class="fn-icon">📅</div>
+        <div class="fn-label">Resolve conflict</div>
+        <span class="fn-tag">Live</span>
+      </button>
+
+      <!-- Row 3 (LTR): 3PM, 4PM (scheduled), 5PM, 5:30PM -->
+      <button class="flow-node live" style="left:15%; top:60%" onclick="openEvent(9)">
+        <div class="fn-time">3:00 PM</div><div class="fn-icon">🔁</div>
+        <div class="fn-label">Bulk reschedule 1:1s</div>
+        <span class="fn-tag">Live</span>
+      </button>
+      <button class="flow-node scheduled" style="left:38%; top:60%" onclick="openEvent(10)">
+        <div class="fn-time">4:00 PM</div><div class="fn-icon">📤</div>
+        <div class="fn-label">Schedule weekly leadership digest</div>
+        <span class="fn-tag">Scheduled</span>
+      </button>
+      <button class="flow-node live" style="left:62%; top:60%" onclick="openEvent(11)">
+        <div class="fn-time">5:00 PM</div><div class="fn-icon">⚖️</div>
+        <div class="fn-label">Time-alignment review</div>
+        <span class="fn-tag">Live</span>
+      </button>
+      <button class="flow-node live" style="left:85%; top:60%" onclick="openEvent(12)">
+        <div class="fn-time">5:30 PM</div><div class="fn-icon">📝</div>
+        <div class="fn-label">EOD wrap-up to exec</div>
+        <span class="fn-tag">Live</span>
+      </button>
+
+      <!-- Row 4 (RTL): 5:45 PM, 6:00 PM — both EOD scheduling -->
+      <button class="flow-node eod" style="left:85%; top:84%" onclick="openEvent(13)">
+        <div class="fn-time">5:45 PM</div><div class="fn-icon">🌙</div>
+        <div class="fn-label">Schedule tomorrow's 6 AM briefing</div>
+        <span class="fn-tag">EOD setup</span>
+      </button>
+      <button class="flow-node eod" style="left:62%; top:84%" onclick="openEvent(14)">
+        <div class="fn-time">6:00 PM</div><div class="fn-icon">🌙</div>
+        <div class="fn-label">Schedule overnight inbox triage</div>
+        <span class="fn-tag">EOD setup</span>
+      </button>
+      <div class="flow-endcap" style="left:38%; top:84%">→ Tomorrow @ 7 AM</div>
+
+    </div>
+
+    <ol class="timeline" style="display:none;">
+
+      <li class="timeline-item">
+        <div class="timeline-time">7:00 AM</div>
+        <div class="timeline-content">
+          <h3>Pull the exec's daily briefing before the day starts</h3>
+          <div class="scenario">EA prepares a one-page briefing covering the exec's day: meetings, prep needed, urgent emails, decisions waiting.</div>
+          <div class="meta"><span class="surf-pill cowork dot">Cowork</span><span class="badge ea">EA on behalf of Exec</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open Cowork app, run the Daily Briefing skill against the exec's mailbox</li>
+            <li>Skim the briefing, add commentary in EA voice</li>
+            <li>Forward to the exec ahead of the workday</li>
+          </ul>
+          <div class="prompt-box"><pre>Brief me on [exec]'s day: meetings with prep needed, urgent unread emails, and decisions waiting on them. Group by priority, keep it to one page.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">8:00 AM</div>
+        <div class="timeline-content">
+          <h3>Triage the exec's inbox</h3>
+          <div class="scenario">Three meeting requests, two customer escalations, and a pile of FYIs accumulated overnight. EA classifies what the exec must read, what to handle, and what to archive.</div>
+          <div class="meta"><span class="surf-pill outlook dot">Outlook</span><span class="badge frontier">Inbox agent</span><span class="badge ea">EA on behalf of Exec</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open the exec's mailbox in Outlook (delegated)</li>
+            <li>Run the Frontier inbox agent prompt</li>
+            <li>Approve the proposed actions: drafts, archive batch, exec-must-read flags</li>
+          </ul>
+          <div class="prompt-box"><pre>Triage [exec]'s inbox from the last 12 hours. Surface what they personally need to read, draft replies for routine items I can handle, and archive newsletters and resolved threads. Show me each action before applying it.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">9:00 AM</div>
+        <div class="timeline-content">
+          <h3>Prep the exec for their 9:30 board prep call</h3>
+          <div class="scenario">EA assembles a one-pager: latest financials, board chair's open questions, and likely talking points.</div>
+          <div class="meta"><span class="surf-pill chat dot">Chat</span><span class="surf-pill cowork dot">Cowork</span><span class="badge ea">EA on behalf of Exec</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open Copilot Chat or the Meeting Intel skill in Cowork</li>
+            <li>Reference [exec]'s 9:30 board prep on their calendar</li>
+            <li>Drop the prep card into the meeting body so it travels with the invite</li>
+          </ul>
+          <div class="prompt-box"><pre>Prepare [exec] for their 9:30 board prep call. Pull the chair's open questions from email, the latest Q1 numbers, and any risks flagged in the last week. Output a one-page prep card.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">10:00 AM</div>
+        <div class="timeline-content">
+          <h3>Schedule a customer save call</h3>
+          <div class="scenario">Renewal at risk — EA needs to find 45 minutes this week between the exec, the customer's CIO, and the head of customer success.</div>
+          <div class="meta"><span class="surf-pill outlook dot">Outlook</span><span class="badge ea">EA on behalf of Exec</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open the exec's calendar with Find a Time</li>
+            <li>Run the prompt; review the proposed slots</li>
+            <li>Send the invite from the exec with a draft agenda already attached</li>
+          </ul>
+          <div class="prompt-box"><pre>Find 45 minutes this week with [exec], [customer CIO email], and [VP CS] to discuss the Contoso renewal. Avoid [exec]'s 9–10 AM block. Send the invite from [exec] with an agenda focused on pricing concerns and product gaps.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">11:00 AM</div>
+        <div class="timeline-content">
+          <h3>Draft a customer reply on behalf of the exec</h3>
+          <div class="scenario">Top customer wants reassurance on a security incident. The reply needs the exec's tone and a precise commitment.</div>
+          <div class="meta"><span class="surf-pill outlook dot">Outlook</span><span class="badge ea">EA on behalf of Exec</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open the customer's escalation thread in the exec's mailbox</li>
+            <li>Click <em>Draft with Copilot</em> on behalf of the exec</li>
+            <li>Save as draft for the exec to review &amp; send</li>
+          </ul>
+          <div class="prompt-box"><pre>Draft a reply on behalf of [exec] to [customer contact]. Acknowledge the security concern, reference the postmortem [exec]'s team published, and commit to a 30-minute call this week with the CTO. Keep [exec]'s tone — direct, warm, no hedging.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">12:00 PM</div>
+        <div class="timeline-content">
+          <h3>Block focus time before a priority meeting</h3>
+          <div class="scenario">Exec has the Sequoia investor update at 3 PM. EA carves out a 45-min focus block and curates prep materials.</div>
+          <div class="meta"><span class="surf-pill outlook dot">Outlook</span><span class="badge frontier">Calendar agent</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open the 3 PM Sequoia event on the exec's calendar</li>
+            <li>Run the prompt; the calendar agent finds the slot and books the prep block</li>
+            <li>Attach the prep brief to the focus block</li>
+          </ul>
+          <div class="prompt-box"><pre>Block 45 minutes of focus time on [exec]'s calendar before the 3 PM Sequoia investor update. Pull the term sheet thread, the latest financials, and Roelof's open items into a prep brief.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">1:00 PM</div>
+        <div class="timeline-content">
+          <h3>Cross-source catch-up while the exec is in back-to-backs</h3>
+          <div class="scenario">EA pulls a quick view of what's been happening with the Aurora launch — exec will ask about it later.</div>
+          <div class="meta"><span class="surf-pill chat dot">Chat</span><span class="badge ea">EA</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open Copilot Chat (M365.cloud.microsoft or the Copilot app)</li>
+            <li>Submit prompt; review cited Teams threads, emails, and files</li>
+            <li>Save the summary to share when [exec] surfaces</li>
+          </ul>
+          <div class="prompt-box"><pre>Catch me up on Aurora launch readiness across [exec]'s email and Teams over the last 48 hours. Highlight blockers, owners, and any decisions waiting on [exec].</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">2:00 PM</div>
+        <div class="timeline-content">
+          <h3>Resolve a calendar conflict for the exec</h3>
+          <div class="scenario">Two priority meetings overlap tomorrow. EA reschedules the lower-priority one.</div>
+          <div class="meta"><span class="surf-pill outlook dot">Outlook</span><span class="badge frontier">Calendar agent</span><span class="badge ea">EA on behalf of Exec</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Open the exec's calendar — confirm the conflict</li>
+            <li>Submit the prompt; review the proposed reschedule slots</li>
+            <li>Approve; Copilot sends the update from the exec with a polite note</li>
+          </ul>
+          <div class="prompt-box"><pre>[Exec]'s 1:1 with [direct report] tomorrow at 10 AM conflicts with the customer call I just booked. Reschedule the 1:1 to later this week and notify [direct report] from [exec] with a brief explanation.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">3:00 PM</div>
+        <div class="timeline-content">
+          <h3>Bulk-reschedule next week's 1:1s</h3>
+          <div class="scenario">Exec is traveling Mon–Wed next week. EA consolidates direct-report 1:1s to Thursday + Friday.</div>
+          <div class="meta"><span class="surf-pill outlook dot">Outlook</span><span class="badge frontier">Calendar agent</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Submit prompt against the exec's calendar</li>
+            <li>Review the stacked grid; nudge any single slot if needed</li>
+            <li>Approve all updates in one batch</li>
+          </ul>
+          <div class="prompt-box"><pre>Reschedule all of [exec]'s direct-report 1:1s next week from Mon–Wed to Thursday and Friday afternoons. Stack them with 15-minute buffers. Send updates from [exec].</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">4:00 PM</div>
+        <div class="timeline-content">
+          <h3>Send weekly leadership update on behalf of the exec</h3>
+          <div class="scenario">Recurring Friday update to the leadership team. EA drafts in the exec's voice — exec reviews and sends.</div>
+          <div class="meta"><span class="surf-pill cowork dot">Cowork</span><span class="surf-pill outlook dot">Outlook</span><span class="badge ea">EA on behalf of Exec</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Run the Stakeholder-comms skill in Cowork against [exec]'s recent activity</li>
+            <li>Review the draft; adjust tone &amp; specifics</li>
+            <li>Place the draft in [exec]'s drafts for review &amp; send</li>
+          </ul>
+          <div class="prompt-box"><pre>Draft this week's leadership update from [exec]. Pull progress on top initiatives, decisions made, top three risks, and what we need from leadership next week. Match [exec]'s direct, no-fluff tone.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">5:00 PM</div>
+        <div class="timeline-content">
+          <h3>Time-alignment review for the exec's next week</h3>
+          <div class="scenario">EA pulls Time-alignment recommendations and prepares them so the exec can decide tomorrow morning what to decline / delegate.</div>
+          <div class="meta"><span class="surf-pill outlook dot">Outlook</span><span class="badge frontier">Time alignment</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Submit prompt against [exec]'s calendar</li>
+            <li>Review the four buckets: Decline · Follow · Delegate · Convert to async</li>
+            <li>Stage approvals so the exec can confirm in one pass</li>
+          </ul>
+          <div class="prompt-box"><pre>Review [exec]'s calendar next week and recommend what to decline, follow, delegate, or convert to async. For "delegate" suggestions, propose me as the delegate where it fits.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+      <li class="timeline-item">
+        <div class="timeline-time">5:30 PM</div>
+        <div class="timeline-content">
+          <h3>End-of-day wrap-up for the exec</h3>
+          <div class="scenario">EA closes the loop — what was handled, what's still open, what tomorrow looks like.</div>
+          <div class="meta"><span class="surf-pill cowork dot">Cowork</span><span class="badge ea">EA</span></div>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Run the Daily Briefing skill in <em>wrap</em> mode</li>
+            <li>Review the summary; add EA notes</li>
+            <li>Send a short Teams message to the exec at end of day</li>
+          </ul>
+          <div class="prompt-box"><pre>Wrap up [exec]'s day. What did I handle on their behalf, what's still open, what does tomorrow look like, and what do they need to decide before the morning?</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+
+  <!-- ============ TAB: ALL HANDS COWORK EXAMPLE ============ -->
+  <div class="tab-panel" id="tab-allhands">
+    <h2 class="section-title">Executive + EA + Copilot Cowork — Prepare for an All Hands</h2>
+    <p class="section-subtitle">A real prep scenario from Microsoft's adoption guidance — first as Copilot helps today (Standard), then upscaled with <strong>Cowork skills</strong> and <strong>scheduled tasks</strong> for the fastest, most autonomous path.</p>
+
+    <div class="upscale-hero">
+      <div class="hero-text">
+        <h3>📈 See how Cowork compresses 5 days of prep into hours of EA review</h3>
+        <p>The Standard path uses Copilot Chat, Word Agent, PowerPoint Agent, and Outlook one step at a time. The Upscaled path runs the same work as parallel Cowork skills with scheduled tasks — the EA arrives to staged drafts, deck, and prep cards ready for [exec] to review.</p>
+      </div>
+      <button class="upscale-btn" onclick="showPath('upscaled')">Upscale with Cowork <span class="arr">→</span></button>
+    </div>
+
+    <div class="path-selector" role="tablist">
+      <button class="path-btn standard active" data-path="standard" onclick="showPath('standard')">📘 Standard path — Copilot today</button>
+      <button class="path-btn upscaled" data-path="upscaled" onclick="showPath('upscaled')">🚀 Upscaled — Cowork skills + scheduled tasks</button>
+    </div>
+
+    <!-- ===== STANDARD PATH ===== -->
+    <div class="path-panel standard active" id="path-standard">
+      <div class="path-banner standard">
+        <div><strong class="std">📘 Standard path.</strong> The exec and EA work through six sequential steps, each in its own Copilot surface. It works — but every handoff is manual and the EA has to be present to drive each one.</div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">~5 days</div><div class="lbl">Calendar time</div></div>
+          <div class="stat"><div class="num">6</div><div class="lbl">Sequential steps</div></div>
+          <div class="stat"><div class="num">5</div><div class="lbl">Surfaces touched</div></div>
+          <div class="stat"><div class="num">0</div><div class="lbl">Autonomous runs</div></div>
+        </div>
+      </div>
+
+      <div class="ah-grid">
+        <div class="ah-card standard">
+          <div class="ah-step-row"><div class="ah-num">1</div><h3>Gather key points</h3></div>
+          <div class="ah-when">Day 1 · Morning</div>
+          <div class="ah-tools"><span class="tool-pill app">💬 Copilot Chat</span></div>
+          <p class="ah-desc">Ask Copilot Chat to summarize the email threads and chat conversations from the past quarter that the exec wants to highlight at the All Hands — wins, customer stories, leadership decisions.</p>
+          <div class="ah-output"><strong>Output:</strong> bulleted recap with cited threads, ready to drop into a doc.</div>
+        </div>
+
+        <div class="ah-card standard">
+          <div class="ah-step-row"><div class="ah-num">2</div><h3>Rally the team</h3></div>
+          <div class="ah-when">Day 1 · Afternoon</div>
+          <div class="ah-tools"><span class="tool-pill app">👥 Facilitator in Teams</span></div>
+          <p class="ah-desc">Run a working session with the exec staff to review business-unit results. Facilitator in Teams takes notes, captures action items and owners, and posts them back to the channel.</p>
+          <div class="ah-output"><strong>Output:</strong> notes + action items in the Teams channel.</div>
+        </div>
+
+        <div class="ah-card standard">
+          <div class="ah-step-row"><div class="ah-num">3</div><h3>Draft the speech</h3></div>
+          <div class="ah-when">Day 2</div>
+          <div class="ah-tools"><span class="tool-pill app">📄 Word Agent</span></div>
+          <p class="ah-desc">Hand the bullets and notes to Word Agent. Specify tone (warm, confident), length, and structure. Word Agent generates a first-pass speech the exec can mark up.</p>
+          <div class="ah-output"><strong>Output:</strong> .docx draft of the speech in [exec]'s OneDrive.</div>
+        </div>
+
+        <div class="ah-card standard">
+          <div class="ah-step-row"><div class="ah-num">4</div><h3>Create the presentation</h3></div>
+          <div class="ah-when">Day 3</div>
+          <div class="ah-tools"><span class="tool-pill app">📊 PowerPoint Agent</span></div>
+          <p class="ah-desc">Point PowerPoint Agent at the speech. It generates a deck with section breaks, key numbers, and visual placeholders. EA cleans up tone &amp; brand.</p>
+          <div class="ah-output"><strong>Output:</strong> .pptx draft in [exec]'s OneDrive.</div>
+        </div>
+
+        <div class="ah-card standard">
+          <div class="ah-step-row"><div class="ah-num">5</div><h3>Review previous session</h3></div>
+          <div class="ah-when">Day 4</div>
+          <div class="ah-tools"><span class="tool-pill app">💬 Copilot Chat</span></div>
+          <p class="ah-desc">Ask Copilot to summarize last quarter's address — what was committed, what numbers were called out, what the audience asked. Use it to keep continuity and avoid repeats.</p>
+          <div class="ah-output"><strong>Output:</strong> chat summary the exec uses while rehearsing.</div>
+        </div>
+
+        <div class="ah-card standard">
+          <div class="ah-step-row"><div class="ah-num">6</div><h3>Send thank you</h3></div>
+          <div class="ah-when">Day 5 · After event</div>
+          <div class="ah-tools"><span class="tool-pill app">📨 Copilot in Outlook</span></div>
+          <p class="ah-desc">Draft a post-event thank-you to the team — referencing specific moments, recognizing contributors, recapping the top three takeaways.</p>
+          <div class="ah-output"><strong>Output:</strong> email sent from [exec] to the all-up DL.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== UPSCALED PATH ===== -->
+    <div class="path-panel upscaled" id="path-upscaled">
+      <div class="path-banner upscaled">
+        <div><strong class="ups">🚀 Upscaled with Cowork.</strong> The same six prep steps run as parallel Cowork skills with scheduled tasks. The EA queues the work once; Cowork delivers staged drafts, the deck, the prep card, and the post-event email — the EA reviews instead of producing.</div>
+        <div class="stat-row">
+          <div class="stat"><div class="num">~6 hrs</div><div class="lbl">EA review time</div></div>
+          <div class="stat"><div class="num">3</div><div class="lbl">Parallel skills</div></div>
+          <div class="stat"><div class="num">3</div><div class="lbl">Scheduled tasks</div></div>
+          <div class="stat"><div class="num">~80%</div><div class="lbl">Time reclaimed</div></div>
+        </div>
+      </div>
+
+      <div class="ah-grid">
+        <div class="ah-card upscaled">
+          <div class="ah-step-row"><div class="ah-num">1</div><h3>Quarter recap, auto-assembled</h3></div>
+          <div class="ah-when">Runs overnight · Day 1</div>
+          <div class="ah-tools"><span class="tool-pill skill">🧠 daily-briefing</span><span class="tool-pill skill">🧠 meeting-intel</span><span class="tool-pill sched">⏰ Scheduled</span></div>
+          <p class="ah-desc">EA schedules a Cowork task that runs the daily-briefing skill across [exec]'s last-quarter mailbox + Teams + meeting transcripts. Output: cited highlights, customer wins, key decisions.</p>
+          <div class="ah-output"><strong>Output:</strong> highlights doc waiting in EA's inbox at 7 AM Day 2.</div>
+        </div>
+
+        <div class="ah-card upscaled">
+          <div class="ah-step-row"><div class="ah-num">2</div><h3>Working-session notes, auto-extracted</h3></div>
+          <div class="ah-when">Right after the staff meeting</div>
+          <div class="ah-tools"><span class="tool-pill skill">🧠 meeting-intel</span><span class="tool-pill app">👥 Teams</span></div>
+          <p class="ah-desc">Cowork meeting-intel skill pulls the staff meeting transcript, extracts decisions + action items + owners + dates, and posts a structured recap into the channel — no manual note-taking.</p>
+          <div class="ah-output"><strong>Output:</strong> structured recap card with owners + due dates.</div>
+        </div>
+
+        <div class="ah-card upscaled">
+          <div class="ah-step-row"><div class="ah-num">3</div><h3>Speech + deck, drafted in parallel</h3></div>
+          <div class="ah-when">Same day · runs in parallel</div>
+          <div class="ah-tools"><span class="tool-pill skill">🧠 stakeholder-comms</span><span class="tool-pill skill">🧠 docx</span><span class="tool-pill skill">🧠 pptx</span></div>
+          <p class="ah-desc">EA fires off two parallel Cowork tasks: stakeholder-comms+docx drafts the speech in [exec]'s tone; pptx generates a matching deck from the same source bullets. Both land at the same time, internally consistent.</p>
+          <div class="ah-output"><strong>Output:</strong> .docx speech &amp; .pptx deck saved to [exec]'s drafts.</div>
+        </div>
+
+        <div class="ah-card upscaled">
+          <div class="ah-step-row"><div class="ah-num">4</div><h3>Continuity check, scheduled</h3></div>
+          <div class="ah-when">Auto-runs the morning of rehearsal</div>
+          <div class="ah-tools"><span class="tool-pill skill">🧠 meeting-intel</span><span class="tool-pill sched">⏰ Scheduled</span></div>
+          <p class="ah-desc">A scheduled Cowork task pulls last quarter's address (transcript or recording), surfaces commitments + numbers + audience questions, and produces a "don't repeat / do reinforce" continuity card for [exec].</p>
+          <div class="ah-output"><strong>Output:</strong> continuity card emailed to [exec] before rehearsal.</div>
+        </div>
+
+        <div class="ah-card upscaled">
+          <div class="ah-step-row"><div class="ah-num">5</div><h3>Day-of prep card</h3></div>
+          <div class="ah-when">Auto-runs morning of the All Hands</div>
+          <div class="ah-tools"><span class="tool-pill skill">🧠 daily-briefing</span><span class="tool-pill sched">⏰ Scheduled</span></div>
+          <p class="ah-desc">Scheduled briefing pulls last-minute updates — overnight customer wins, news the exec should reference, FAQs likely to come up — and stages a one-page card next to the deck.</p>
+          <div class="ah-output"><strong>Output:</strong> day-of prep card alongside the deck.</div>
+        </div>
+
+        <div class="ah-card upscaled">
+          <div class="ah-step-row"><div class="ah-num">6</div><h3>Thank-you email, drafted &amp; staged</h3></div>
+          <div class="ah-when">Within 1 hour after the event</div>
+          <div class="ah-tools"><span class="tool-pill skill">🧠 stakeholder-comms</span><span class="tool-pill sched">⏰ Scheduled</span></div>
+          <p class="ah-desc">Scheduled task runs after the All Hands ends — pulls the recording's standout moments, names contributors, drafts the recap email in [exec]'s voice, and lands it in [exec]'s drafts folder for one-click send.</p>
+          <div class="ah-output"><strong>Output:</strong> draft thank-you email in [exec]'s drafts folder.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB: SETUP STEPS ============ -->
+  <div class="tab-panel" id="tab-setup">
+
+    <div class="config-bar">
+      <div class="config-header-row">
+        <div>
+          <h2 class="section-title">Configuration Options</h2>
+          <div class="section-subtitle">Hover any chip for a quick definition. Click <strong>Compare All</strong> for a side-by-side view.</div>
+        </div>
+        <button class="compare-btn" onclick="openModal()">⚖️ Compare All</button>
+      </div>
+      <div class="config-chips">
+        <span class="chip admin">Shared Mailbox<span class="tooltip">A single mailbox (e.g. exec-office@) that multiple people can read &amp; send from. Replies appear from the shared address. Requires IT admin to set up.</span></span>
+        <span class="chip">Shared Folders<span class="tooltip">Share specific folders of your mailbox with view-only, edit, or delegate privileges — without sharing the whole mailbox.</span></span>
+        <span class="chip">View-Only Calendar Share<span class="tooltip">Let others see your calendar (free/busy, titles, or full details) without the ability to create, edit, or respond on your behalf.</span></span>
+        <span class="chip">Calendar with Edit/Delegate<span class="tooltip">Grant your EA permission to read, create, edit, and respond to meeting invites on the executive's calendar. Send-on-behalf is included.</span></span>
+        <span class="chip">Mailbox Delegate Access<span class="tooltip">Beyond folder sharing — the delegate can compose &amp; respond to mail on your behalf. Permission levels: Reviewer / Author / Editor.</span></span>
+        <span class="chip">Send on Behalf<span class="tooltip">EA sends as themselves "on behalf of" the exec. Recipients see "EA on behalf of Exec." Set in Outlook delegation — no admin needed.</span></span>
+        <span class="chip admin">Send As<span class="tooltip">EA's email appears to come directly from the exec — no "on behalf of" label. Only an IT admin can grant this permission.</span></span>
+        <span class="chip">Copilot for Delegates<span class="tooltip">If the delegate has a Copilot license, they can use Copilot on the exec's items they have delegate access to. Honors the same item permissions.</span></span>
+        <span class="chip frontier">Copilot Inbox Agent (Frontier)<span class="tooltip">Agentic Copilot triages mail, drafts follow-ups, creates rules, catches you up after vacation. Frontier program — Outlook web/Win/Mac/mobile, GA Apr 27, 2026.</span></span>
+        <span class="chip frontier">Copilot Calendar Agent (Frontier)<span class="tooltip">Proactively responds to invites, resolves 1:1 conflicts, rebooks rooms, blocks focus time, drafts agendas. Frontier — Win + web only.</span></span>
+        <span class="chip frontier">Copilot Time-Alignment (Frontier)<span class="tooltip">Reviews next week's calendar and recommends what to decline, delegate, follow async. Helps prep for key meetings. Frontier — Win + web.</span></span>
+      </div>
+    </div>
+
+    <div class="intake">
+      <h2>① Tell us what you want to set up</h2>
+      <p>Check every goal that applies. The setup steps below adjust automatically — only the cards relevant to your selections will be shown.</p>
+      <label class="check-row" id="select-all-row" style="margin-bottom:10px; border-style:dashed; max-width:280px;">
+        <input type="checkbox" id="g-selectall" />
+        <div><div class="label">Select all</div><div class="desc">Toggle every goal at once.</div></div>
+      </label>
+      <div class="checkbox-grid">
+        <label class="check-row" data-goal="shared">
+          <input type="checkbox" id="g-shared" />
+          <div><div class="label">Shared team mailbox</div><div class="desc">A single team address (e.g. office-of-cfo@) the exec + EA both send from.</div></div>
+        </label>
+        <label class="check-row" data-goal="calendar">
+          <input type="checkbox" id="g-calendar" checked />
+          <div><div class="label">EA manages exec's calendar</div><div class="desc">Delegate the executive's calendar so the EA can schedule, accept, and respond to invites.</div></div>
+        </label>
+        <label class="check-row" data-goal="mailbox">
+          <input type="checkbox" id="g-mailbox" />
+          <div><div class="label">EA manages exec's mailbox</div><div class="desc">Delegate the inbox (or specific folders) so the EA can read, draft, and reply.</div></div>
+        </label>
+        <label class="check-row" data-goal="sendas">
+          <input type="checkbox" id="g-sendas" />
+          <div><div class="label">EA sends <em>as</em> the exec</div><div class="desc">Email appears to come directly from the exec — no "on behalf of" label.</div></div>
+        </label>
+        <label class="check-row" data-goal="copilot">
+          <input type="checkbox" id="g-copilot" />
+          <div><div class="label">Always-on Copilot agents (Frontier)</div><div class="desc">Enable agentic Copilot to triage email and manage the calendar continuously.</div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <strong>Setup progress</strong>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 of 0 complete</div>
+    </div>
+
+    <h2 class="section-title">Step-by-Step Setup</h2>
+    <div class="section-subtitle">Cards appear based on your selections above. Mark each complete, then click <em>Next</em>.</div>
+
+    <div class="steps" id="steps">
+
+      <div class="step-card" data-step="1" data-requires="always">
+        <div class="step-number">1</div>
+        <div class="step-body">
+          <h3 class="step-title">Confirm the working model with your EA</h3>
+          <div class="step-meta"><span class="badge exec">Exec</span><span class="badge ea">EA</span></div>
+          <div class="step-content">
+            Talk through and document:
+            <ul>
+              <li>Which mail categories the EA handles vs. exec-only.</li>
+              <li>Which calendar slots are sacred (focus blocks, family time).</li>
+              <li>Escalation rules: when to interrupt vs. queue.</li>
+              <li>Tone and signature when the EA writes on the exec's behalf.</li>
+            </ul>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(1)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(1)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(1)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="2" data-requires="shared">
+        <div class="step-number">2</div>
+        <div class="step-body">
+          <h3 class="step-title">Provision the shared team mailbox</h3>
+          <div class="step-meta"><span class="badge admin">IT Admin Required</span></div>
+          <div class="step-content">
+            <ol>
+              <li>Submit ticket to IT to create the shared mailbox (e.g. <em>office-of-ceo@contoso.com</em>).</li>
+              <li>Have IT add both the exec and EA as members and assign Send As / Send on Behalf.</li>
+              <li>The shared mailbox auto-mounts in Outlook within ~60 minutes.</li>
+            </ol>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(2)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(2)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(2)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="3" data-requires="calendar">
+        <div class="step-number">3</div>
+        <div class="step-body">
+          <h3 class="step-title">Grant calendar delegate permissions</h3>
+          <div class="step-meta"><span class="badge exec">Exec action</span><span class="badge">No admin needed</span></div>
+          <div class="step-content">
+            From the executive's Outlook:
+            <ol>
+              <li>File → Account Settings → <strong>Delegate Access</strong> → Add… → choose the EA.</li>
+              <li>Set <strong>Calendar = Editor</strong>.</li>
+              <li>Check <em>"Delegate receives copies of meeting-related messages"</em>.</li>
+              <li>Choose whether the EA can see <em>Private</em> items.</li>
+            </ol>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(3)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(3)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(3)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="4" data-requires="mailbox">
+        <div class="step-number">4</div>
+        <div class="step-body">
+          <h3 class="step-title">Grant mailbox / folder delegation</h3>
+          <div class="step-meta"><span class="badge exec">Exec action</span></div>
+          <div class="step-content">
+            In the same Delegate Access dialog:
+            <ul>
+              <li>Set <strong>Inbox</strong> permission (Reviewer / Author / Editor).</li>
+              <li>For folder-level only: right-click the folder → <em>Properties → Permissions</em>.</li>
+              <li>Tasks, Notes, Contacts can be delegated separately if needed.</li>
+            </ul>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(4)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(4)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(4)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="5" data-requires="calendar mailbox">
+        <div class="step-number">5</div>
+        <div class="step-body">
+          <h3 class="step-title">Verify Send on Behalf works</h3>
+          <div class="step-meta"><span class="badge ea">EA action</span></div>
+          <div class="step-content">
+            <ol>
+              <li>EA opens <em>New Email</em>, clicks <strong>From</strong> → <em>Other Email Address</em> → picks the exec.</li>
+              <li>Recipient should see <em>"EA on behalf of Exec"</em>.</li>
+              <li>If From is missing from the ribbon, add it via Customize Ribbon.</li>
+            </ol>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(5)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(5)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(5)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="6" data-requires="sendas">
+        <div class="step-number">6</div>
+        <div class="step-body">
+          <h3 class="step-title">Request Send As permission from IT</h3>
+          <div class="step-meta"><span class="badge admin">IT Admin Required</span></div>
+          <div class="step-content">
+            <ol>
+              <li>Open IT ticket: <em>"Grant [EA UPN] Send As permission on [Exec mailbox]."</em></li>
+              <li>Admin runs in M365 admin center → Recipients → Mailboxes → Mailbox permissions → <strong>Send as</strong>.</li>
+              <li>Confirm by sending a test — message must appear from the exec's address only.</li>
+            </ol>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(6)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(6)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(6)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="7" data-requires="copilot mailbox calendar">
+        <div class="step-number">7</div>
+        <div class="step-body">
+          <h3 class="step-title">Verify Copilot license for both users</h3>
+          <div class="step-meta"><span class="badge admin">Verify with IT</span></div>
+          <div class="step-content">
+            <ul>
+              <li>Confirm both <strong>Exec</strong> and <strong>EA</strong> have a M365 Copilot license assigned.</li>
+              <li>If the EA has Copilot, they can summarize/draft/rewrite on the exec's delegated items.</li>
+              <li>Without a Copilot license the EA can still delegate-act manually — just no AI assist.</li>
+            </ul>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(7)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(7)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(7)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="8" data-requires="copilot">
+        <div class="step-number">8</div>
+        <div class="step-body">
+          <h3 class="step-title">Enroll in the Copilot Frontier program</h3>
+          <div class="step-meta"><span class="badge frontier">Frontier</span><span class="badge">GA Apr 27, 2026</span></div>
+          <div class="step-content">
+            <ul>
+              <li>IT enrolls the tenant (or specific users) in Frontier from the M365 admin center.</li>
+              <li><strong>Inbox agent:</strong> available on web, Windows, Mac, mobile.</li>
+              <li><strong>Calendar agent + Time-alignment:</strong> Outlook for Windows + web only.</li>
+            </ul>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(8)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(8)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(8)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="9" data-requires="copilot">
+        <div class="step-number">9</div>
+        <div class="step-body">
+          <h3 class="step-title">Configure the Copilot Inbox agent</h3>
+          <div class="step-meta"><span class="badge frontier">Frontier</span><span class="badge exec">Exec setup</span></div>
+          <div class="step-content">
+            Prime the inbox agent with starter prompts:
+            <ul>
+              <li>Identify follow-ups not replied to in 24h, prioritize, draft polite nudges.</li>
+              <li>Create a rule that tags emails from the manager as High Priority.</li>
+              <li>Catch up after vacation.</li>
+            </ul>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(9)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(9)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(9)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="10" data-requires="copilot">
+        <div class="step-number">10</div>
+        <div class="step-body">
+          <h3 class="step-title">Configure the Copilot Calendar agent</h3>
+          <div class="step-meta"><span class="badge frontier">Frontier</span><span class="badge exec">Exec preferences</span></div>
+          <div class="step-content">
+            Set preferences so the agent acts predictably:
+            <ul>
+              <li>Schedule a Copilot-managed weekly 1:1; auto-reschedule conflicts.</li>
+              <li>Auto-follow large meetings outside working hours.</li>
+              <li>Bulk-reschedule direct-report 1:1s.</li>
+              <li>Draft agendas focused on blockers, owners, decisions.</li>
+            </ul>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(10)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(10)">Undo</button>
+            <button class="btn btn-next" onclick="goNext(10)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card" data-step="11" data-requires="always">
+        <div class="step-number">11</div>
+        <div class="step-body">
+          <h3 class="step-title">Test, document, and review with the EA</h3>
+          <div class="step-meta"><span class="badge exec">Exec</span><span class="badge ea">EA</span></div>
+          <div class="step-content">
+            <ol>
+              <li>EA sends a test invite from the exec's calendar — confirm exec is shown as organizer.</li>
+              <li>EA replies on a test thread — confirm correct From line.</li>
+              <li>If on Frontier: ask Copilot to triage inbox; review proposed actions before approving.</li>
+              <li>Document the working norms in the Chief of Staff playbook.</li>
+              <li>Schedule a 30-day review.</li>
+            </ol>
+          </div>
+          <div class="step-actions">
+            <button class="btn btn-complete" onclick="markComplete(11)">Mark Complete</button>
+            <button class="btn btn-undo" onclick="markIncomplete(11)">Undo</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sources">
+    <h3>Sources</h3>
+    <ul>
+      <li><a href="https://support.microsoft.com/en-us/office/about-shared-mailboxes-shared-folders-and-shared-calendars-in-outlook-3ed70138-6143-4404-9cc6-b7a23e8a4278" target="_blank" rel="noopener">Microsoft Support — About shared mailboxes, shared folders, and shared calendars in Outlook</a></li>
+      <li><a href="https://support.microsoft.com/en-us/office/about-delegates-allow-someone-to-manage-your-mail-and-calendar-in-outlook-41c40c04-3bd1-4d22-963a-28eafec25926" target="_blank" rel="noopener">Microsoft Support — About delegates: Allow someone to manage your mail and calendar in Outlook</a></li>
+      <li><a href="https://techcommunity.microsoft.com/blog/outlook/copilot-in-outlook-new-agentic-experiences-for-email-and-calendar/4514601" target="_blank" rel="noopener">Outlook Blog — Copilot in Outlook: New agentic experiences for email and calendar (Apr 27, 2026)</a></li>
+      <li><a href="https://support.microsoft.com/en-us/office/calendar-instructions-in-outlook-and-copilot-04f58b60-109a-4795-9774-e373bdd56d3f" target="_blank" rel="noopener">Microsoft Support — Calendar Instructions in Outlook and Copilot</a></li>
+      <li>🎬 <strong>Watch the videos:</strong> <a href="https://adoption.microsoft.com/en-us/customer-hub/?filter=microsoft-365-copilot" target="_blank" rel="noopener">Customer Hub – Microsoft Adoption (M365 Copilot videos) ↗</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- EVENT MODAL (Day in the Life) -->
+<div class="modal-overlay" id="event-modal" onclick="if(event.target===this)closeEvent()">
+  <div class="modal" style="max-width:780px">
+    <div class="modal-header">
+      <h2 id="event-modal-title">Event</h2>
+      <button class="modal-close" onclick="closeEvent()">×</button>
+    </div>
+    <div class="modal-body" id="event-modal-body"></div>
+  </div>
+</div>
+
+<!-- COMPARE MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Compare Configurations — What Each One Brings</h2>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Shared Mailbox</th>
+            <th>Shared Folder</th>
+            <th>View-Only Calendar</th>
+            <th>Calendar Delegate</th>
+            <th>Mailbox Delegate</th>
+            <th>Send on Behalf</th>
+            <th>Send As</th>
+            <th>Copilot for Delegates</th>
+            <th>Inbox Agent (Frontier)</th>
+            <th>Calendar Agent (Frontier)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="ai-row">
+            <td>🤖 EA Copilot AI surfaces</td>
+            <td><span class="surf-pill chat dot">Chat</span> <span class="surf-pill cowork dot">Cowork</span></td>
+            <td><span class="surf-pill outlook dot">Outlook</span> <span class="surf-pill chat dot">Chat</span></td>
+            <td><span class="surf-pill chat dot">Chat</span></td>
+            <td><span class="surf-pill outlook dot">Outlook</span> <span class="surf-pill chat dot">Chat</span> <span class="surf-pill cowork dot">Cowork</span></td>
+            <td><span class="surf-pill outlook dot">Outlook</span> <span class="surf-pill chat dot">Chat</span> <span class="surf-pill cowork dot">Cowork</span></td>
+            <td><span class="surf-pill outlook dot">Outlook</span> <span class="surf-pill cowork dot">Cowork</span></td>
+            <td><span class="surf-pill outlook dot">Outlook</span> <span class="surf-pill cowork dot">Cowork</span></td>
+            <td><span class="surf-pill chat dot">Chat</span> <span class="surf-pill outlook dot">Outlook</span> <span class="surf-pill cowork dot">Cowork</span></td>
+            <td><span class="surf-pill outlook dot">Outlook</span></td>
+            <td><span class="surf-pill outlook dot">Outlook</span></td>
+          </tr>
+          <tr><td><strong>Primary value</strong></td><td>Team operates from one address</td><td>Surgical access to specific folders</td><td>Visibility into schedule</td><td>EA manages calendar end-to-end</td><td>EA manages mailbox content</td><td>Reply on exec's behalf</td><td>Reply <em>as</em> the exec</td><td>AI on shared items</td><td>Always-on inbox triage</td><td>Always-on schedule mgmt</td></tr>
+          <tr><td>Read mail</td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-no">No</span></td></tr>
+          <tr><td>Send mail</td><td><span class="pill pill-yes">Yes (shared)</span></td><td><span class="pill pill-partial">Partial</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-yes">Yes (labeled)</span></td><td><span class="pill pill-yes">Yes (as exec)</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Drafts</span></td><td><span class="pill pill-no">No</span></td></tr>
+          <tr><td>Manage calendar</td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-partial">Optional</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Yes</span></td></tr>
+          <tr><td>Auto-triage inbox</td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-partial">Manual</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-no">No</span></td></tr>
+          <tr><td>Auto-resolve conflicts</td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-partial">Manual</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Yes</span></td></tr>
+          <tr><td>IT admin required</td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-partial">Sometimes</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Yes</span></td><td><span class="pill pill-no">No</span></td><td><span class="pill pill-yes">Frontier</span></td><td><span class="pill pill-yes">Frontier</span></td></tr>
+          <tr><td>Available today / Frontier</td><td>Today</td><td>Today</td><td>Today</td><td>Today</td><td>Today</td><td>Today</td><td>Today</td><td>Today</td><td>Apr 27, 2026 · web/Win/Mac/mobile</td><td>Apr 27, 2026 · Win + web</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + id));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showPersp(id) {
+    document.querySelectorAll('.persp-btn').forEach(b => b.classList.toggle('active', b.dataset.persp === id));
+    document.querySelectorAll('.persp-panel').forEach(p => p.classList.toggle('active', p.id === 'persp-' + id));
+  }
+
+  function showSection(id) {
+    document.querySelectorAll('.section-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.section === id));
+    document.querySelectorAll('.section-content').forEach(p => p.classList.toggle('active', p.id === 'section-' + id));
+  }
+
+  function showPath(id) {
+    document.querySelectorAll('.path-btn').forEach(b => b.classList.toggle('active', b.dataset.path === id));
+    document.querySelectorAll('.path-panel').forEach(p => p.classList.toggle('active', p.id === 'path-' + id));
+  }
+
+  /* ===== Day-in-the-life event data ===== */
+  const dayEvents = {
+    1: {
+      time: '7:00 AM',
+      title: 'Morning briefing already in [exec]\'s inbox',
+      type: 'autonomous',
+      typeLabel: '✨ Autonomous result — delivered overnight',
+      surfaces: ['<span class="surf-pill cowork dot">Cowork</span>', '<span class="badge frontier">Scheduled task</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'When the EA arrives, the daily briefing is already waiting — created automatically by the Cowork briefing task they scheduled at 5:45 PM yesterday. Briefing covers meetings with prep needed, urgent unread emails, and decisions waiting on [exec].',
+      actions: [
+        'Open the briefing email already in the EA\'s inbox',
+        'Skim — add a one-line EA note for [exec]',
+        'Forward to [exec] before they sit down at 7:30 AM'
+      ],
+      prompt: 'Brief me on [exec]\'s day: meetings with prep needed, urgent unread emails, and decisions waiting on them. Group by priority, keep it to one page.'
+    },
+    2: {
+      time: '8:00 AM',
+      title: 'Triage [exec]\'s inbox',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge frontier">Inbox agent</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'Three meeting requests, two customer escalations, and a pile of FYIs accumulated overnight. EA classifies what [exec] must read, what to handle, and what to archive.',
+      actions: [
+        'Open [exec]\'s mailbox in Outlook (delegated)',
+        'Run the Frontier inbox agent prompt',
+        'Approve proposed actions: drafts, archive batch, exec-must-read flags'
+      ],
+      prompt: 'Triage [exec]\'s inbox from the last 12 hours. Surface what they personally need to read, draft replies for routine items I can handle, and archive newsletters and resolved threads. Show me each action before applying it.'
+    },
+    3: {
+      time: '9:00 AM',
+      title: 'Prep [exec] for the 9:30 board prep call',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill chat dot">Chat</span>', '<span class="surf-pill cowork dot">Cowork</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'EA assembles a one-pager: latest financials, board chair\'s open questions, and likely talking points.',
+      actions: [
+        'Open Copilot Chat or the Meeting Intel skill in Cowork',
+        'Reference [exec]\'s 9:30 board prep on their calendar',
+        'Drop the prep card into the meeting body so it travels with the invite'
+      ],
+      prompt: 'Prepare [exec] for their 9:30 board prep call. Pull the chair\'s open questions from email, the latest Q1 numbers, and any risks flagged in the last week. Output a one-page prep card.'
+    },
+    4: {
+      time: '10:00 AM',
+      title: 'Schedule a customer save call',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'Renewal at risk — EA needs to find 45 minutes this week between [exec], the customer\'s CIO, and the head of customer success.',
+      actions: [
+        'Open [exec]\'s calendar with Find a Time',
+        'Run the prompt; review the proposed slots',
+        'Send the invite from [exec] with a draft agenda already attached'
+      ],
+      prompt: 'Find 45 minutes this week with [exec], [customer CIO email], and [VP CS] to discuss the Contoso renewal. Avoid [exec]\'s 9–10 AM block. Send the invite from [exec] with an agenda focused on pricing concerns and product gaps.'
+    },
+    5: {
+      time: '11:00 AM',
+      title: 'Draft a customer reply on behalf of [exec]',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'Top customer wants reassurance on a security incident. The reply needs [exec]\'s tone and a precise commitment.',
+      actions: [
+        'Open the customer\'s escalation thread in [exec]\'s mailbox',
+        'Click <em>Draft with Copilot</em> on behalf of [exec]',
+        'Save as draft for [exec] to review &amp; send'
+      ],
+      prompt: 'Draft a reply on behalf of [exec] to [customer contact]. Acknowledge the security concern, reference the postmortem [exec]\'s team published, and commit to a 30-minute call this week with the CTO. Keep [exec]\'s tone — direct, warm, no hedging.'
+    },
+    6: {
+      time: '12:00 PM',
+      title: 'Schedule weekly recurring focus blocks for [exec]',
+      type: 'scheduled',
+      typeLabel: '⏰ Scheduled — runs autonomously every Sunday',
+      surfaces: ['<span class="surf-pill cowork dot">Cowork</span>', '<span class="badge frontier">Calendar agent</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'Instead of manually carving out focus time each week, the EA sets up a recurring Cowork task that books two 90-min focus blocks every Sunday for the upcoming week — guarded against meeting load.',
+      actions: [
+        'Open Cowork → Schedule recurring task',
+        'Set frequency: weekly, runs Sunday 6 PM',
+        'Submit prompt; confirm the recurring task name and description'
+      ],
+      prompt: 'Every Sunday evening, scan [exec]\'s calendar for the upcoming week and book two 90-minute focus blocks at the highest-leverage times (avoid 1:1s, customer calls, and travel). Mark the blocks as private, attach a one-line context note, and send a heads-up to me.',
+      schedule: { freq: 'Weekly · Sundays at 6:00 PM', preview: 'This task is scheduled once. From now on, it runs every Sunday on its own — no further EA action required unless preferences change.' }
+    },
+    7: {
+      time: '1:00 PM',
+      title: 'Cross-source Aurora catch-up',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill chat dot">Chat</span>', '<span class="badge ea">EA</span>'],
+      scenario: 'EA pulls a quick view of what\'s been happening with the Aurora launch — [exec] will ask about it later.',
+      actions: [
+        'Open Copilot Chat (M365.cloud.microsoft or the Copilot app)',
+        'Submit prompt; review cited Teams threads, emails, and files',
+        'Save the summary to share when [exec] surfaces'
+      ],
+      prompt: 'Catch me up on Aurora launch readiness across [exec]\'s email and Teams over the last 48 hours. Highlight blockers, owners, and any decisions waiting on [exec].'
+    },
+    8: {
+      time: '2:00 PM',
+      title: 'Resolve a calendar conflict for [exec]',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge frontier">Calendar agent</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'Two priority meetings overlap tomorrow. EA reschedules the lower-priority one.',
+      actions: [
+        'Open [exec]\'s calendar — confirm the conflict',
+        'Submit the prompt; review the proposed reschedule slots',
+        'Approve; Copilot sends the update from [exec] with a polite note'
+      ],
+      prompt: '[Exec]\'s 1:1 with [direct report] tomorrow at 10 AM conflicts with the customer call I just booked. Reschedule the 1:1 to later this week and notify [direct report] from [exec] with a brief explanation.'
+    },
+    9: {
+      time: '3:00 PM',
+      title: 'Bulk-reschedule next week\'s 1:1s',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge frontier">Calendar agent</span>'],
+      scenario: '[Exec] is traveling Mon–Wed next week. EA consolidates direct-report 1:1s to Thursday + Friday.',
+      actions: [
+        'Submit prompt against [exec]\'s calendar',
+        'Review the stacked grid; nudge any single slot if needed',
+        'Approve all updates in one batch'
+      ],
+      prompt: 'Reschedule all of [exec]\'s direct-report 1:1s next week from Mon–Wed to Thursday and Friday afternoons. Stack them with 15-minute buffers. Send updates from [exec].'
+    },
+    10: {
+      time: '4:00 PM',
+      title: 'Schedule the weekly leadership digest',
+      type: 'scheduled',
+      typeLabel: '⏰ Scheduled — runs every Friday at 3 PM',
+      surfaces: ['<span class="surf-pill cowork dot">Cowork</span>', '<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
+      scenario: 'Instead of remembering to draft Friday\'s leadership update each week, the EA configures a recurring Cowork task that drafts it automatically and places it in [exec]\'s drafts folder for review.',
+      actions: [
+        'Open Cowork → Schedule recurring task',
+        'Set frequency: weekly, Friday 3:00 PM',
+        'Submit the stakeholder-comms prompt; confirm draft destination'
+      ],
+      prompt: 'Every Friday at 3 PM, draft this week\'s leadership update from [exec] using stakeholder-comms. Pull progress on top initiatives, decisions made, top three risks, and what we need from leadership next week. Match [exec]\'s direct, no-fluff tone. Save the draft into [exec]\'s drafts folder; send me a Teams notification when ready.',
+      schedule: { freq: 'Weekly · Fridays at 3:00 PM', preview: 'Draft is in [exec]\'s drafts folder by 3:30 PM each Friday. EA reviews, [exec] sends.' }
+    },
+    11: {
+      time: '5:00 PM',
+      title: 'Time-alignment review for next week',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge frontier">Time alignment</span>'],
+      scenario: 'EA pulls Time-alignment recommendations and prepares them so [exec] can decide tomorrow morning what to decline / delegate.',
+      actions: [
+        'Submit prompt against [exec]\'s calendar',
+        'Review the four buckets: Decline · Follow · Delegate · Convert to async',
+        'Stage approvals so [exec] can confirm in one pass'
+      ],
+      prompt: 'Review [exec]\'s calendar next week and recommend what to decline, follow, delegate, or convert to async. For "delegate" suggestions, propose me as the delegate where it fits.'
+    },
+    12: {
+      time: '5:30 PM',
+      title: 'End-of-day wrap-up to [exec]',
+      type: 'live',
+      typeLabel: '🟢 Live action',
+      surfaces: ['<span class="surf-pill cowork dot">Cowork</span>', '<span class="badge ea">EA</span>'],
+      scenario: 'EA closes the loop — what was handled, what\'s still open, what tomorrow looks like.',
+      actions: [
+        'Run the Daily Briefing skill in <em>wrap</em> mode',
+        'Review the summary; add EA notes',
+        'Send a short Teams message to [exec] at end of day'
+      ],
+      prompt: 'Wrap up [exec]\'s day. What did I handle on their behalf, what\'s still open, what does tomorrow look like, and what do they need to decide before the morning?'
+    },
+    13: {
+      time: '5:45 PM',
+      title: 'Schedule tomorrow\'s 6 AM briefing run',
+      type: 'eod',
+      typeLabel: '🌙 End-of-day setup — runs at 6:00 AM tomorrow',
+      surfaces: ['<span class="surf-pill cowork dot">Cowork</span>', '<span class="badge frontier">Scheduled task</span>'],
+      scenario: 'Before the EA leaves, they schedule the briefing skill to run at 6:00 AM tomorrow against [exec]\'s mailbox + calendar so the briefing is sitting in the EA\'s inbox at 7:00 AM ready to forward.',
+      actions: [
+        'Open Cowork → Schedule one-time task for 6:00 AM',
+        'Submit the prompt; confirm the run time and recipient',
+        'EA can leave; the task runs autonomously overnight'
+      ],
+      prompt: 'At 6:00 AM tomorrow, brief me on [exec]\'s day: meetings with prep needed, urgent unread emails, and decisions waiting on them. Group by priority, keep it to one page. Email the briefing to me so it\'s ready before [exec] arrives.',
+      schedule: { freq: 'One-time · Tomorrow 6:00 AM', preview: 'This is what powers the 7:00 AM "Briefing waiting" event at the start of the next day.' }
+    },
+    14: {
+      time: '6:00 PM',
+      title: 'Schedule overnight inbox triage prep',
+      type: 'eod',
+      typeLabel: '🌙 End-of-day setup — runs at 6:30 AM tomorrow',
+      surfaces: ['<span class="surf-pill cowork dot">Cowork</span>', '<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge frontier">Inbox agent</span>'],
+      scenario: 'EA stages a 6:30 AM triage pass on [exec]\'s inbox so by the time the EA arrives at 7 AM, drafts, archive suggestions, and exec-must-read flags are pre-staged for one-pass approval.',
+      actions: [
+        'Open Cowork → Schedule one-time task for 6:30 AM',
+        'Submit the inbox-agent prompt; specify "stage only — do not send"',
+        'Sign off; arrive tomorrow to a triaged queue ready to approve'
+      ],
+      prompt: 'At 6:30 AM tomorrow, triage [exec]\'s inbox from the last 12 hours. Stage drafts for routine replies I can handle, propose archives for newsletters and resolved threads, and flag exec-must-read items. Do not send anything — just stage for my approval at 7 AM.',
+      schedule: { freq: 'One-time · Tomorrow 6:30 AM', preview: 'Result: at 7 AM the EA opens [exec]\'s inbox to find drafts pre-written, archive batch ready, and a clear must-read list.' }
+    }
+  };
+
+  function openEvent(id) {
+    const ev = dayEvents[id];
+    if (!ev) return;
+    document.getElementById('event-modal-title').textContent = ev.time + ' — ' + ev.title;
+    let html = '<div class="event-meta">' + (ev.surfaces || []).join('') + '</div>';
+    html += '<div style="margin-bottom:12px; font-size:12.5px; color:var(--text-muted); font-weight:600;">' + ev.typeLabel + '</div>';
+    html += '<p class="event-scenario">' + ev.scenario + '</p>';
+    html += '<div class="event-action-label">To perform this action:</div>';
+    html += '<ul class="event-actions">';
+    (ev.actions || []).forEach(a => { html += '<li>' + a + '</li>'; });
+    html += '</ul>';
+    html += '<div class="event-action-label">Prompt</div>';
+    html += '<div class="prompt-box"><pre>' + ev.prompt.replace(/</g,'&lt;') + '</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>';
+    if (ev.schedule) {
+      html += '<div class="schedule-block"><strong>Runs on a schedule.</strong> ' + ev.schedule.freq + '<br><span style="color:var(--text-muted)">' + ev.schedule.preview + '</span></div>';
+    }
+    document.getElementById('event-modal-body').innerHTML = html;
+    document.getElementById('event-modal').classList.add('open');
+  }
+  function closeEvent() {
+    document.getElementById('event-modal').classList.remove('open');
+  }
+
+  function copyBtn(btn) {
+    const text = btn.innerText;
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    const onCopied = () => {
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onCopied).catch(() => { fallback(); onCopied(); });
+    } else {
+      fallback(); onCopied();
+    }
+  }
+
+  function copyInstr(btn) {
+    const box = btn.parentElement;
+    const text = box.querySelector('pre').innerText;
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    const onCopied = () => {
+      const original = btn.innerText;
+      btn.innerText = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerText = original; btn.classList.remove('copied'); }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onCopied).catch(() => { fallback(); onCopied(); });
+    } else {
+      fallback(); onCopied();
+    }
+  }
+
+  function copyPrompt(btn) {
+    const pre = btn.parentElement.querySelector('pre');
+    const text = pre.innerText;
+    const fallback = () => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    };
+    const onCopied = () => {
+      const original = btn.innerText;
+      btn.innerText = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.innerText = original; btn.classList.remove('copied'); }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onCopied).catch(() => { fallback(); onCopied(); });
+    } else {
+      fallback(); onCopied();
+    }
+  }
+
+  /* Setup tab — checkbox filter & step progression */
+  const goalMap = {
+    shared:   document.getElementById('g-shared'),
+    calendar: document.getElementById('g-calendar'),
+    mailbox:  document.getElementById('g-mailbox'),
+    sendas:   document.getElementById('g-sendas'),
+    copilot:  document.getElementById('g-copilot'),
+  };
+  const completed = new Set();
+  function applyFilter() {
+    document.querySelectorAll('.check-row').forEach(row => {
+      const cb = row.querySelector('input');
+      row.classList.toggle('checked', cb.checked);
+    });
+    const cards = document.querySelectorAll('.step-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const requires = (card.dataset.requires || '').split(/\s+/);
+      const show = requires.includes('always') || requires.some(r => goalMap[r] && goalMap[r].checked);
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    updateProgress(visible);
+    activateFirstVisible();
+  }
+  function visibleSteps() { return Array.from(document.querySelectorAll('.step-card:not(.hidden)')); }
+  function activateFirstVisible() {
+    const next = visibleSteps().find(c => !c.classList.contains('complete'));
+    document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+    if (next) next.classList.add('active');
+  }
+  function activate(n) {
+    const card = document.querySelector('[data-step="' + n + '"]');
+    if (!card || card.classList.contains('hidden')) return;
+    document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function updateProgress(total) {
+    if (total === undefined) total = visibleSteps().length;
+    const fill = document.getElementById('progressFill');
+    const text = document.getElementById('progressText');
+    let done = 0;
+    visibleSteps().forEach(c => { if (c.classList.contains('complete')) done++; });
+    const pct = total ? (done / total) * 100 : 0;
+    fill.style.width = pct + '%';
+    text.textContent = done + ' of ' + total + ' complete';
+  }
+  function markComplete(n) {
+    completed.add(n);
+    document.querySelector('[data-step="' + n + '"]').classList.add('complete');
+    updateProgress();
+  }
+  function markIncomplete(n) {
+    completed.delete(n);
+    document.querySelector('[data-step="' + n + '"]').classList.remove('complete');
+    updateProgress();
+  }
+  function goNext(n) {
+    if (!completed.has(n)) markComplete(n);
+    const list = visibleSteps().map(c => parseInt(c.dataset.step, 10));
+    const idx = list.indexOf(n);
+    if (idx >= 0 && idx < list.length - 1) activate(list[idx + 1]);
+  }
+  Object.values(goalMap).forEach(cb => cb && cb.addEventListener('change', () => {
+    const all = Object.values(goalMap).every(c => c && c.checked);
+    const selectAll = document.getElementById('g-selectall');
+    if (selectAll) selectAll.checked = all;
+    applyFilter();
+  }));
+  const selectAllCb = document.getElementById('g-selectall');
+  if (selectAllCb) {
+    selectAllCb.addEventListener('change', () => {
+      Object.values(goalMap).forEach(cb => { if (cb) cb.checked = selectAllCb.checked; });
+      applyFilter();
+    });
+  }
+  document.querySelectorAll('.check-row').forEach(row => {
+    row.addEventListener('click', e => {
+      if (e.target.tagName !== 'INPUT') {
+        const cb = row.querySelector('input');
+        cb.checked = !cb.checked;
+        cb.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+  function openModal() { document.getElementById('modal').classList.add('open'); }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  applyFilter();
+</script>
+
+</body>
+</html>
