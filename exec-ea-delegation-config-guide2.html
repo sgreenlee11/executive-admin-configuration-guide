@@ -497,6 +497,8 @@
     margin-bottom: 14px;
   }
   .prompt-card.frontier { border-left-color: var(--purple); }
+  .prompt-card.personal { border-left-color: var(--green); }
+  .prompt-card.delegate { border-left-color: var(--amber); }
   .prompt-card h3 {
     margin: 0 0 8px 0;
     font-size: 14px;
@@ -2098,131 +2100,131 @@
   <!-- ============ TAB: COPILOT (TODAY) ============ -->
   <div class="tab-panel" id="tab-copilot">
     <h2 class="section-title">Copilot Experiences &amp; Prompts</h2>
-    <p class="section-subtitle">Available today in Outlook (web, Windows, Mac, mobile). Copy any prompt and paste it into the Copilot composer in your tenant.</p>
-    <div class="availability-banner green">✅ Available today · Outlook for web, Windows, Mac, and mobile</div>
+    <p class="section-subtitle">Available today in Outlook and Copilot Chat. Use the left column for the EA's own mailbox/calendar; use the right column only when running against the Executive's delegated mailbox/calendar.</p>
+    <div class="availability-banner green">✅ Available today · Type / to invoke Context IQ and choose the Executive's mailbox or calendar · Delegate prompts require existing Outlook delegate access; Editor is recommended for accept/decline/reschedule actions.</div>
 
     <div class="exp-columns">
-      <!-- LEFT: Email -->
+      <!-- LEFT: EA-owned content -->
       <div>
-        <div class="exp-col-header email">📨 Outlook Email — Experiences &amp; Prompts</div>
+        <div class="exp-col-header email">👤 EA's own content — mailbox &amp; calendar</div>
         <div class="exp-col-body">
 
-          <div class="prompt-card">
-            <h3>1. Summarize a long thread</h3>
+          <div class="prompt-card personal">
+            <h3>1. Triage my unread email <span class="badge ea">EA content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open a thread with 5+ replies</li>
-              <li>Click <em>Summary by Copilot</em> at the top, or paste the prompt</li>
-              <li>Review the bullet summary with cited messages</li>
+              <li>Use when you want a quick view of your own inbox</li>
+              <li>Adjust the time window or folder as needed</li>
+              <li>Review source links before taking action</li>
             </ul>
-            <div class="prompt-box"><pre>Summarize this thread, including any decisions made, open questions, and what each participant has committed to.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Summarize my unread emails from the last 3 days. Group by topic and include action items, owners, and any deadlines.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card">
-            <h3>2. Draft a reply</h3>
+          <div class="prompt-card personal">
+            <h3>2. Find a message or thread <span class="badge ea">EA content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open a message, click <em>Draft with Copilot</em></li>
-              <li>Provide the bullet you want communicated</li>
-              <li>Choose tone (formal / direct / casual) and length</li>
+              <li>Use Copilot Chat when search terms are fuzzy</li>
+              <li>Include topic, sender, domain, or approximate timing</li>
+              <li>Open the cited email before forwarding or replying</li>
             </ul>
-            <div class="prompt-box"><pre>Draft a reply that confirms attendance at the budget review on Thursday, asks for the latest forecast doc to be sent in advance, and offers two questions I plan to ask. Keep it concise and professional.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Find emails about &lt;topic&gt; from &lt;sender or domain&gt; and summarize key decisions, open questions, and the exact thread I should review.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card">
-            <h3>3. Coach &amp; rewrite a draft</h3>
+          <div class="prompt-card personal">
+            <h3>3. Draft or tighten my reply <span class="badge ea">EA content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Compose a draft, then click <em>Coaching by Copilot</em></li>
-              <li>Review tone, clarity, and reader-sentiment feedback</li>
-              <li>Apply the rewrite or revise manually</li>
+              <li>Open the message or thread first</li>
+              <li>Provide the points you want communicated</li>
+              <li>Use Copilot coaching if you already have a draft</li>
             </ul>
-            <div class="prompt-box"><pre>Rewrite this email so it sounds more direct and confident. Cut filler words, lead with the ask, and end with a clear next step.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Draft a concise, professional reply to this thread. Lead with the ask, include 3 bullet next steps, and end with the decision or input I need.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card">
-            <h3>4. Catch me up across email and Teams</h3>
+          <div class="prompt-card personal">
+            <h3>4. Prep my calendar <span class="badge ea">EA content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open Copilot pane in Outlook (or Copilot Chat)</li>
-              <li>Submit prompt — Copilot pulls from email + Teams</li>
-              <li>Review summary with linked sources</li>
+              <li>Run before daily planning or end-of-day prep</li>
+              <li>Use your own calendar, not the Executive's</li>
+              <li>Turn the output into prep blocks or reminders</li>
             </ul>
-            <div class="prompt-box"><pre>Catch me up on everything related to the Aurora launch from the past 5 days. Include decisions made, open risks, and anything that needs my attention before tomorrow.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
-          </div>
-
-          <div class="prompt-card">
-            <h3>5. Find a specific email</h3>
-            <div class="action-label">To perform this action:</div>
-            <ul class="action-list">
-              <li>Open Copilot Chat</li>
-              <li>Describe the message by topic, sender, or context</li>
-              <li>Click through to the original email</li>
-            </ul>
-            <div class="prompt-box"><pre>Find the email where the CFO shared the Q1 close numbers and the customer concentration footnote. Show me the exact thread.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Summarize tomorrow's meetings on my calendar with who, why, desired outcome, conflicts, and anything I need to prepare today.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
         </div>
       </div>
 
-      <!-- RIGHT: Calendar -->
+      <!-- RIGHT: Executive delegated content -->
       <div>
-        <div class="exp-col-header calendar">📅 Outlook Calendar — Experiences &amp; Prompts</div>
+        <div class="exp-col-header calendar">🧑‍💼 Executive's content — delegated mailbox &amp; calendar</div>
         <div class="exp-col-body">
 
-          <div class="prompt-card">
-            <h3>1. Find a time that works</h3>
+          <div class="prompt-card delegate">
+            <h3>1. Triage the Executive's mailbox <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open Copilot in Outlook calendar</li>
-              <li>Provide attendees, duration, and time window</li>
-              <li>Pick from suggested slots; Copilot drafts the invite</li>
+              <li>Type <strong>/</strong> and choose the Executive's mailbox</li>
+              <li>Scope by folder and date to keep the output focused</li>
+              <li>Use the summary to decide what needs follow-up</li>
             </ul>
-            <div class="prompt-box"><pre>Find 30 minutes next week with Priya, James, and Lin. Avoid Mondays and Friday afternoons. Prefer mornings.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Summarize unread emails from the last 3 days in /&lt;leader&gt;'s mailbox. Group by topic and include action items, owners, and deadlines.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card">
-            <h3>2. Schedule a meeting via chat</h3>
+          <div class="prompt-card delegate">
+            <h3>2. Find a leader thread <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open Copilot Chat or the meeting form</li>
-              <li>Describe the meeting in plain language</li>
-              <li>Approve the proposed invite before it sends</li>
+              <li>Use when the Executive asks, "Where did we land on this?"</li>
+              <li>Include topic plus sender or domain when possible</li>
+              <li>Verify cited messages before summarizing back</li>
             </ul>
-            <div class="prompt-box"><pre>Schedule a 45-minute Aurora launch readiness review for Thursday afternoon with the engineering, marketing, and customer success leads. Add a Teams link.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Find emails in /&lt;leader&gt;'s mailbox about &lt;topic&gt; from &lt;sender or domain&gt; and summarize key decisions, open questions, and the exact thread to review.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card">
-            <h3>3. Prepare for an upcoming meeting</h3>
+          <div class="prompt-card delegate">
+            <h3>3. Draft in the Executive's voice <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open the meeting on your calendar</li>
-              <li>Click <em>Prepare with Copilot</em> or paste the prompt</li>
-              <li>Review the prep card with cited sources</li>
+              <li>Open the relevant message or cite the latest sender</li>
+              <li>Keep sensitive or policy-heavy replies for human review</li>
+              <li>Executive should approve before sending if required</li>
             </ul>
-            <div class="prompt-box"><pre>Help me prepare for tomorrow's customer save call with Contoso. What's the history, what concerns has their team raised, and what should I be ready to commit to?</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Draft a polite reply as &lt;leader&gt; from /&lt;leader&gt;'s mailbox to the latest message from &lt;person&gt;. Use their usual tone: concise, professional, with bullet next steps.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card">
-            <h3>4. Summarize my schedule</h3>
+          <div class="prompt-card delegate">
+            <h3>4. Summarize the Executive's day <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open Copilot Chat from any surface</li>
-              <li>Ask for a window — today, tomorrow, next week</li>
-              <li>Use the summary to plan prep time</li>
+              <li>Type <strong>/</strong> and choose the Executive's calendar</li>
+              <li>Run daily for morning briefings or day-ahead prep</li>
+              <li>Flag conflicts, unclear outcomes, and prep gaps</li>
             </ul>
-            <div class="prompt-box"><pre>Summarize what's on my calendar next week. Flag anything that needs prep or where I'm the decision-maker.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>From /&lt;leader&gt;'s calendar, summarize tomorrow's meetings with who, why, desired outcome, and prep needed. Flag conflicts and pending invites I should review.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card">
-            <h3>5. Draft a meeting agenda</h3>
+          <div class="prompt-card delegate">
+            <h3>5. Find open time for the Executive <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
-              <li>Open the meeting form</li>
-              <li>Click Copilot → <em>Draft agenda</em></li>
-              <li>Review and trim before sending</li>
+              <li>Use when coordinating meetings from chat</li>
+              <li>Specify duration, date range, and constraints</li>
+              <li>Review suggested slots before sending any invite</li>
             </ul>
-            <div class="prompt-box"><pre>Draft an agenda for tomorrow's exec staff meeting. Pull from last week's action items and any open Teams threads. Keep it to 5 lines max.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+            <div class="prompt-box"><pre>Find open 45-minute slots on /&lt;leader&gt;'s calendar next week. Avoid Mondays and Friday afternoons, and prioritize morning options.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
+          <div class="prompt-card delegate">
+            <h3>6. Take a delegated calendar action <span class="badge exec">Executive content</span></h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Use only when you have Editor delegate access</li>
+              <li>Ask Copilot to show the affected meetings first if unsure</li>
+              <li>Confirm the action before it changes the calendar</li>
+            </ul>
+            <div class="prompt-box"><pre>Show pending invites on /&lt;leader&gt;'s calendar that I should review. Recommend accept, decline, or propose new time, but do not take action until I confirm.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
         </div>
