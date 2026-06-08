@@ -393,7 +393,7 @@
           <span class="badge orange">Executive admin guide</span>
           <span class="badge green">EA audience</span>
           <span class="badge blue">Support links included</span>
-          <span class="badge amber">Refreshed May 7, 2026</span>
+          <span class="badge amber">Refreshed June 7, 2026</span>
         </div>
       </div>
       <div class="suite-mark">EA</div>
@@ -426,11 +426,19 @@
   </div>
 
   <main class="container">
+    <section class="update-brief" aria-label="Updates since original session">
+      <div>
+        <strong>New since the May session</strong>
+        <span>Blue rail = added or materially changed since delivery.</span>
+      </div>
+      <p>This page now highlights the June 5 feature-matrix refresh, New Outlook Copilot account selector, offline improvements, upcoming delegate permission management, and admin adoption controls. Scan for the <span class="session-stamp">New since session</span> stamp.</p>
+    </section>
+
     <section class="slide" id="headline">
       <div class="slide-header">
         <div>
           <h2 class="slide-title">Executive summary: New Outlook is ready for many EA workflows, but delegation depth still needs validation.</h2>
-          <p class="slide-subtitle">Microsoft's feature matrix for New Outlook was last updated April 14, 2026. The app is generally available, continues to receive feature updates, and is the direction of travel for Outlook on Windows.</p>
+          <p class="slide-subtitle">Microsoft's feature matrix for New Outlook was last updated June 5, 2026. The app is generally available, continues to receive feature updates, and is the direction of travel for Outlook on Windows.</p>
         </div>
         <div class="slide-number">01 / HEADLINE</div>
       </div>
@@ -557,6 +565,26 @@
           </ul>
         </div>
 
+        <div class="card copilot-card session-new">
+          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot</span><span class="badge green">May rollout</span></div>
+          <h3>Copilot account selector reduces multi-account confusion</h3>
+          <p>When more than one Copilot-enabled account is added to New Outlook, the Copilot side pane in Calendar includes an account dropdown.</p>
+          <ul>
+            <li><strong>EA angle:</strong> helps assistants and multi-account users confirm which account Copilot is acting on.</li>
+            <li><strong>Callout:</strong> include this in validation for anyone juggling multiple work identities or delegated contexts.</li>
+          </ul>
+        </div>
+
+        <div class="card ea-card session-new">
+          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge green">Updated</span><span class="badge blue">Offline</span></div>
+          <h3>Offline support continues to improve</h3>
+          <p>Microsoft notes support for adding attachments while offline, a 30-day offline mail sync window, offline search folders, and undo send while offline.</p>
+          <ul>
+            <li><strong>EA angle:</strong> better resilience for travel, stores, facilities, and variable connectivity.</li>
+            <li><strong>Callout:</strong> still test real travel/offline scenarios before removing classic Outlook fallback.</li>
+          </ul>
+        </div>
+
         <div class="card risk-card">
           <div class="badge-row"><span class="badge amber">Coming / changed</span><span class="badge blue">Calendar</span></div>
           <h3>Calendar power-user items are still moving</h3>
@@ -574,6 +602,16 @@
           <ul>
             <li><strong>EA angle:</strong> these are the practical wins to demonstrate live, especially for high-volume executive inboxes.</li>
             <li><strong>Callout:</strong> show how these replace daily workarounds rather than explaining them as "new features."</li>
+          </ul>
+        </div>
+
+        <div class="card session-new">
+          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge amber">Roadmap</span><span class="badge blue">Delegation</span></div>
+          <h3>Mail delegate permission management is on the roadmap</h3>
+          <p>Roadmap item 417063 says users will be able to grant mailbox and folder delegate access from the New Outlook app, planned for July 2026.</p>
+          <ul>
+            <li><strong>EA angle:</strong> could simplify setup conversations between executives, assistants, and IT.</li>
+            <li><strong>Callout:</strong> until available, keep current Exchange/Outlook delegate setup guidance in the rollout plan.</li>
           </ul>
         </div>
       </div>
@@ -753,6 +791,26 @@
             <li><strong>Governance:</strong> verify appropriate delegation and mailbox access before relying on assistant-driven Copilot flows.</li>
           </ul>
         </div>
+
+        <div class="card copilot-card session-new">
+          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot</span><span class="badge green">Newer flow</span></div>
+          <h3>Add Outlook email context into Copilot Chat</h3>
+          <p>Implicit Grounding in Outlook lets users add selected emails or thread text directly into Microsoft 365 Copilot Chat prompts.</p>
+          <ul>
+            <li><strong>EA use:</strong> ground escalation briefs, meeting prep, and draft replies in the exact email context being reviewed.</li>
+            <li><strong>Watchout:</strong> still verify the selected source context and citations before sending executive communications.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card session-new">
+          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot</span><span class="badge amber">Multi-account</span></div>
+          <h3>Confirm the active Copilot account</h3>
+          <p>The Outlook Copilot side pane account selector helps users switch between Copilot-enabled accounts without relying only on Outlook's broader account context.</p>
+          <ul>
+            <li><strong>EA use:</strong> reduce mistakes when switching between personal work, project, and delegated executive contexts.</li>
+            <li><strong>Admin note:</strong> include account-context screenshots in training for multi-account users.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -817,11 +875,23 @@
             <td>May affect specialized EA workflows, line-of-business tools, or custom executive processes.</td>
             <td>Identify replacements with web add-ins or process changes.</td>
           </tr>
-          <tr>
+          <tr class="session-new-row">
             <td><strong>Offline / PST</strong></td>
-            <td>Both are partially available in New Outlook.</td>
+            <td>Both are partially available; offline support now includes adding attachments while offline and a 30-day sync window.</td>
             <td>Relevant for travel, intermittent connectivity, archive lookup, and long-lived PST dependencies.</td>
-            <td>Test travel scenarios and legacy archive access before cutover.</td>
+            <td><span class="session-stamp">New since session</span> Test travel scenarios and legacy archive access before cutover.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Copilot account context</strong></td>
+            <td>Account selector in the Outlook Copilot side pane is rolling out for users with more than one Copilot-enabled account.</td>
+            <td>Reduces wrong-account risk for multi-account assistants and leaders.</td>
+            <td><span class="session-stamp">New since session</span> Add to pilot scripts for users with multiple work accounts or delegated scenarios.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Mail delegate permissions</strong></td>
+            <td>Granting mailbox and folder delegate permissions from New Outlook is planned for July 2026.</td>
+            <td>Could simplify executive/delegate setup once available.</td>
+            <td><span class="session-stamp">New since session</span> Track roadmap item 417063 and keep existing delegate setup guidance until rollout.</td>
           </tr>
         </tbody>
       </table>
@@ -920,6 +990,22 @@
             <li>Conditional Access and OWA mailbox policies can enforce device, MFA, and attachment-related controls.</li>
           </ul>
         </div>
+        <div class="card session-new">
+          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot support</span></div>
+          <h3>Prepare support for Copilot settings in classic Outlook</h3>
+          <ul>
+            <li>Copilot settings are being added under the File menu in classic Outlook for Windows, with preview in June and GA planned for July 2026.</li>
+            <li>Support teams should know where users can toggle Copilot and how that differs from tenant licensing or admin controls.</li>
+          </ul>
+        </div>
+        <div class="card session-new">
+          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge amber">Adoption control</span></div>
+          <h3>Use targeted Copilot adoption messages</h3>
+          <ul>
+            <li>Organizational Messages now supports email delivery and usage-based targeting for Copilot adoption segments.</li>
+            <li>Use this for targeted nudges to inactive Copilot users, pilot cohorts, or EA groups after New Outlook training.</li>
+          </ul>
+        </div>
       </div>
 
       <div class="callout"><strong>EA rollout recommendation:</strong> create an EA pilot ring with named executive/delegate pairs, shared mailbox scenarios, Copilot license coverage, required add-ins, and calendar power-user workflows. Promote only the scenarios that pass real-world validation.</div>
@@ -935,7 +1021,7 @@
       </div>
 
       <div class="source-list">
-        <a href="https://support.microsoft.com/en-us/office/compare-new-outlook-for-windows-and-classic-outlook-for-windows-de453583-1e76-48bf-975a-2e9cd2ee16dd" target="_blank" rel="noopener">Compare New Outlook and classic Outlook <span>Feature matrix; last updated April 14, 2026</span></a>
+        <a href="https://support.microsoft.com/en-us/office/feature-comparison-between-new-outlook-and-classic-outlook-de453583-1e76-48bf-975a-2e9cd2ee16dd" target="_blank" rel="noopener">Compare New Outlook and classic Outlook <span>Feature matrix; last updated June 5, 2026</span></a>
         <a href="https://aka.ms/newoutlookwhatsnew" target="_blank" rel="noopener">What's new in New Outlook <span>Monthly update landing page</span></a>
         <a href="https://aka.ms/newOutlookforWindows" target="_blank" rel="noopener">Microsoft 365 Roadmap: New Outlook for Windows <span>Roadmap-filtered feature list</span></a>
         <a href="https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/get-started/guide-product-availability" target="_blank" rel="noopener">New Outlook product availability guidance <span>Admin migration stages and roadmap timing</span></a>
@@ -949,6 +1035,8 @@
         <a href="https://support.microsoft.com/en-us/office/summarize-an-email-thread-with-copilot-in-outlook-a79873f2-396b-46dc-b852-7fe5947ab640" target="_blank" rel="noopener">Summarize email threads with Copilot <span>End-user Copilot summary guidance</span></a>
         <a href="https://support.microsoft.com/en-us/office/create-a-meeting-agenda-with-copilot-in-outlook-31a44dfa-62bb-4751-82c4-14327a26759f" target="_blank" rel="noopener">Create a meeting agenda with Copilot <span>Schedule with Copilot and agenda drafting</span></a>
         <a href="https://support.microsoft.com/en-us/topic/prepare-for-your-meeting-with-copilot-f23326fc-7721-45f1-875e-23e77aaf3d89" target="_blank" rel="noopener">Prepare for your meeting with Copilot <span>Meeting prep insights and permissions</span></a>
+        <a href="https://www.microsoft.com/microsoft-365/roadmap?featureid=559991" target="_blank" rel="noopener">Outlook Copilot account selector <span>Roadmap item 559991; multi-account Copilot context</span></a>
+        <a href="https://www.microsoft.com/microsoft-365/roadmap?featureid=417063" target="_blank" rel="noopener">Grant mail delegate permissions from New Outlook <span>Roadmap item 417063; planned delegate setup improvement</span></a>
       </div>
 
       <div class="presenter-note"><strong>Source note:</strong> Roadmap dates and feature states can change. Re-check the Microsoft 365 roadmap and the New Outlook comparison matrix before presenting to a production rollout audience.</div>

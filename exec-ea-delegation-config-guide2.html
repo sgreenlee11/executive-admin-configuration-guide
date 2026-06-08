@@ -1640,7 +1640,7 @@
     <div>
       <p class="suite-kicker">Executive admin enablement</p>
       <h1>Microsoft 365 Copilot for Executive Assistant Delegation</h1>
-      <p>How an executive and their assistant use Copilot together across email and calendar — today, in the Frontier program, and through a delegated working day.</p>
+      <p>How an executive and their assistant use Copilot together across email and calendar — refreshed with June 2026 Copilot Chat, Outlook, and Notebook updates.</p>
     </div>
     <div class="suite-mark">EA</div>
   </div>
@@ -1686,6 +1686,15 @@
       <div class="workiq-text">
         <strong>Grounded in your work with WorkIQ.</strong> Every Copilot response is built on the WorkIQ graph — the connected understanding of your emails, meetings, chats, files, and people across Microsoft 365. That's why summaries cite the right thread, drafts pick up your tone, and prep cards surface the customer's open issue instead of generic advice.
         <span class="sub">No setup required — WorkIQ is on for every M365 Copilot user. Outputs honor your existing permissions: Copilot can only see what you can see.</span>
+      </div>
+    </div>
+
+    <div class="workiq-callout session-new">
+      <div class="workiq-icon">🔄</div>
+      <div class="workiq-text">
+        <span class="session-stamp">New since session</span>
+        <strong>June 2026 update to use in this guide.</strong> Copilot Chat can now be scoped with selected Content Sources, Outlook email content can be added directly into Copilot Chat prompts, meeting RSVPs can be handled in Copilot Chat, and Copilot Notebooks can use web links and Teams meetings as references.
+        <span class="sub">For EAs, the practical shift is better grounding: choose the mailbox thread, meeting, notebook, or selected sources before asking for an executive brief, reply draft, or calendar decision.</span>
       </div>
     </div>
 
@@ -2336,8 +2345,19 @@
             <div class="prompt-box"><pre>Reschedule all of my 1:1s with my direct reports for next week to the Friday afternoon that week.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
+          <div class="prompt-card frontier session-new">
+            <h3><span class="session-stamp">New since session</span> 4. RSVP directly in Copilot Chat</h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Open Copilot Chat and reference the target meeting</li>
+              <li>Ask Copilot to choose Accept, Decline, Tentative, Follow, or Remove canceled</li>
+              <li>Review the suggested response before applying it to the calendar</li>
+            </ul>
+            <div class="prompt-box"><pre>Review [exec]'s pending meeting invites for tomorrow. Recommend Accept, Decline, Tentative, or Follow for each one based on priority, conflicts, and whether [exec] needs the recap. Show me the reasoning before applying any RSVP.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
           <div class="prompt-card frontier">
-            <h3>4. Draft an agenda from the meeting form</h3>
+            <h3>5. Draft an agenda from the meeting form</h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Open the meeting form for tomorrow's standup</li>
@@ -2348,7 +2368,7 @@
           </div>
 
           <div class="prompt-card frontier">
-            <h3>5. Prioritize next week (Time Alignment)</h3>
+            <h3>6. Prioritize next week (Time Alignment)</h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Make sure next week has 10+ meetings to review</li>
@@ -2359,7 +2379,7 @@
           </div>
 
           <div class="prompt-card frontier">
-            <h3>6. Prepare for meetings (Time Alignment)</h3>
+            <h3>7. Prepare for meetings (Time Alignment)</h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Replace [customer name] with a real account</li>
@@ -3443,12 +3463,13 @@ Automatically follow meetings with subject containing "FYI".</pre><button class=
       typeLabel: '🟢 Live action',
       surfaces: ['<span class="surf-pill outlook dot">Outlook</span>', '<span class="badge ea">EA on behalf of Exec</span>'],
       scenario: 'Top customer wants reassurance on a security incident. The reply needs [exec]\'s tone and a precise commitment.',
+      newSinceSession: true,
       actions: [
         'Open the customer\'s escalation thread in [exec]\'s mailbox',
-        'Click <em>Draft with Copilot</em> on behalf of [exec]',
+        'Add the selected email/thread text into Copilot Chat or click <em>Draft with Copilot</em> in Outlook',
         'Save as draft for [exec] to review &amp; send'
       ],
-      prompt: 'Draft a reply on behalf of [exec] to [customer contact]. Acknowledge the security concern, reference the postmortem [exec]\'s team published, and commit to a 30-minute call this week with the CTO. Keep [exec]\'s tone — direct, warm, no hedging.'
+      prompt: 'Using this selected Outlook thread as context, draft a reply on behalf of [exec] to [customer contact]. Acknowledge the security concern, reference the postmortem [exec]\'s team published, and commit to a 30-minute call this week with the CTO. Keep [exec]\'s tone — direct, warm, no hedging.'
     },
     6: {
       time: '12:00 PM',
@@ -3472,12 +3493,14 @@ Automatically follow meetings with subject containing "FYI".</pre><button class=
       typeLabel: '🟢 Live action',
       surfaces: ['<span class="surf-pill chat dot">Chat</span>', '<span class="badge ea">EA</span>'],
       scenario: 'EA pulls a quick view of what\'s been happening with the Aurora launch — [exec] will ask about it later.',
+      newSinceSession: true,
       actions: [
         'Open Copilot Chat (M365.cloud.microsoft or the Copilot app)',
+        'Use Content Sources to scope the prompt to the Aurora Teams channel, launch files, and relevant Outlook threads',
         'Submit prompt; review cited Teams threads, emails, and files',
         'Save the summary to share when [exec] surfaces'
       ],
-      prompt: 'Catch me up on Aurora launch readiness across [exec]\'s email and Teams over the last 48 hours. Highlight blockers, owners, and any decisions waiting on [exec].'
+      prompt: 'Using only the selected Aurora Teams channel, launch readiness files, and relevant Outlook threads, catch me up on Aurora launch readiness over the last 48 hours. Highlight blockers, owners, and any decisions waiting on [exec].'
     },
     8: {
       time: '2:00 PM',
@@ -3586,7 +3609,7 @@ Automatically follow meetings with subject containing "FYI".</pre><button class=
     const ev = dayEvents[id];
     if (!ev) return;
     document.getElementById('event-modal-title').textContent = ev.time + ' — ' + ev.title;
-    let html = '<div class="event-meta">' + (ev.surfaces || []).join('') + '</div>';
+    let html = '<div class="event-meta">' + (ev.newSinceSession ? '<span class="session-stamp">New since session</span>' : '') + (ev.surfaces || []).join('') + '</div>';
     html += '<div style="margin-bottom:12px; font-size:12.5px; color:var(--text-muted); font-weight:600;">' + ev.typeLabel + '</div>';
     html += '<p class="event-scenario">' + ev.scenario + '</p>';
     html += '<div class="event-action-label">To perform this action:</div>';
