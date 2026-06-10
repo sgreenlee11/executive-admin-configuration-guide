@@ -32,7 +32,8 @@ jobs:
       - name: Prepare site artifact
         run: |
           mkdir _site
-          cp *.html .nojekyll _site/
+          cp *.html .nojekyll shared-brand.css _site/
+          cp -R assets _site/assets
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
