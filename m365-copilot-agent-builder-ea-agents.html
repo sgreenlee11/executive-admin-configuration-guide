@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Build Executive Admin Agents with Microsoft 365 Copilot Agent Builder</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="shared-brand.css">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(249, 99, 2, 0.24), transparent 26rem),
+        radial-gradient(circle at 88% 0%, rgba(76, 194, 255, 0.12), transparent 30rem),
+        linear-gradient(135deg, var(--bg), #111114 72%);
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    }
+
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100vw - 36px)); margin: 0 auto; }
+
+    header {
+      padding: 34px 0 30px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.2), transparent 18rem),
+        linear-gradient(135deg, #F96302 0%, #C45109 54%, #5B2A12 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow-md);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(0, 0, 0, 0.12);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fff, var(--amber));
+      box-shadow: 0 0 24px rgba(255, 202, 99, 0.62);
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 22px 0 12px;
+      color: #fff;
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .suite-mark {
+      width: 58px;
+      height: 58px;
+      border: 3px solid #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 13px;
+      line-height: 1;
+      letter-spacing: 0.5px;
+      transform: rotate(-6deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+      color: #fff;
+      flex: 0 0 auto;
+    }
+
+    main { padding: 26px 0 54px; }
+    section { scroll-margin-top: 90px; }
+    h2 {
+      margin: 0 0 14px;
+      color: #fff;
+      font-size: clamp(24px, 3vw, 36px);
+      letter-spacing: -0.025em;
+    }
+    h3 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    p, li {
+      color: var(--text-muted);
+      line-height: 1.58;
+      font-size: 15px;
+    }
+    p { margin: 0 0 12px; }
+    ul, ol { margin: 10px 0 0; padding-left: 21px; }
+    li + li { margin-top: 8px; }
+
+    .hero-grid,
+    .pattern-grid,
+    .field-grid,
+    .source-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .hero-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 26px 0 0; }
+    .pattern-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .field-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .source-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .panel,
+    .card,
+    .step,
+    .callout,
+    .source-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      box-shadow: var(--shadow);
+    }
+
+    .panel { padding: 22px; margin: 0 0 22px; }
+    .card, .source-card { padding: 20px; }
+    .step { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 14px; padding: 18px; margin-top: 14px; }
+    .num {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange), #C45109);
+      font-weight: 900;
+      box-shadow: 0 10px 22px rgba(249, 99, 2, 0.24);
+    }
+    .stat {
+      position: relative;
+      overflow: hidden;
+      min-height: 132px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      box-shadow: var(--shadow);
+    }
+    .stat::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--amber));
+    }
+    .stat strong {
+      display: block;
+      margin: 0 0 6px;
+      color: #fff;
+      font-size: 24px;
+      line-height: 1.05;
+    }
+    .stat span { color: var(--text-muted); font-size: 13px; line-height: 1.45; }
+
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.06);
+      font-size: 12.5px;
+      font-weight: 750;
+    }
+
+    .callout {
+      padding: 18px;
+      border-color: rgba(76, 194, 255, 0.42);
+      background:
+        radial-gradient(circle at 6% 10%, rgba(76, 194, 255, 0.18), transparent 16rem),
+        linear-gradient(135deg, rgba(76, 194, 255, 0.12), rgba(249, 99, 2, 0.08)),
+        rgba(255, 255, 255, 0.055);
+    }
+
+    .template {
+      margin: 12px 0 0;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.22);
+      color: #ECECF1;
+      font: 13px/1.55 Consolas, "Cascadia Mono", "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .quick-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 10px 14px;
+      border: 1px solid rgba(249, 99, 2, 0.54);
+      border-radius: 999px;
+      background: rgba(249, 99, 2, 0.14);
+      color: #fff;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .agent-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .copy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .copy-card {
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .copy-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .copy-card header {
+      position: static;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      overflow: visible;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.065);
+      box-shadow: none;
+    }
+
+    .copy-card header strong {
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 0.035em;
+      text-transform: uppercase;
+    }
+
+    .copy-card pre {
+      margin: 0;
+      padding: 14px;
+      color: #ECECF1;
+      font: 13px/1.55 Consolas, "Cascadia Mono", "Courier New", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+
+    .copy-btn {
+      flex: 0 0 auto;
+      border: 1px solid rgba(249, 99, 2, 0.68);
+      border-radius: 999px;
+      padding: 7px 11px;
+      color: #fff;
+      background: linear-gradient(135deg, #F96302, #B84700);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(249, 99, 2, 0.18);
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 202, 99, 0.8);
+    }
+
+    .copy-btn.copied {
+      background: linear-gradient(135deg, var(--green), #2C7B2E);
+      border-color: rgba(108, 203, 95, 0.8);
+    }
+
+    .screenshot {
+      margin: 16px 0 2px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .screenshot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .screenshot.narrow {
+      max-width: 320px;
+    }
+
+    .screenshot figcaption {
+      margin-top: 9px;
+      color: var(--text-faint);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    th { color: #fff; background: rgba(255, 255, 255, 0.08); }
+    tr:last-child td { border-bottom: 0; }
+
+    .source-card a {
+      color: #FFB78B;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .source-card a:hover { text-decoration: underline; }
+    .small { font-size: 13px; color: var(--text-faint); }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .pattern-grid,
+      .field-grid,
+      .source-grid {
+        grid-template-columns: 1fr;
+      }
+      .brand-row { flex-direction: column; }
+      .agent-summary,
+      .copy-grid {
+        grid-template-columns: 1fr;
+      }
+      .copy-card.wide {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .step { grid-template-columns: 1fr; }
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      th, td {
+        min-width: 180px;
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap brand-row">
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Microsoft 365 Copilot Agent Builder</div>
+        <h1>Build Executive Admin Agents with Agent Builder</h1>
+        <p class="lead">Use Microsoft 365 Copilot Agent Builder to create practical assistants for two common executive admin workflows: preparing a daily briefing and drafting communications in a leader's voice.</p>
+      </div>
+      <div class="suite-mark">EA</div>
+    </div>
+  </header>
+
+  <nav class="suite-nav" aria-label="Executive admin guide navigation">
+    <div class="suite-nav-inner">
+      <a class="suite-home" href="index.html">Guide Home</a>
+      <a href="exec-ea-delegation-config-guide2.html">Delegation Configuration</a>
+      <a href="m365-copilot-exec-admin-features.html">M365 Copilot Features</a>
+      <a href="m365-copilot-agent-builder-ea-agents.html" aria-current="page">Build EA Agents</a>
+      <a href="new-outlook-ea-updates.html">New Outlook Updates</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <div class="quick-links" aria-label="Agent build sections">
+      <a href="#daily-briefing-agent">Agent 1: Daily Briefing</a>
+      <a href="#leader-voice-agent">Agent 2: Leader Voice</a>
+    </div>
+
+    <section class="panel" id="daily-briefing-agent">
+      <h2>Agent 1: Daily Executive Briefing Assistant</h2>
+      <div class="agent-summary">
+        <div>
+          <p>Build this agent when an executive admin needs a fast, prioritized start-of-day briefing across recent communications, meetings, open commitments, and risk items.</p>
+          <p><strong>Personalize before you paste:</strong> replace <strong>&lt;Leader Name&gt;</strong> anywhere you want the agent to elevate a specific leader's communications, meetings, or asks.</p>
+        </div>
+        <div class="card">
+          <h3>Recommended knowledge</h3>
+          <div class="chip-row">
+            <span class="chip">My emails</span>
+            <span class="chip">Teams chats and meetings</span>
+            <span class="chip">People</span>
+            <span class="chip">SharePoint or OneDrive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Open Agent Builder</h3>
+          <p>Open Microsoft 365 Copilot in a browser or in Microsoft Teams. In the left pane, select <strong>New agent</strong>, then choose <strong>Skip to configure</strong>.</p>
+          <figure class="screenshot narrow">
+            <img src="assets/agent-builder/01-new-agent-left-nav.png" alt="Microsoft 365 Copilot left navigation with an arrow pointing to New agent">
+            <figcaption>Select <strong>New agent</strong> from the Microsoft 365 Copilot left navigation.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/02-agent-builder-start.png" alt="Agent Builder start page with an arrow pointing to Skip to configure">
+            <figcaption>Use <strong>Skip to configure</strong> for a repeatable setup path.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Copy the name and description</h3>
+          <p>Paste these values into the <strong>Name</strong> and <strong>Description</strong> fields on the Configure tab.</p>
+          <div class="copy-grid">
+            <article class="copy-card">
+              <header><strong>Name</strong><button class="copy-btn" data-copy-target="briefing-name">Copy</button></header>
+              <pre id="briefing-name">Daily Briefing Assistant</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Description</strong><button class="copy-btn" data-copy-target="briefing-description">Copy</button></header>
+              <pre id="briefing-description">Prepares a concise daily briefing from recent communications, meetings, open actions, leader priorities, customer impacts, and risk signals.</pre>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Add briefing knowledge</h3>
+          <p>Use the <strong>Knowledge</strong> section on Configure. Add only the sources available in your tenant and relevant to the briefing.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/04-knowledge-section.png" alt="Agent Builder Knowledge section showing source icons, URL field, and knowledge toggles">
+            <figcaption>Use the Knowledge section to add SharePoint, Teams, Outlook, web, and other available data sources.</figcaption>
+          </figure>
+          <ul>
+            <li><strong>My emails</strong> for recent email signals. Email knowledge is personal to the current user; sharing the agent does not expose the builder's mailbox.</li>
+            <li><strong>My Teams chats and meetings</strong> or selected chats when you need Teams and meeting context. Agent Builder currently supports up to five selected Teams chat URLs.</li>
+            <li><strong>People</strong> context when the agent needs to identify leaders, senders, owners, and stakeholders.</li>
+            <li><strong>SharePoint or OneDrive</strong> files for operating rhythms, priority lists, recurring briefing formats, or planning documents.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>Copy the briefing instructions</h3>
+          <p>Paste this block into <strong>Instructions</strong>. It is adapted from the example briefing agent package. Replace <strong>&lt;Leader Name&gt;</strong> only where you want the agent to elevate a specific leader's communications or meetings.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/03-configure-instructions-knowledge.png" alt="Agent Builder Configure tab with an arrow pointing to the Instructions area">
+            <figcaption>Paste the guide's instruction block into <strong>Instructions</strong>.</figcaption>
+          </figure>
+          <article class="copy-card wide">
+            <header><strong>Instructions</strong><button class="copy-btn" data-copy-target="briefing-instructions">Copy</button></header>
+            <pre id="briefing-instructions">Purpose:
+Provide a clear daily executive briefing that helps the user prioritize the workday, with explicit emphasis on &lt;Leader Name&gt;-related items, executive visibility, customer impact, deadlines, meetings, and risks.
+
+Guidelines:
+- Write for a senior business leader: concise, direct, and outcome-focused.
+- Prioritize by urgency, business impact, executive visibility, and customer impact.
+- Elevate items sent by, assigned by, or involving &lt;Leader Name&gt;.
+- Suppress low-signal noise such as FYIs, acknowledgements, and non-actionable updates.
+- Use bullets, clear labels, and short phrases.
+- If a section has no material signal, write "No material updates."
+
+Output:
+1. Top Priorities - Action Required Today
+2. &lt;Leader Name&gt; Highlights
+3. Overnight Email Summary
+4. Today's Meetings - What Matters
+5. Open Action Items
+6. Risks and Watchouts
+
+For each action item, include owner, deadline, context, and recommended next step when clear. Clearly label assumptions and incomplete information.</pre>
+          </article>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">5</div>
+        <div>
+          <h3>Copy starter prompts</h3>
+          <p>Add these as suggested prompts. Copy each title and message into the matching fields.</p>
+          <div class="copy-grid">
+            <article class="copy-card">
+              <header><strong>Prompt 1 title</strong><button class="copy-btn" data-copy-target="briefing-prompt-1-title">Copy</button></header>
+              <pre id="briefing-prompt-1-title">Generate today's briefing</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 1 message</strong><button class="copy-btn" data-copy-target="briefing-prompt-1-message">Copy</button></header>
+              <pre id="briefing-prompt-1-message">Generate my executive briefing for today using overnight emails, today's meetings, and open action items.</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 2 title</strong><button class="copy-btn" data-copy-target="briefing-prompt-2-title">Copy</button></header>
+              <pre id="briefing-prompt-2-title">&lt;Leader Name&gt; items</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 2 message</strong><button class="copy-btn" data-copy-target="briefing-prompt-2-message">Copy</button></header>
+              <pre id="briefing-prompt-2-message">Show me only &lt;Leader Name&gt;-related items that need my attention today.</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 3 title</strong><button class="copy-btn" data-copy-target="briefing-prompt-3-title">Copy</button></header>
+              <pre id="briefing-prompt-3-title">Top risks today</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 3 message</strong><button class="copy-btn" data-copy-target="briefing-prompt-3-message">Copy</button></header>
+              <pre id="briefing-prompt-3-message">What are the top risks or watchouts I should be aware of today?</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 4 title</strong><button class="copy-btn" data-copy-target="briefing-prompt-4-title">Copy</button></header>
+              <pre id="briefing-prompt-4-title">Meeting prep focus</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 4 message</strong><button class="copy-btn" data-copy-target="briefing-prompt-4-message">Copy</button></header>
+              <pre id="briefing-prompt-4-message">What do I need to prepare for today's most important meetings?</pre>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">6</div>
+        <div>
+          <h3>Enable document, chart, and code creation</h3>
+          <p>Before switching to Preview, return to <strong>Configure</strong> and make sure <strong>Create documents, charts, and code</strong> is turned on. This allows the agent to help create polished briefing documents, simple charts, and other generated artifacts when users ask for them.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/07-create-documents-charts-code.png" alt="Agent Builder Capabilities section with the Create documents, charts, and code toggle turned on">
+            <figcaption>Turn on <strong>Create documents, charts, and code</strong> before previewing and creating the agent.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">7</div>
+        <div>
+          <h3>Preview, then create</h3>
+          <p>Use <strong>Preview</strong> to test realistic prompts. Confirm the output is concise, prioritized, and organized in the expected briefing structure, then choose <strong>Create</strong>. The agent starts private until you share it.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/05-preview-tab.png" alt="Agent Builder Preview tab showing an agent card, starter prompts, and message box">
+            <figcaption>The Preview tab lets you test the agent experience and starter prompts before creating or sharing it.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="leader-voice-agent">
+      <h2>Agent 2: Leader Voice Communications Assistant</h2>
+      <div class="agent-summary">
+        <div>
+          <p>Build this agent when an executive admin needs to draft internal and external communications in a consistent, approved leader voice.</p>
+          <p><strong>Personalize before you paste:</strong> replace the sample fields with approved details for the leader, business unit, voice traits, values, and source artifacts.</p>
+        </div>
+        <div class="card">
+          <h3>Recommended knowledge</h3>
+          <div class="chip-row">
+            <span class="chip">SharePoint voice artifacts</span>
+            <span class="chip">Approved posts</span>
+            <span class="chip">Customer notes</span>
+            <span class="chip">Style guidance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>Open Agent Builder</h3>
+          <p>Open Microsoft 365 Copilot in a browser or in Microsoft Teams. In the left pane, select <strong>New agent</strong>, then choose <strong>Skip to configure</strong>.</p>
+          <figure class="screenshot narrow">
+            <img src="assets/agent-builder/01-new-agent-left-nav.png" alt="Microsoft 365 Copilot left navigation with an arrow pointing to New agent">
+            <figcaption>Select <strong>New agent</strong> from the Microsoft 365 Copilot left navigation.</figcaption>
+          </figure>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/02-agent-builder-start.png" alt="Agent Builder start page with an arrow pointing to Skip to configure">
+            <figcaption>Use <strong>Skip to configure</strong> for a repeatable setup path.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>Prepare voice artifacts</h3>
+          <p>Create a curated SharePoint folder for voice examples. Include approved emails, Viva posts, LinkedIn posts, town hall remarks, customer follow-ups, bios, interviews, podcasts, and style notes. Leave out personal, confidential, or outdated content that should not influence future drafts.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>Copy the name and description</h3>
+          <p>Paste these values into the <strong>Name</strong> and <strong>Description</strong> fields on the Configure tab.</p>
+          <div class="copy-grid">
+            <article class="copy-card">
+              <header><strong>Name</strong><button class="copy-btn" data-copy-target="voice-name">Copy</button></header>
+              <pre id="voice-name">Leader Voice Assistant</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Description</strong><button class="copy-btn" data-copy-target="voice-description">Copy</button></header>
+              <pre id="voice-description">Drafts internal and external messages in &lt;Leader Name&gt;'s voice using approved communications examples and style guidance.</pre>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>Add voice examples</h3>
+          <p>Use the Configure tab to add the SharePoint folder or specific files. If you upload files directly into the agent, remember that people with access to the agent can receive responses grounded in those files. For shared communications assistants, SharePoint permissions are usually safer and easier to govern.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/06-add-knowledge-options-redacted.png" alt="Agent Builder Add knowledge picker with recent items redacted and options for SharePoint, Teams chats and meetings, and emails">
+            <figcaption>The knowledge picker can search recent content and includes quick entries for SharePoint, Teams chats and meetings, and email.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">5</div>
+        <div>
+          <h3>Copy the writing instructions</h3>
+          <p>Paste this block into <strong>Instructions</strong>. It is adapted from the example leader-voice agent package. Replace the sample fields with approved details for the leader and source artifacts you want the agent to use.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/03-configure-instructions-knowledge.png" alt="Agent Builder Configure tab with an arrow pointing to the Instructions area">
+            <figcaption>Paste the guide's instruction block into <strong>Instructions</strong>.</figcaption>
+          </figure>
+          <article class="copy-card wide">
+            <header><strong>Instructions</strong><button class="copy-btn" data-copy-target="voice-instructions">Copy</button></header>
+            <pre id="voice-instructions">Purpose:
+Draft and revise internal and external communications in the voice of &lt;Leader Name&gt; using approved source artifacts.
+
+Guidelines:
+- Match &lt;Leader Name&gt;'s tone, style, vocabulary, values, and business priorities based on approved artifacts.
+- Keep messages clear, concise, professional, and audience-appropriate.
+- Use a friendly, approachable tone for internal messages.
+- Use a formal, respectful tone for external messages.
+- Avoid unsupported claims, overstatement, jargon, and overly complex language.
+- Ask for the audience, channel, purpose, and desired call to action when missing.
+- Remind the user to provide or confirm a recent artifact, such as a blog post, podcast, customer note, or leadership message, before finalizing.
+
+Voice attributes to preserve:
+- Functional focus: &lt;Business Unit&gt;, customer impact, AI transformation, inclusive leadership, business value, and responsible innovation.
+- Personality: &lt;Voice Traits&gt;.
+- Values: &lt;Leader Values&gt;.
+
+Output:
+Provide a ready-to-use draft, followed by a short rationale explaining which artifacts or style signals influenced the draft. If source artifacts are insufficient, state what is missing.</pre>
+          </article>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">6</div>
+        <div>
+          <h3>Copy starter prompts</h3>
+          <p>Add these as suggested prompts. Copy each title and message into the matching fields.</p>
+          <div class="copy-grid">
+            <article class="copy-card">
+              <header><strong>Prompt 1 title</strong><button class="copy-btn" data-copy-target="voice-prompt-1-title">Copy</button></header>
+              <pre id="voice-prompt-1-title">Draft internal update</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 1 message</strong><button class="copy-btn" data-copy-target="voice-prompt-1-message">Copy</button></header>
+              <pre id="voice-prompt-1-message">Draft an internal team update from &lt;Leader Name&gt; about &lt;Topic&gt;.</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 2 title</strong><button class="copy-btn" data-copy-target="voice-prompt-2-title">Copy</button></header>
+              <pre id="voice-prompt-2-title">Rewrite customer follow-up</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 2 message</strong><button class="copy-btn" data-copy-target="voice-prompt-2-message">Copy</button></header>
+              <pre id="voice-prompt-2-message">Rewrite this customer follow-up in &lt;Leader Name&gt;'s voice.</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 3 title</strong><button class="copy-btn" data-copy-target="voice-prompt-3-title">Copy</button></header>
+              <pre id="voice-prompt-3-title">Create social post</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 3 message</strong><button class="copy-btn" data-copy-target="voice-prompt-3-message">Copy</button></header>
+              <pre id="voice-prompt-3-message">Create a concise LinkedIn-style post based on these talking points.</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 4 title</strong><button class="copy-btn" data-copy-target="voice-prompt-4-title">Copy</button></header>
+              <pre id="voice-prompt-4-title">Review draft tone</pre>
+            </article>
+            <article class="copy-card">
+              <header><strong>Prompt 4 message</strong><button class="copy-btn" data-copy-target="voice-prompt-4-message">Copy</button></header>
+              <pre id="voice-prompt-4-message">Review this draft for tone, clarity, and alignment to &lt;Leader Name&gt;'s communication style.</pre>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">7</div>
+        <div>
+          <h3>Enable document, chart, and code creation</h3>
+          <p>Before switching to Preview, return to <strong>Configure</strong> and make sure <strong>Create documents, charts, and code</strong> is turned on. This allows the agent to turn approved messaging guidance into reusable drafts, formatted documents, simple charts, and other generated artifacts when users ask for them.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/07-create-documents-charts-code.png" alt="Agent Builder Capabilities section with the Create documents, charts, and code toggle turned on">
+            <figcaption>Turn on <strong>Create documents, charts, and code</strong> before previewing and creating the agent.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">8</div>
+        <div>
+          <h3>Preview, then create</h3>
+          <p>Use <strong>Preview</strong> to test realistic prompts. Confirm the output matches the expected tone, structure, and leader voice, then choose <strong>Create</strong>. The agent starts private until you share it.</p>
+          <figure class="screenshot">
+            <img src="assets/agent-builder/05-preview-tab.png" alt="Agent Builder Preview tab showing an agent card, starter prompts, and message box">
+            <figcaption>The Preview tab lets you test the agent experience and starter prompts before creating or sharing it.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const copyButtons = document.querySelectorAll(".copy-btn");
+
+    function copyWithTextArea(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.opacity = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      const copied = document.execCommand("copy");
+      textArea.remove();
+      if (!copied) {
+        throw new Error("Copy command was not available.");
+      }
+    }
+
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return;
+        } catch (error) {
+          copyWithTextArea(text);
+          return;
+        }
+      }
+
+      copyWithTextArea(text);
+    }
+
+    copyButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.copyTarget);
+        if (!target) return;
+
+        const originalText = button.textContent;
+        try {
+          await copyText(target.textContent.trim());
+          button.textContent = "Copied";
+          button.classList.add("copied");
+        } catch (error) {
+          button.textContent = "Copy failed";
+        }
+
+        window.setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove("copied");
+        }, 1600);
+      });
+    });
+  </script>
+</body>
+</html>
