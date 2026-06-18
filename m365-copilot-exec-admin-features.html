@@ -256,7 +256,8 @@
     .ReleaseNotes { --accent: var(--orange); }
     .TechCommunity { --accent: var(--amber); }
     .Roadmap { --accent: var(--green); }
-    .MessageCenter { --accent: var(--purple); }
+    .MicrosoftLearn { --accent: var(--blue); }
+    .MicrosoftSupport { --accent: var(--purple); }
 
     h2 {
       margin: 0 0 9px;
@@ -412,7 +413,7 @@
         <p class="lead">A curated briefing of recently released or newly announced Microsoft 365 Copilot capabilities that matter most to executive assistants, chiefs of staff, admins supporting leaders, and the IT teams enabling them.</p>
         <div class="hero-grid">
           <div class="stat"><strong id="statItems">0</strong><span>curated feature items</span></div>
-          <div class="stat"><strong>4</strong><span>source families included</span></div>
+          <div class="stat"><strong>5</strong><span>public source families included</span></div>
           <div class="stat"><strong id="statTop">0</strong><span>high relevance items</span></div>
           <div class="stat"><strong>90+</strong><span>days reviewed</span></div>
         </div>
@@ -448,7 +449,8 @@
           <option value="Release Notes">Release Notes</option>
           <option value="Tech Community">Tech Community</option>
           <option value="M365 Roadmap">M365 Roadmap</option>
-          <option value="Message Center">Message Center</option>
+          <option value="Microsoft Learn">Microsoft Learn</option>
+          <option value="Microsoft Support">Microsoft Support</option>
         </select>
         <select id="impact">
           <option value="all">All impacts</option>
@@ -466,7 +468,7 @@
       </div>
       <div class="chips">
         <span class="chip">Tip: filter to Calendar & meetings for EA-specific wins</span>
-        <span class="chip">Message Center links require tenant admin access</span>
+        <span class="chip">All source links open to public Microsoft pages</span>
         <span class="chip">Roadmap dates are feature availability timing</span>
       </div>
     </section>
@@ -476,8 +478,8 @@
     <details>
       <summary>Source and curation notes</summary>
       <div class="method">
-        <p>This page combines: Microsoft 365 Copilot release notes, Microsoft 365 Copilot Tech Community blog posts, M365 Roadmap items returned by Microsoft Release Communications, and Message Center posts returned from Microsoft Graph service announcements.</p>
-        <p>Items were selected for relevance to executive admin workflows: calendar coordination, meeting prep and recap, inbox triage, executive briefings, presentation/document creation, delegated work, adoption analytics, governance, and agent automation. Some roadmap and Message Center items are announced or rolling out inside the review window rather than fully available to every tenant.</p>
+        <p>This page combines: Microsoft 365 Copilot release notes, Microsoft 365 Copilot Tech Community blog posts, M365 Roadmap items returned by Microsoft Release Communications, and Microsoft Learn or Support pages. Message Center announcements used during curation are cited by ID in summaries but linked to public Microsoft alternatives.</p>
+        <p>Items were selected for relevance to executive admin workflows: calendar coordination, meeting prep and recap, inbox triage, executive briefings, presentation/document creation, delegated work, adoption analytics, governance, and agent automation. Some roadmap items are announced or rolling out inside the review window rather than fully available to every tenant.</p>
       </div>
     </details>
   </main>
@@ -497,33 +499,33 @@
       {
         title: "Calendar Agentic capabilities in Microsoft 365 Copilot",
         date: "2026-04-30",
-        source: "Message Center",
+        source: "Tech Community",
         impact: "Calendar & meetings",
         relevance: 5,
         summary: "Message Center post MC1296874 says users can automate calendar actions with natural-language instructions across Outlook and Teams. Rollout spans April-May 2026 and respects existing compliance settings.",
         why: "A high-value EA scenario: ask Copilot to take action on calendar coordination instead of only answering questions.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1296874"
+        link: "https://techcommunity.microsoft.com/blog/outlook/copilot-in-outlook-new-agentic-experiences-for-email-and-calendar/4514601"
       },
       {
         title: "Smart Calendar for Classic Outlook Copilot users",
         date: "2026-05-04",
-        source: "Message Center",
+        source: "Microsoft Support",
         impact: "Calendar & meetings",
         relevance: 5,
         summary: "Message Center post MC1181279 describes AI-powered scheduling, coordination, and meeting recaps in Classic Outlook for Microsoft 365 Copilot users, with GA by May 2026.",
         why: "Classic Outlook remains common for executive support teams; this brings Copilot calendar help into an existing workflow.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1181279"
+        link: "https://support.microsoft.com/en-US/Outlook/copilot-outlook/create-a-meeting-agenda-with-copilot-in-outlook"
       },
       {
         title: "RSVP to meetings directly in Copilot Chat",
         date: "2026-06-04",
-        source: "Message Center",
+        source: "Microsoft Support",
         impact: "Calendar & meetings",
         relevance: 5,
         newSinceSession: true,
         summary: "Message Center post MC1192258 says Microsoft 365 Copilot Chat can handle meeting responses directly, including Accept, Decline, Tentative, Follow, and Remove canceled.",
         why: "A practical EA win: assistants and leaders can process calendar decisions in the same Copilot flow used for catch-up and meeting prep.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1192258"
+        link: "https://support.microsoft.com/en-US/Outlook/calendar-instructions-in-outlook-and-copilot"
       },
       {
         title: "Search for meetings by organizer in Copilot Chat",
@@ -569,23 +571,23 @@
       {
         title: "Copilot Notebooks adds SharePoint grounding, group sharing, Word/PowerPoint agents, and mind maps",
         date: "2026-03-17",
-        source: "Message Center",
+        source: "Tech Community",
         impact: "Briefings & content",
         relevance: 5,
         summary: "Message Center post MC1254552 says Copilot Notebooks features include chat interactivity, study guides, SharePoint grounding, PowerPoint and Word agents, group sharing, and mind maps, rolling out from late March with GA by June.",
         why: "Strong fit for executive briefing books, project notebooks, reusable prep hubs, and turning collected notes into polished outputs.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1254552"
+        link: "https://techcommunity.microsoft.com/blog/microsoft365copilotblog/meet-the-updated-copilot-notebooks-experience-your-home-for-understanding-work-p/4501383"
       },
       {
         title: "Copilot Notebooks can use web links and Teams meetings as references",
         date: "2026-06",
-        source: "Message Center",
+        source: "Microsoft Support",
         impact: "Briefings & content",
         relevance: 5,
         newSinceSession: true,
         summary: "Message Center post MC1193414 and Roadmap item 560706 expand Copilot Notebooks with public web links and Teams meeting content such as transcripts, notes, chats, and shared files.",
         why: "Makes Notebooks a stronger executive briefing hub by combining meeting history, source links, project materials, and follow-up context in one grounded workspace.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1193414"
+        link: "https://support.microsoft.com/en-us/Microsoft-365-Copilot/add-references-to-your-microsoft-365-copilot-notebook"
       },
       {
         title: "Copilot Notebooks can generate Excel spreadsheets and infographics",
@@ -721,23 +723,23 @@
       {
         title: "M365 Copilot Cowork expands with plugins, connectors, and partner integrations",
         date: "2026-05-05",
-        source: "Message Center",
+        source: "Microsoft Learn",
         impact: "Agents & automation",
         relevance: 3,
         summary: "Message Center post MC1301832 says Microsoft 365 Copilot Cowork is expanding for Frontier participants with plugins, connectors, and partner integrations while respecting existing permissions.",
         why: "Signals broader automation and integration options for cross-system assistant workflows.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1301832"
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-available-plugins"
       },
       {
         title: "Content Sources in Copilot Chat",
         date: "2026-06",
-        source: "Message Center",
+        source: "M365 Roadmap",
         impact: "Briefings & content",
         relevance: 5,
         newSinceSession: true,
         summary: "Message Center post MC1127230 says licensed users can select specific content sources to scope Copilot Chat responses. Worldwide rollout is planned for mid to late June 2026.",
         why: "Important for focused executive prep where answers should be grounded only in selected files, teams, or sources.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1127230"
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?featureid=496596"
       },
       {
         title: "Scope Copilot Chat prompts to Teams channels with Context IQ",
@@ -762,22 +764,22 @@
       {
         title: "Intelligent summaries in Copilot Dashboard",
         date: "2026-03-31",
-        source: "Message Center",
+        source: "M365 Roadmap",
         impact: "Admin & adoption",
         relevance: 4,
         summary: "Message Center post MC1266912 says Copilot Dashboard will generate AI summaries of adoption trends and usage insights for admins, with suggested prompts for deeper analysis.",
         why: "Helps admin and adoption leads brief executives on Copilot usage and value without manual dashboard analysis.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1266912"
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?featureid=557681"
       },
       {
         title: "Comprehensive Copilot metrics in Copilot Analytics",
         date: "2026-03-30",
-        source: "Message Center",
+        source: "Microsoft Learn",
         impact: "Admin & adoption",
         relevance: 4,
         summary: "Message Center post MC1266023 adds usage metrics across Copilot app, Edge, OneNote, Outlook, Word, Excel, and PowerPoint in Copilot Dashboard and Analytics.",
         why: "Gives leaders and adoption teams a stronger view of where Copilot is being used across productivity apps.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1266023"
+        link: "https://learn.microsoft.com/en-us/microsoft-365/admin/activity-reports/microsoft-365-copilot-usage?view=o365-worldwide"
       },
       {
         title: "Copilot Dashboard enhanced scope drilldown",
@@ -802,12 +804,12 @@
       {
         title: "Branded footer customization in the Microsoft 365 Copilot app",
         date: "2026-05-04",
-        source: "Message Center",
+        source: "M365 Roadmap",
         impact: "Admin & adoption",
         relevance: 3,
         summary: "Message Center post MC1238432 lets admins add an organizational logo/footer to the Microsoft 365 Copilot app, confirming a trusted Copilot environment.",
         why: "Helps reinforce approved AI usage and reduce confusion for high-profile executive users.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1238432"
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?featureid=555852"
       },
       {
         title: "Organizational Messages adds email delivery and usage-based targeting",
@@ -854,13 +856,13 @@
       {
         title: "PowerPoint Copilot skills and Agent Mode updates",
         date: "2026-06",
-        source: "Message Center",
+        source: "M365 Roadmap",
         impact: "Briefings & content",
         relevance: 4,
         newSinceSession: true,
         summary: "PowerPoint Copilot adds skills such as Review this presentation, Visualize this slide, and Prepare for Questions; create/add slide experiences are moving into Agent Mode in the Copilot chat pane.",
         why: "Directly supports executive deck preparation, speaker readiness, and faster iteration on text-heavy briefing slides.",
-        link: "https://admin.microsoft.com/Adminportal/Home#/MessageCenter/:/messages/MC1239724"
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?featureid=555874"
       },
       {
         title: "Tech Community March 2026 monthly update",
@@ -888,7 +890,8 @@
       "Release Notes": "ReleaseNotes",
       "Tech Community": "TechCommunity",
       "M365 Roadmap": "Roadmap",
-      "Message Center": "MessageCenter"
+      "Microsoft Learn": "MicrosoftLearn",
+      "Microsoft Support": "MicrosoftSupport"
     };
 
     const cards = document.getElementById("cards");
