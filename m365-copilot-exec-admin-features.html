@@ -408,14 +408,14 @@
   <header>
     <div class="wrap brand-row">
       <div>
-        <div class="eyebrow"><span class="dot"></span> Executive admin enablement | Refreshed June 7, 2026</div>
+        <div class="eyebrow"><span class="dot"></span> Executive admin enablement | Refreshed July 27, 2026</div>
         <h1>Microsoft 365 Copilot Features for Executive Admins</h1>
         <p class="lead">A curated briefing of recently released or newly announced Microsoft 365 Copilot capabilities that matter most to executive assistants, chiefs of staff, admins supporting leaders, and the IT teams enabling them.</p>
         <div class="hero-grid">
           <div class="stat"><strong id="statItems">0</strong><span>curated feature items</span></div>
-          <div class="stat"><strong>5</strong><span>public source families included</span></div>
+          <div class="stat"><strong id="statUpdates">0</strong><span>tagged as updates</span></div>
           <div class="stat"><strong id="statTop">0</strong><span>high relevance items</span></div>
-          <div class="stat"><strong>90+</strong><span>days reviewed</span></div>
+          <div class="stat"><strong>120+</strong><span>days reviewed</span></div>
         </div>
       </div>
       <div class="suite-mark">EA</div>
@@ -433,12 +433,12 @@
   </nav>
 
   <main class="wrap">
-    <section class="update-brief" aria-label="Updates since original session">
+    <section class="update-brief" aria-label="Updates in this refresh">
       <div>
-        <strong>New since the May session</strong>
-        <span>Blue rail = added or materially changed since delivery.</span>
+        <strong>Updates in this refresh</strong>
+        <span>Blue rail = added or materially changed since the last delivery.</span>
       </div>
-      <p>Look for the blue <span class="session-stamp">New since session</span> stamp to quickly find the Copilot Chat, Outlook grounding, Notebook, adoption, and PowerPoint updates that were not in the original briefing.</p>
+      <p>Look for the blue <span class="session-stamp">Update</span> tag to find the June and July 2026 changes: Outlook compose with Copilot, whole-mailbox Copilot Chat reasoning, Outlook emails in Notebooks, delegated calling controls, Assistant details on profile cards, scheduled agent prompts, and the Meeting Insights retirement. Items from March 2026 and earlier have moved to the archive at the bottom of this page.</p>
     </section>
 
     <section class="panel" aria-label="Filters">
@@ -462,18 +462,27 @@
         </select>
         <select id="sort">
           <option value="relevance">Sort by relevance</option>
+          <option value="update">Sort by updates first</option>
           <option value="date">Sort by date</option>
           <option value="source">Sort by source</option>
         </select>
       </div>
       <div class="chips">
-        <span class="chip">Tip: filter to Calendar & meetings for EA-specific wins</span>
+        <span class="chip">Tip: filter to Calendar &amp; meetings for EA-specific wins</span>
         <span class="chip">All source links open to public Microsoft pages</span>
         <span class="chip">Roadmap dates are feature availability timing</span>
       </div>
     </section>
 
     <section id="cards" class="grid" aria-live="polite"></section>
+
+    <details class="archive-block">
+      <summary>Archive: earlier items (<span id="archiveCount">0</span>) — March 2026 and earlier</summary>
+      <div class="method">
+        <p>These items were covered in previous deliveries of this session. They are retained for reference but de-prioritized: most have completed rollout, and they are excluded from the counts, filters, and sorting above.</p>
+      </div>
+      <div id="archiveCards" class="grid"></div>
+    </details>
 
     <details>
       <summary>Source and curation notes</summary>
@@ -487,8 +496,339 @@
   <script>
     const items = [
       {
+        title: "Shared and delegate mailbox scheduling for events",
+        date: "2026-05-29",
+        source: "M365 Roadmap",
+        impact: "Calendar & meetings",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Message Center post MC1326502 (Roadmap 561912) lets executive assistants and delegates organize events on behalf of leaders using shared or delegated mailboxes, so invitations, updates, and notifications send from the selected mailbox identity rather than the assistant's own. Targeted release ran through June 2026 with GA across July 2026. Enabled by default and governed by existing Exchange permissions.",
+        why: "The single most EA-specific change in this refresh. Microsoft explicitly names executive assistants and chiefs of staff: invites now carry the recognized organizational mailbox identity, which improves recipient trust and removes the 'who actually sent this?' confusion on executive invitations.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=561912"
+      },
+      {
+        title: "Assistant information now shows in the Teams Organization view",
+        date: "2026-06-26",
+        source: "M365 Roadmap",
+        impact: "Calendar & meetings",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Message Center post MC1405501 (Roadmap 565221) adds the Assistant field to the Organization section of a Teams profile card, alongside the existing Contacts tab. General availability runs from mid-July to mid-August 2026.",
+        why: "Makes it far easier for colleagues to find the right executive assistant before booking time, routing approvals, or escalating - provided the Assistant attribute is populated in the directory.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=565221"
+      },
+      {
+        title: "Collaborate with Copilot while drafting email in Outlook",
+        date: "2026-07-17",
+        source: "M365 Roadmap",
+        impact: "Email & communications",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Message Center post MC1430542 (Roadmap 564605) puts Copilot side-by-side in the Outlook compose experience so users can create, refine, and edit a message in real time. GA runs mid-July to early August 2026 across Outlook on the web, New Outlook, and mobile, with Mac and classic Outlook later.",
+        why: "This is the core EA drafting loop - iterating on an executive reply without leaving compose, instead of round-tripping through a separate Copilot pane.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=564605"
+      },
+      {
+        title: "Copilot Chat in Outlook reasons across the whole inbox and calendar",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Email & communications",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Roadmap item 531910 expands Copilot Chat in Outlook from reasoning over a single thread to reasoning across the user's full mailbox, calendar, meetings, and other Microsoft 365 data.",
+        why: "Changes the question an assistant can ask from 'summarize this thread' to 'what has the exec committed to this month and what is still open' without leaving Outlook.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=531910"
+      },
+      {
+        title: "Outlook emails can be added as references in Copilot Notebooks",
+        date: "2026-06-15",
+        source: "M365 Roadmap",
+        impact: "Briefings & content",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Message Center post MC1392569 (Roadmap 564910) lets users add Outlook emails as Copilot Notebook references alongside files and links. GA rolls out mid-July through late July 2026.",
+        why: "Lets an EA build a durable notebook for an initiative that includes the actual email decisions - then generate briefs, summaries, and decks grounded in that thread history.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=564910"
+      },
+      {
+        title: "Schedule recurring prompts for Copilot agents",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Agents & automation",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Roadmap item 531759 lets users schedule prompts to declarative agents - including Analyst, Idea Coach, and agents built in Agent Builder - on an hourly, daily, weekly, or monthly recurrence.",
+        why: "The missing piece for the daily briefing agent pattern: the agent can run itself each morning instead of waiting for the assistant to prompt it.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=531759"
+      },
+      {
+        title: "Generate PowerPoint, Word, and Excel files from Copilot Notebooks",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Roadmap items 558938, 558934, and 559480 let Copilot Notebooks produce structured, editable PowerPoint decks, Word documents, and Excel spreadsheets directly from notebook content and references.",
+        why: "Completes the research-to-deliverable path: gather the sources once in a notebook, then produce the pre-read, the summary memo, and the tracker from the same grounded set.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=558938"
+      },
+      {
+        title: "Enhanced delegated calling with call locks and join notifications in Teams",
+        date: "2026-07-15",
+        source: "M365 Roadmap",
+        impact: "Calendar & meetings",
+        relevance: 5,
+        isUpdate: true,
+        summary: "Message Center post MC1429012 (Roadmap 567306) lets delegators lock an active call to prevent delegate participation and optionally play a warning tone when a delegate joins or resumes a call. Rollout begins early August 2026.",
+        why: "Directly addresses the sensitive-call problem in executive delegation - the exec keeps delegate call handling without exposing confidential conversations.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=567306"
+      },
+      {
+        title: "Meeting Insights is retiring in favor of Copilot meeting prep",
+        date: "2026-07-17",
+        source: "Microsoft Learn",
+        impact: "Calendar & meetings",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Message Center post MC1430531 retires Meeting Insights - the panel that surfaced related emails and files inside meeting details - beginning mid-August 2026 and completing early September 2026. Copilot-licensed users move to Copilot meeting preparation experiences instead.",
+        why: "A change to call out explicitly: assistants who rely on Meeting Insights for pre-reads need to be shown the Copilot prep equivalent before the feature disappears.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Publish curated organization prompts to Copilot Chat",
+        date: "2026-06-18",
+        source: "M365 Roadmap",
+        impact: "Admin & adoption",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Message Center post MC1396361 (Roadmap 486695) lets admins centrally create and publish curated prompts to Copilot Chat and the Copilot Prompt Gallery tenant-wide. GA ran early July to late July 2026.",
+        why: "The practical way to make session content stick: publish the executive-support prompts from this workshop directly into the Prompt Gallery instead of relying on a handout.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=486695"
+      },
+      {
+        title: "Copilot agents now support multiple owners",
+        date: "2026-07-24",
+        source: "Microsoft Learn",
+        impact: "Agents & automation",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Message Center post MC1438569 adds multi-owner support for Microsoft 365 Copilot declarative agents, replacing single-creator ownership. GA rolls out early to mid-August 2026.",
+        why: "Removes the key-person risk in EA-built agents - a briefing or scheduling agent can be co-owned by the admin pod rather than stranded when one assistant changes roles.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Proactive Copilot notifications for daily priorities on mobile",
+        date: "2026-07-09",
+        source: "M365 Roadmap",
+        impact: "Briefings & content",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Message Center post MC1422059 (Roadmap 560339) introduces proactive push notifications in the Microsoft 365 Copilot mobile app for scenarios such as Your Day at a Glance and Items waiting for you. Public preview began mid-July 2026, with GA from mid-August 2026.",
+        why: "Turns the morning briefing from something the assistant has to go get into something that arrives - useful on travel days and before early executive meetings.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=560339"
+      },
+      {
+        title: "Submit agents to the Agent Store from Agent Builder",
+        date: "2026-07-15",
+        source: "Release Notes",
+        impact: "Agents & automation",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Roadmap item 557173 lets users submit an agent built in Agent Builder for admin review and, once approved, publish it to the Agent Store under 'Built by your org'.",
+        why: "The governed path from a single assistant's prototype to a supported, discoverable agent for the whole executive-support community.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=557173"
+      },
+      {
+        title: "Copilot Cowork is generally available",
+        date: "2026-06-16",
+        source: "Tech Community",
+        impact: "Agents & automation",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Message Center post MC1393471 confirms Copilot Cowork reached general availability worldwide with multi-model support, plugins, updated skill management, and Microsoft Purview integration. It requires a Microsoft 365 Copilot license plus usage-based billing through Copilot Credits.",
+        why: "Cowork handles the long-running, multi-step assembly work - board packet prep, event logistics, cross-system research - but the Copilot Credits requirement needs a budget conversation first.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/16/copilot-cowork-is-now-generally-available/"
+      },
+      {
+        title: "Microsoft Scout introduces always-on Autopilot agents",
+        date: "2026-06-02",
+        source: "Microsoft Learn",
+        impact: "Agents & automation",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Message Center post MC1332811 introduces Autopilots - always-on agents with their own identity that act on a user's behalf within set permissions. Microsoft Scout is the first, available through Frontier as a desktop experience on Windows and macOS, working across Teams, Outlook, OneDrive, and SharePoint.",
+        why: "The clearest signal of where executive support automation is heading. Worth previewing as a direction-setting item rather than something to deploy this quarter.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Open Office and PDF files directly inside Copilot Chat",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Roadmap item 548641 opens Word, Excel, PowerPoint, and PDF files cited in a Copilot Chat response inside the chat pane instead of a separate browser tab.",
+        why: "Keeps the assistant in context while checking a citation - a small change that meaningfully reduces tab-shuffling during briefing verification.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=548641"
+      },
+      {
+        title: "Copilot-generated files inherit sensitivity labels automatically",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Admin & adoption",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Microsoft 365 Copilot now evaluates source content when generating a file and applies the highest sensitivity label detected, notifying the user when a label cannot be applied.",
+        why: "Important guardrail for assistants generating documents from confidential executive material - protection now follows the content into the new file by default.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Build presentations from a Teams meeting or chat in PowerPoint Agent Mode",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Roadmap items 555883, 555884, and 555885 let users reference a specific Teams meeting or chat thread as the source when generating a presentation with Copilot Agent Mode in PowerPoint. Related items 555887, 555889, and 555892 let Copilot reuse content and style from an existing deck.",
+        why: "Turns a leadership discussion straight into a draft readout, and keeps it on the executive's established template rather than a generic Copilot layout.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=555884"
+      },
+      {
+        title: "Teams Recap app consolidates meeting recaps in one place",
+        date: "2026-06-25",
+        source: "M365 Roadmap",
+        impact: "Calendar & meetings",
+        relevance: 4,
+        isUpdate: true,
+        summary: "Message Center post MC1404322 (Roadmap 564614) introduces a Recap app in Teams that brings recordings, transcripts, and AI summaries together with quick filters, audio recap playback, and 30 days of history.",
+        why: "Solves a recurring EA complaint - hunting across chats and calendar events for the recap of a meeting the executive missed.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=564614"
+      },
+      {
+        title: "Copilot Notebooks accept Markdown, TXT, and RTF references",
+        date: "2026-07-10",
+        source: "Microsoft Learn",
+        impact: "Briefings & content",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center posts MC1423103 and MC1420894 add Markdown (.md), TXT, and RTF files as supported grounding sources for Copilot Notebooks, alongside a suggested-artifacts experience announced in MC1411727.",
+        why: "Widens what an assistant can pull into a notebook - exported notes, plain-text agendas, and legacy documents no longer need converting first.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Grouped email notifications in Outlook",
+        date: "2026-06-09",
+        source: "Microsoft Learn",
+        impact: "Email & communications",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1385580 groups email notifications arriving within a few seconds into a single alert in New Outlook and Outlook on the web. Production rollout ran late June to late July 2026.",
+        why: "Meaningful relief for assistants monitoring several high-volume mailboxes where notification noise is a constant interruption.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Send Availability is retiring in Outlook for iOS and Android",
+        date: "2026-06-16",
+        source: "Microsoft Learn",
+        impact: "Calendar & meetings",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1393802 removes the Send Availability option from the Outlook mobile compose experience, rolling out mid-July to late July 2026. Users share availability by referencing their calendar manually instead.",
+        why: "A small but real regression for assistants coordinating times from a phone. Worth flagging so it is not mistaken for a bug.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Copilot settings arrive in classic Outlook for Windows",
+        date: "2026-06-04",
+        source: "M365 Roadmap",
+        impact: "Email & communications",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1358831 (Roadmap 561491) adds Copilot settings to the File menu in classic Outlook for Windows, including the option to turn Copilot on or off. GA ran early July to late July 2026.",
+        why: "Useful for the population still on classic Outlook - settings now live where the feature is used rather than only in admin policy.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=561491"
+      },
+      {
+        title: "Set your work location from the Outlook mobile calendar",
+        date: "2026-07-09",
+        source: "Microsoft Learn",
+        impact: "Calendar & meetings",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1421966 lets users set and edit their work location (office or remote) directly from the Outlook Mobile calendar, rolling out mid-July to late July 2026.",
+        why: "Improves the work-location signal assistants rely on when placing in-person meetings, travel, and on-site executive commitments.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Copilot Search matches on a person's department",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Briefings & content",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Roadmap item 508527 lets Copilot Search match on the department attribute, so users can find everyone in a given department directly from the people source.",
+        why: "Speeds up stakeholder lookup when assembling invite lists, distribution groups, or escalation paths for an executive.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=508527"
+      },
+      {
+        title: "Profile cards show more properties by default, including Assistant",
+        date: "2026-07-24",
+        source: "Microsoft Learn",
+        impact: "Admin & adoption",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1438571 changes the default visibility of 11 existing Microsoft 365 profile card properties so they display automatically when populated, rather than requiring an admin to enable each one. Admin controls remain available.",
+        why: "Pairs with the Teams Assistant view change - together they only pay off if the Assistant attribute is actually maintained in the directory. Worth a data-hygiene action item.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Copilot Dashboard reports on licensed and unlicensed users together",
+        date: "2026-07-01",
+        source: "Release Notes",
+        impact: "Admin & adoption",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Roadmap item 559475 gives the Copilot Dashboard adoption page a unified view of Microsoft 365 Copilot and Copilot Chat usage, with a filter to switch between licensed and all-user views.",
+        why: "Lets adoption leads show true reach across an assistant population where licensing is often mixed.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=559475"
+      },
+      {
+        title: "Microsoft 365 Admin agent is generally available",
+        date: "2026-07-22",
+        source: "Microsoft Learn",
+        impact: "Admin & adoption",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1436831 makes the Microsoft 365 Admin agent generally available across the admin center and Copilot Chat, letting admins discover, configure, troubleshoot, and govern services conversationally while respecting role-based access and requiring approval before changes.",
+        why: "Relevant to the IT teams supporting this audience - delegation, mailbox, and Copilot licensing questions can be worked through conversationally.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Domain exclusion controls for Copilot web grounding",
+        date: "2026-07-01",
+        source: "Microsoft Learn",
+        impact: "Admin & adoption",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1411435 lets admins exclude specific domains from web grounding in Microsoft 365 Copilot, complementing the existing web content setting consolidated under Settings in MC1421919.",
+        why: "Gives IT a targeted control when specific external sources should never inform executive-facing Copilot output.",
+        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
+      },
+      {
+        title: "Copilot Studio and agent roadmaps move to the Microsoft 365 Roadmap",
+        date: "2026-07-02",
+        source: "Tech Community",
+        impact: "Admin & adoption",
+        relevance: 3,
+        isUpdate: true,
+        summary: "Message Center post MC1413298 confirms that from July 2, 2026, feature updates for Microsoft Copilot Studio, Sales Agent, Finance Agent, and Service Agent publish exclusively on the Microsoft 365 Roadmap. Release Planner is no longer a source for these products.",
+        why: "A bookmark change for anyone tracking agent capability timelines on behalf of an executive or adoption program.",
+        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap"
+      },
+      {
         title: "Delegates can search another user's meetings in Copilot Chat",
         date: "2026-03-24",
+        archived: true,
         source: "Release Notes",
         impact: "Calendar & meetings",
         relevance: 5,
@@ -522,7 +862,6 @@
         source: "Microsoft Support",
         impact: "Calendar & meetings",
         relevance: 5,
-        newSinceSession: true,
         summary: "Message Center post MC1192258 says Microsoft 365 Copilot Chat can handle meeting responses directly, including Accept, Decline, Tentative, Follow, and Remove canceled.",
         why: "A practical EA win: assistants and leaders can process calendar decisions in the same Copilot flow used for catch-up and meeting prep.",
         link: "https://support.microsoft.com/en-US/Outlook/calendar-instructions-in-outlook-and-copilot"
@@ -530,6 +869,7 @@
       {
         title: "Search for meetings by organizer in Copilot Chat",
         date: "2026-03-10",
+        archived: true,
         source: "Release Notes",
         impact: "Calendar & meetings",
         relevance: 5,
@@ -540,6 +880,7 @@
       {
         title: "Catch up on important emails in Copilot Chat",
         date: "2026-03",
+        archived: true,
         source: "M365 Roadmap",
         impact: "Email & communications",
         relevance: 5,
@@ -553,7 +894,6 @@
         source: "Release Notes",
         impact: "Email & communications",
         relevance: 5,
-        newSinceSession: true,
         summary: "Implicit Grounding in Outlook lets users add selected emails or text from email threads directly into Microsoft 365 Copilot Chat prompt context.",
         why: "Reduces copy/paste and helps EAs ground summaries, escalation briefs, and executive-ready replies in the exact email content they are reviewing.",
         link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
@@ -571,6 +911,7 @@
       {
         title: "Copilot Notebooks adds SharePoint grounding, group sharing, Word/PowerPoint agents, and mind maps",
         date: "2026-03-17",
+        archived: true,
         source: "Tech Community",
         impact: "Briefings & content",
         relevance: 5,
@@ -584,7 +925,6 @@
         source: "Microsoft Support",
         impact: "Briefings & content",
         relevance: 5,
-        newSinceSession: true,
         summary: "Message Center post MC1193414 and Roadmap item 560706 expand Copilot Notebooks with public web links and Teams meeting content such as transcripts, notes, chats, and shared files.",
         why: "Makes Notebooks a stronger executive briefing hub by combining meeting history, source links, project materials, and follow-up context in one grounded workspace.",
         link: "https://support.microsoft.com/en-us/Microsoft-365-Copilot/add-references-to-your-microsoft-365-copilot-notebook"
@@ -595,7 +935,6 @@
         source: "Tech Community",
         impact: "Briefings & content",
         relevance: 4,
-        newSinceSession: true,
         summary: "The May 2026 Copilot roundup says Copilot Notebooks can generate structured Excel spreadsheets from notebook content and turn notebook material into visual infographics.",
         why: "Useful for turning planning notes, meeting inputs, and project references into executive-ready tables or visual summaries with less manual formatting.",
         link: "https://techcommunity.microsoft.com/t5/microsoft-365-copilot-blog/what-s-new-in-microsoft-365-copilot-may-2026/ba-p/4522010"
@@ -613,6 +952,7 @@
       {
         title: "Generate PowerPoint from a Copilot page",
         date: "2026-03",
+        archived: true,
         source: "Release Notes",
         impact: "Briefings & content",
         relevance: 5,
@@ -633,6 +973,7 @@
       {
         title: "Summarize and Explain actions in the Microsoft Edge PDF reader",
         date: "2026-03-24",
+        archived: true,
         source: "Release Notes",
         impact: "Briefings & content",
         relevance: 4,
@@ -662,12 +1003,13 @@
       },
       {
         title: "Capture voice notes in the Microsoft 365 Copilot mobile app",
-        date: "2026-05",
+        date: "2026-07-23",
         source: "M365 Roadmap",
         impact: "Briefings & content",
         relevance: 4,
-        summary: "Roadmap item 498640 says Microsoft 365 Copilot can transform offline discussions into structured, actionable, searchable content using voice notes in the mobile app.",
-        why: "Good for capturing hallway conversations, post-meeting takeaways, travel notes, or verbal instructions from leaders.",
+        isUpdate: true,
+        summary: "Message Center post MC1437679 (Roadmap 498640) confirms Record in the Microsoft 365 Copilot mobile app: capture an in-person conversation or voice note and receive an AI transcript and summary in Copilot Chat. Frontier preview began late July 2026, with GA from late August through late September 2026.",
+        why: "Good for capturing hallway conversations, post-meeting takeaways, travel notes, or verbal instructions from leaders - now with confirmed rollout dates rather than a roadmap placeholder.",
         link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=498640"
       },
       {
@@ -693,6 +1035,7 @@
       {
         title: "Expand declarative agents with Mail, People, and Meeting Insights",
         date: "2026-03",
+        archived: true,
         source: "Tech Community",
         impact: "Agents & automation",
         relevance: 4,
@@ -736,7 +1079,6 @@
         source: "M365 Roadmap",
         impact: "Briefings & content",
         relevance: 5,
-        newSinceSession: true,
         summary: "Message Center post MC1127230 says licensed users can select specific content sources to scope Copilot Chat responses. Worldwide rollout is planned for mid to late June 2026.",
         why: "Important for focused executive prep where answers should be grounded only in selected files, teams, or sources.",
         link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=496596"
@@ -744,6 +1086,7 @@
       {
         title: "Scope Copilot Chat prompts to Teams channels with Context IQ",
         date: "2026-03-10",
+        archived: true,
         source: "Release Notes",
         impact: "Briefings & content",
         relevance: 4,
@@ -754,6 +1097,7 @@
       {
         title: "Lists in Context IQ",
         date: "2026-03",
+        archived: true,
         source: "M365 Roadmap",
         impact: "Briefings & content",
         relevance: 3,
@@ -764,6 +1108,7 @@
       {
         title: "Intelligent summaries in Copilot Dashboard",
         date: "2026-03-31",
+        archived: true,
         source: "M365 Roadmap",
         impact: "Admin & adoption",
         relevance: 4,
@@ -774,6 +1119,7 @@
       {
         title: "Comprehensive Copilot metrics in Copilot Analytics",
         date: "2026-03-30",
+        archived: true,
         source: "Microsoft Learn",
         impact: "Admin & adoption",
         relevance: 4,
@@ -784,6 +1130,7 @@
       {
         title: "Copilot Dashboard enhanced scope drilldown",
         date: "2026-03",
+        archived: true,
         source: "M365 Roadmap",
         impact: "Admin & adoption",
         relevance: 4,
@@ -794,6 +1141,7 @@
       {
         title: "Satisfaction-rate metric for Microsoft 365 Copilot",
         date: "2026-03",
+        archived: true,
         source: "M365 Roadmap",
         impact: "Admin & adoption",
         relevance: 3,
@@ -817,7 +1165,6 @@
         source: "Release Notes",
         impact: "Admin & adoption",
         relevance: 4,
-        newSinceSession: true,
         summary: "Organizational Messages in the Microsoft 365 admin center now supports email delivery and dynamic usage-based targeting, including segments for inactive Copilot users.",
         why: "Gives adoption leads a direct way to target Copilot nudges, reminders, and onboarding to EAs or leaders who are not yet using key features.",
         link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
@@ -848,7 +1195,6 @@
         source: "Tech Community",
         impact: "Admin & adoption",
         relevance: 3,
-        newSinceSession: true,
         summary: "Learning Agent provides personalized Copilot and AI upskilling in the flow of work, using role and work-pattern context plus Microsoft and organization learning sources.",
         why: "A useful adoption resource after the EA session: admins can point assistants and leaders to role-relevant Copilot practice instead of generic training.",
         link: "https://techcommunity.microsoft.com/t5/microsoft-365-copilot-blog/learning-agent-now-generally-available-personalized-ai/ba-p/4524571"
@@ -859,7 +1205,6 @@
         source: "M365 Roadmap",
         impact: "Briefings & content",
         relevance: 4,
-        newSinceSession: true,
         summary: "PowerPoint Copilot adds skills such as Review this presentation, Visualize this slide, and Prepare for Questions; create/add slide experiences are moving into Agent Mode in the Copilot chat pane.",
         why: "Directly supports executive deck preparation, speaker readiness, and faster iteration on text-heavy briefing slides.",
         link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=555874"
@@ -867,6 +1212,7 @@
       {
         title: "Tech Community March 2026 monthly update",
         date: "2026-03",
+        archived: true,
         source: "Tech Community",
         impact: "Briefings & content",
         relevance: 3,
@@ -895,33 +1241,25 @@
     };
 
     const cards = document.getElementById("cards");
+    const archiveCards = document.getElementById("archiveCards");
     const search = document.getElementById("search");
     const source = document.getElementById("source");
     const impact = document.getElementById("impact");
     const sort = document.getElementById("sort");
 
-    document.getElementById("statItems").textContent = items.length;
-    document.getElementById("statTop").textContent = items.filter(item => item.relevance >= 5).length;
+    const current = items.filter(item => !item.archived);
+    const archived = items.filter(item => item.archived);
 
-    function render() {
-      const q = search.value.trim().toLowerCase();
-      let filtered = items.filter(item => {
-        const text = [item.title, item.summary, item.why, item.source, item.impact].join(" ").toLowerCase();
-        return (!q || text.includes(q))
-          && (source.value === "all" || item.source === source.value)
-          && (impact.value === "all" || item.impact === impact.value);
-      });
+    document.getElementById("statItems").textContent = current.length;
+    document.getElementById("statTop").textContent = current.filter(item => item.relevance >= 5).length;
+    document.getElementById("statUpdates").textContent = current.filter(item => item.isUpdate).length;
+    document.getElementById("archiveCount").textContent = archived.length;
 
-      filtered.sort((a, b) => {
-        if (sort.value === "date") return b.date.localeCompare(a.date) || b.relevance - a.relevance;
-        if (sort.value === "source") return a.source.localeCompare(b.source) || b.relevance - a.relevance;
-        return b.relevance - a.relevance || b.date.localeCompare(a.date);
-      });
-
-      cards.innerHTML = filtered.length ? filtered.map(item => `
-        <article class="card ${sourceClass[item.source]} ${item.newSinceSession ? "session-new" : ""}">
+    function cardMarkup(item) {
+      return `
+        <article class="card ${sourceClass[item.source]} ${item.isUpdate ? "session-new" : ""}">
           <div class="meta">
-            ${item.newSinceSession ? `<span class="session-stamp">New since session</span>` : ""}
+            ${item.isUpdate ? `<span class="session-stamp">Update</span>` : ""}
             <span class="pill source">${item.source}</span>
             <span class="pill">${item.impact}</span>
             <span class="pill">${item.date}</span>
@@ -934,8 +1272,33 @@
             <span class="relevance">Relevance ${item.relevance}/5</span>
           </div>
         </article>
-      `).join("") : `<div class="empty">No items match the current filters.</div>`;
+      `;
     }
+
+    function render() {
+      const q = search.value.trim().toLowerCase();
+      let filtered = current.filter(item => {
+        const text = [item.title, item.summary, item.why, item.source, item.impact].join(" ").toLowerCase();
+        return (!q || text.includes(q))
+          && (source.value === "all" || item.source === source.value)
+          && (impact.value === "all" || item.impact === impact.value);
+      });
+
+      filtered.sort((a, b) => {
+        if (sort.value === "date") return b.date.localeCompare(a.date) || b.relevance - a.relevance;
+        if (sort.value === "source") return a.source.localeCompare(b.source) || b.relevance - a.relevance;
+        if (sort.value === "update") return (b.isUpdate === true) - (a.isUpdate === true) || b.relevance - a.relevance;
+        return b.relevance - a.relevance || b.date.localeCompare(a.date);
+      });
+
+      cards.innerHTML = filtered.length
+        ? filtered.map(cardMarkup).join("")
+        : `<div class="empty">No items match the current filters.</div>`;
+    }
+
+    archiveCards.innerHTML = archived
+      .sort((a, b) => b.date.localeCompare(a.date) || b.relevance - a.relevance)
+      .map(cardMarkup).join("");
 
     [search, source, impact, sort].forEach(control => control.addEventListener("input", render));
     render();

@@ -271,11 +271,34 @@ header p,
   margin-top: 6px;
 }
 
+.archive-block {
+  margin-top: 30px;
+}
+
+.archive-block > summary {
+  cursor: pointer;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.archive-block .grid {
+  margin-top: 16px;
+  opacity: 0.72;
+}
+
+.archive-block .grid:hover {
+  opacity: 1;
+}
+
+.archive-block .card {
+  box-shadow: none !important;
+  border-style: dashed !important;
+}
+
 .stat {
   position: relative;
   overflow: hidden;
 }
-
 .stat::before {
   content: "";
   position: absolute;

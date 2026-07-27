@@ -1640,7 +1640,7 @@
     <div>
       <p class="suite-kicker">Executive admin enablement</p>
       <h1>Microsoft 365 Copilot for Executive Assistant Delegation</h1>
-      <p>How an executive and their assistant use Copilot together across email and calendar — refreshed with June 2026 Copilot Chat, Outlook, and Notebook updates.</p>
+      <p>How an executive and their assistant use Copilot together across email and calendar — refreshed July 2026 with shared-mailbox event scheduling, Copilot in compose, Notebook grounding, and delegated calling controls.</p>
     </div>
     <div class="suite-mark">EA</div>
   </div>
@@ -1693,9 +1693,9 @@
     <div class="workiq-callout session-new">
       <div class="workiq-icon">🔄</div>
       <div class="workiq-text">
-        <span class="session-stamp">New since session</span>
-        <strong>June 2026 update to use in this guide.</strong> Copilot Chat can now be scoped with selected Content Sources, Outlook email content can be added directly into Copilot Chat prompts, meeting RSVPs can be handled in Copilot Chat, and Copilot Notebooks can use web links and Teams meetings as references.
-        <span class="sub">For EAs, the practical shift is better grounding: choose the mailbox thread, meeting, notebook, or selected sources before asking for an executive brief, reply draft, or calendar decision.</span>
+        <span class="session-stamp">Update</span>
+        <strong>July 2026 updates to use in this guide.</strong> Assistants and delegates can now schedule events from a shared or delegated mailbox so invites send from the recognized organizational identity (MC1326502, Roadmap 561912). Copilot now works side-by-side in the Outlook compose window (MC1430542), Copilot Chat in Outlook reasons across the entire mailbox and calendar rather than a single thread (Roadmap 531910), Outlook emails can be added as Copilot Notebook references (MC1392569), and Teams call delegation gains call locks and delegate-join notifications (MC1429012).
+        <span class="sub">Two things to plan around: Meeting Insights retires between mid-August and early September 2026 in favor of Copilot meeting prep (MC1430531), and the Assistant field now surfaces in the Teams Organization view (MC1405501) — which only pays off if that directory attribute is actually maintained.</span>
       </div>
     </div>
 
@@ -2346,8 +2346,8 @@
             <div class="prompt-box"><pre>Reschedule all of my 1:1s with my direct reports for next week to the Friday afternoon that week.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
           </div>
 
-          <div class="prompt-card frontier session-new">
-            <h3><span class="session-stamp">New since session</span> 4. RSVP directly in Copilot Chat</h3>
+          <div class="prompt-card frontier">
+            <h3>4. RSVP directly in Copilot Chat</h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Open Copilot Chat and reference the target meeting</li>
@@ -3005,6 +3005,15 @@ Automatically follow meetings with subject containing "FYI".</pre><button class=
   <!-- ============ TAB: SETUP STEPS ============ -->
   <div class="tab-panel" id="tab-setup">
 
+    <div class="workiq-callout session-new">
+      <div class="workiq-icon">📤</div>
+      <div class="workiq-text">
+        <span class="session-stamp">Update</span>
+        <strong>Shared and delegate mailboxes can now schedule events directly.</strong> Message Center post MC1326502 (Roadmap 561912) lets assistants and delegates create and manage events on behalf of leaders from a shared or delegated mailbox, with invitations, updates, and notifications sent from that mailbox identity instead of the assistant's own. Targeted release ran through June 2026 and general availability completed across July 2026.
+        <span class="sub">No new policy is required — the feature is on by default and respects existing Exchange delegate and shared mailbox permissions. Before the session, review those permissions for each executive/assistant pair, and brief helpdesk that the sender identity on event invitations has changed.</span>
+      </div>
+    </div>
+
     <div class="config-bar">
       <div class="config-header-row">
         <div>
@@ -3610,7 +3619,7 @@ Automatically follow meetings with subject containing "FYI".</pre><button class=
     const ev = dayEvents[id];
     if (!ev) return;
     document.getElementById('event-modal-title').textContent = ev.time + ' — ' + ev.title;
-    let html = '<div class="event-meta">' + (ev.newSinceSession ? '<span class="session-stamp">New since session</span>' : '') + (ev.surfaces || []).join('') + '</div>';
+    let html = '<div class="event-meta">' + (ev.newSinceSession ? '' : '') + (ev.surfaces || []).join('') + '</div>';
     html += '<div style="margin-bottom:12px; font-size:12.5px; color:var(--text-muted); font-weight:600;">' + ev.typeLabel + '</div>';
     html += '<p class="event-scenario">' + ev.scenario + '</p>';
     html += '<div class="event-action-label">To perform this action:</div>';

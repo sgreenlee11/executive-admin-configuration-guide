@@ -483,6 +483,47 @@
         white-space: normal;
       }
     }
+    .session-stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      width: fit-content;
+      padding: 6px 9px;
+      border: 1px solid rgba(76, 194, 255, 0.42);
+      border-radius: 999px;
+      background: rgba(76, 194, 255, 0.16);
+      color: #DDF5FF;
+      font-size: 10.5px;
+      font-weight: 950;
+      letter-spacing: 0.045em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .session-stamp::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4CC2FF;
+      box-shadow: 0 0 0 5px rgba(76, 194, 255, 0.16);
+      flex: 0 0 auto;
+    }
+
+    .session-new {
+      border-color: rgba(76, 194, 255, 0.50) !important;
+      box-shadow: inset 6px 0 0 #4CC2FF, 0 18px 38px rgba(76, 194, 255, 0.10);
+    }
+
+    .update-list {
+      margin: 14px 0 0;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+
+    .update-list li + li {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -509,9 +550,22 @@
 
   <main class="wrap">
     <div class="quick-links" aria-label="Agent build sections">
+      <a href="#agent-updates">What changed</a>
       <a href="#daily-briefing-agent">Agent 1: Daily Briefing</a>
       <a href="#leader-voice-agent">Agent 2: Leader Voice</a>
     </div>
+
+    <section class="panel session-new" id="agent-updates">
+      <h2><span class="session-stamp">Update</span> What changed for agents since the last session</h2>
+      <p>Four changes from June and July 2026 materially affect how the agents on this page get built, run, and shared. Cover these before walking through the build steps.</p>
+      <ul class="update-list">
+        <li><strong>Scheduled prompts (Roadmap 531759).</strong> Prompts can now be scheduled against declarative agents on an hourly, daily, weekly, or monthly recurrence. This is the missing piece for Agent 1 — the daily briefing agent can run itself each morning instead of waiting for the assistant to open Copilot and prompt it.</li>
+        <li><strong>Multiple owners per agent (MC1438569).</strong> Declarative agents are no longer limited to a single creator-owner. Rolling out early to mid-August 2026, this removes the key-person risk in an assistant-built agent — a briefing or leader-voice agent can be co-owned by the whole admin pod rather than stranded when one person changes roles.</li>
+        <li><strong>Publish to the Agent Store (Roadmap 557173).</strong> Agents built here can be submitted for admin review and, once approved, published to the Agent Store under "Built by your org." This is the governed path from one assistant's prototype to a supported, discoverable agent for the entire executive-support community.</li>
+        <li><strong>Share directly to a Team (Roadmap 557947).</strong> The sharing dialog now accepts a Microsoft Teams team, with an optional notification and install link posted to the team's main channel — useful for distributing an agent to an EA peer group without a store submission.</li>
+      </ul>
+      <p style="margin-top:14px;"><strong>Also worth knowing:</strong> Copilot Notebooks can now take Outlook emails as references (MC1392569) and generate PowerPoint, Word, and Excel files directly from notebook content. For some briefing scenarios a well-built notebook is a faster starting point than a custom agent — worth positioning the two side by side.</p>
+    </section>
 
     <section class="panel" id="daily-briefing-agent">
       <h2>Agent 1: Daily Executive Briefing Assistant</h2>

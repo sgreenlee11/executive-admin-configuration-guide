@@ -393,7 +393,7 @@
           <span class="badge orange">Executive admin guide</span>
           <span class="badge green">EA audience</span>
           <span class="badge blue">Support links included</span>
-          <span class="badge amber">Refreshed June 7, 2026</span>
+          <span class="badge amber">Refreshed July 27, 2026</span>
         </div>
       </div>
       <div class="suite-mark">EA</div>
@@ -427,12 +427,12 @@
   </div>
 
   <main class="container">
-    <section class="update-brief" aria-label="Updates since original session">
+    <section class="update-brief" aria-label="Updates in this refresh">
       <div>
-        <strong>New since the May session</strong>
-        <span>Blue rail = added or materially changed since delivery.</span>
+        <strong>Updates in this refresh</strong>
+        <span>Blue rail = added or materially changed since the last delivery.</span>
       </div>
-      <p>This page now highlights the June 5 feature-matrix refresh, New Outlook Copilot account selector, offline improvements, upcoming delegate permission management, and admin adoption controls. Scan for the <span class="session-stamp">New since session</span> stamp.</p>
+      <p>Scan for the <span class="session-stamp">Update</span> tag. This round covers shared and delegate mailbox event scheduling, Copilot in the compose window, whole-mailbox Copilot Chat reasoning, calendar copy and .ics preview, the Meeting Insights retirement, and two mobile features being removed.</p>
     </section>
 
     <section class="slide" id="headline">
@@ -496,6 +496,66 @@
       </div>
 
       <div class="grid cols-3">
+        <div class="card ea-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge green">GA July 2026</span><span class="badge blue">Delegation</span></div>
+          <h3>Events can now be scheduled from a shared or delegate mailbox</h3>
+          <p>Message Center post MC1326502 (Roadmap 561912) lets assistants and delegates organize events on behalf of leaders using a shared or delegated mailbox, so invitations, updates, and notifications send from that mailbox identity. Targeted release ran through June 2026, GA across July 2026.</p>
+          <ul>
+            <li><strong>EA angle:</strong> the headline change for this audience. Microsoft names executive assistants and chiefs of staff directly - invites finally carry the recognized organizational identity instead of the assistant's personal mailbox.</li>
+            <li><strong>Callout:</strong> enabled by default and governed by existing Exchange permissions. Review delegate and shared mailbox permissions, and brief helpdesk on the new sender identity model.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge purple">Copilot</span><span class="badge green">GA Aug 2026</span></div>
+          <h3>Copilot moves into the compose window</h3>
+          <p>Message Center post MC1430542 (Roadmap 564605) puts Copilot side-by-side in the Outlook compose experience so a draft can be created, refined, and edited in real time. Rolling out mid-July to early August 2026 on Outlook web, New Outlook, and mobile; Mac follows, classic Outlook later in 2026.</p>
+          <ul>
+            <li><strong>EA angle:</strong> this is the core drafting loop for executive correspondence - iterate in place instead of round-tripping between a Copilot pane and the message body.</li>
+            <li><strong>Callout:</strong> requires a Microsoft 365 Copilot license. Worth demonstrating live against a real reply-on-behalf-of scenario.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge purple">Copilot</span><span class="badge blue">Roadmap 531910</span></div>
+          <h3>Copilot Chat in Outlook now reasons across the whole mailbox</h3>
+          <p>Copilot Chat in Outlook expands from reasoning over a single thread to reasoning across the full inbox, calendar, meetings, and other Microsoft 365 data available to the user.</p>
+          <ul>
+            <li><strong>EA angle:</strong> changes the question from "summarize this thread" to "what has the exec committed to this month, and what is still unanswered."</li>
+            <li><strong>Callout:</strong> results are permission-scoped. In a delegated context, confirm which mailbox Copilot is reasoning over before trusting the answer.</li>
+          </ul>
+        </div>
+
+        <div class="card ea-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge green">July 2026</span><span class="badge blue">Calendar</span></div>
+          <h3>Calendar power-user gaps are starting to close</h3>
+          <p>Ctrl+drag now copies a calendar event, and dragging an .ics file onto the calendar surface previews the invitation before it is accepted. Shared calendars assigned by an administrator also appear automatically without a manual add step.</p>
+          <ul>
+            <li><strong>EA angle:</strong> copy/paste of events was one of the loudest gaps for experienced calendar managers. This is the item to demo to skeptical power users.</li>
+            <li><strong>Callout:</strong> Schedule View, multi-select, and conditional formatting are still outstanding - keep them on the scorecard.</li>
+          </ul>
+        </div>
+
+        <div class="card risk-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge amber">Retiring</span><span class="badge blue">Meetings</span></div>
+          <h3>Meeting Insights is being retired</h3>
+          <p>Message Center post MC1430531 retires Meeting Insights - the panel surfacing related emails and files inside meeting details - beginning mid-August 2026 and completing early September 2026. Copilot-licensed users move to Copilot meeting preparation instead.</p>
+          <ul>
+            <li><strong>EA angle:</strong> assistants who build pre-reads from Meeting Insights need the Copilot prep equivalent shown to them before the panel disappears.</li>
+            <li><strong>Callout:</strong> affects Outlook web, New Outlook, mobile, Mac, and Teams. Non-Copilot users lose the capability without a direct replacement.</li>
+          </ul>
+        </div>
+
+        <div class="card risk-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge amber">Retiring</span><span class="badge blue">Mobile</span></div>
+          <h3>Send Availability is disappearing from Outlook mobile</h3>
+          <p>Message Center post MC1393802 removed the Send Availability option from the Outlook mobile compose experience between mid-July and late July 2026. Users share availability by referencing the calendar manually instead.</p>
+          <ul>
+            <li><strong>EA angle:</strong> a genuine regression for assistants coordinating times from a phone between meetings or while travelling.</li>
+            <li><strong>Callout:</strong> flag it explicitly so it is not reported to the helpdesk as a bug. Calendar functionality itself is unchanged.</li>
+          </ul>
+        </div>
+
         <div class="card ea-card">
           <div class="badge-row"><span class="badge green">Recently updated</span><span class="badge blue">Shared mailbox</span></div>
           <h3>Shared mailbox archive is now available</h3>
@@ -566,8 +626,8 @@
           </ul>
         </div>
 
-        <div class="card copilot-card session-new">
-          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot</span><span class="badge green">May rollout</span></div>
+        <div class="card copilot-card">
+          <div class="badge-row"><span class="badge purple">Copilot</span><span class="badge green">May rollout</span></div>
           <h3>Copilot account selector reduces multi-account confusion</h3>
           <p>When more than one Copilot-enabled account is added to New Outlook, the Copilot side pane in Calendar includes an account dropdown.</p>
           <ul>
@@ -576,8 +636,8 @@
           </ul>
         </div>
 
-        <div class="card ea-card session-new">
-          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge green">Updated</span><span class="badge blue">Offline</span></div>
+        <div class="card ea-card">
+          <div class="badge-row"><span class="badge green">Updated</span><span class="badge blue">Offline</span></div>
           <h3>Offline support continues to improve</h3>
           <p>Microsoft notes support for adding attachments while offline, a 30-day offline mail sync window, offline search folders, and undo send while offline.</p>
           <ul>
@@ -606,8 +666,8 @@
           </ul>
         </div>
 
-        <div class="card session-new">
-          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge amber">Roadmap</span><span class="badge blue">Delegation</span></div>
+        <div class="card">
+          <div class="badge-row"><span class="badge amber">Roadmap</span><span class="badge blue">Delegation</span></div>
           <h3>Mail delegate permission management is on the roadmap</h3>
           <p>Roadmap item 417063 says users will be able to grant mailbox and folder delegate access from the New Outlook app, planned for July 2026.</p>
           <ul>
@@ -793,8 +853,8 @@
           </ul>
         </div>
 
-        <div class="card copilot-card session-new">
-          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot</span><span class="badge green">Newer flow</span></div>
+        <div class="card copilot-card">
+          <div class="badge-row"><span class="badge purple">Copilot</span><span class="badge green">Newer flow</span></div>
           <h3>Add Outlook email context into Copilot Chat</h3>
           <p>Implicit Grounding in Outlook lets users add selected emails or thread text directly into Microsoft 365 Copilot Chat prompts.</p>
           <ul>
@@ -803,13 +863,33 @@
           </ul>
         </div>
 
-        <div class="card copilot-card session-new">
-          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot</span><span class="badge amber">Multi-account</span></div>
+        <div class="card copilot-card">
+          <div class="badge-row"><span class="badge purple">Copilot</span><span class="badge amber">Multi-account</span></div>
           <h3>Confirm the active Copilot account</h3>
           <p>The Outlook Copilot side pane account selector helps users switch between Copilot-enabled accounts without relying only on Outlook's broader account context.</p>
           <ul>
             <li><strong>EA use:</strong> reduce mistakes when switching between personal work, project, and delegated executive contexts.</li>
             <li><strong>Admin note:</strong> include account-context screenshots in training for multi-account users.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge purple">Copilot</span><span class="badge green">Notebooks</span></div>
+          <h3>Pull Outlook emails into Copilot Notebooks</h3>
+          <p>Message Center post MC1392569 (Roadmap 564910) lets Outlook emails be added as references in Copilot Notebooks alongside files and links, with GA rolling out mid-July through late July 2026.</p>
+          <ul>
+            <li><strong>EA use:</strong> build a durable notebook per initiative that includes the actual email decisions, then generate briefs, summaries, and decks grounded in that thread history.</li>
+            <li><strong>Watchout:</strong> notebook references inherit source permissions - confirm what a shared notebook exposes before circulating it.</li>
+          </ul>
+        </div>
+
+        <div class="card copilot-card session-new">
+          <div class="badge-row"><span class="session-stamp">Update</span><span class="badge purple">Copilot</span><span class="badge blue">Classic Outlook</span></div>
+          <h3>Copilot settings reach classic Outlook for Windows</h3>
+          <p>Message Center post MC1358831 (Roadmap 561491) adds Copilot settings to the File menu in classic Outlook for Windows, including the option to turn Copilot on or off. GA ran early July to late July 2026.</p>
+          <ul>
+            <li><strong>EA use:</strong> useful for the population still on classic Outlook while the migration runs - settings now sit where the feature is used.</li>
+            <li><strong>Admin note:</strong> this does not change Copilot licensing, eligibility, or existing admin controls.</li>
           </ul>
         </div>
       </div>
@@ -876,23 +956,59 @@
             <td>May affect specialized EA workflows, line-of-business tools, or custom executive processes.</td>
             <td>Identify replacements with web add-ins or process changes.</td>
           </tr>
-          <tr class="session-new-row">
+          <tr>
             <td><strong>Offline / PST</strong></td>
             <td>Both are partially available; offline support now includes adding attachments while offline and a 30-day sync window.</td>
             <td>Relevant for travel, intermittent connectivity, archive lookup, and long-lived PST dependencies.</td>
-            <td><span class="session-stamp">New since session</span> Test travel scenarios and legacy archive access before cutover.</td>
+            <td>Test travel scenarios and legacy archive access before cutover.</td>
           </tr>
-          <tr class="session-new-row">
+          <tr>
             <td><strong>Copilot account context</strong></td>
             <td>Account selector in the Outlook Copilot side pane is rolling out for users with more than one Copilot-enabled account.</td>
             <td>Reduces wrong-account risk for multi-account assistants and leaders.</td>
-            <td><span class="session-stamp">New since session</span> Add to pilot scripts for users with multiple work accounts or delegated scenarios.</td>
+            <td>Add to pilot scripts for users with multiple work accounts or delegated scenarios.</td>
           </tr>
-          <tr class="session-new-row">
+          <tr>
             <td><strong>Mail delegate permissions</strong></td>
             <td>Granting mailbox and folder delegate permissions from New Outlook is planned for July 2026.</td>
             <td>Could simplify executive/delegate setup once available.</td>
-            <td><span class="session-stamp">New since session</span> Track roadmap item 417063 and keep existing delegate setup guidance until rollout.</td>
+            <td>Track roadmap item 417063 and keep existing delegate setup guidance until rollout.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Event scheduling from shared/delegate mailboxes</strong></td>
+            <td>Available. MC1326502 (Roadmap 561912) reached GA across July 2026; enabled by default and governed by existing Exchange permissions.</td>
+            <td>Core executive scheduling workflow. Invites now send from the recognized organizational mailbox identity.</td>
+            <td><span class="session-stamp">Update</span> Review delegate and shared mailbox permissions, then brief assistants and helpdesk on the new sender identity.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Copilot in compose</strong></td>
+            <td>Rolling out. MC1430542 (Roadmap 564605) completes early August 2026 on Outlook web, New Outlook, and mobile; Mac follows and classic Outlook comes later in 2026.</td>
+            <td>Primary drafting loop for executive correspondence.</td>
+            <td><span class="session-stamp">Update</span> Requires a Copilot license. Demo against a real reply-on-behalf-of scenario during the session.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Meeting Insights</strong></td>
+            <td>Retiring. MC1430531 begins mid-August 2026 and completes early September 2026; Copilot meeting prep is the replacement.</td>
+            <td>Affects assistants who build pre-reads from the meeting details panel.</td>
+            <td><span class="session-stamp">Update</span> Show the Copilot prep equivalent before retirement. Note that non-Copilot users have no direct replacement.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Calendar power-user gaps</strong></td>
+            <td>Improving. Ctrl+drag event copy and .ics drag-to-preview shipped in July 2026; admin-assigned shared calendars now appear automatically.</td>
+            <td>The area experienced calendar managers complain about most.</td>
+            <td><span class="session-stamp">Update</span> Re-demo to previously skeptical users. Schedule View, multi-select, and conditional formatting remain outstanding.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Shared calendar sync model</strong></td>
+            <td>MC1287370 auto-upgrades shared calendars from the legacy MAPI model to the modern REST model. Per the MC1289719 follow-up, this tenant was initially excluded and was scheduled into the rollout from June 2, 2026.</td>
+            <td>Improves sync reliability and performance for delegates on executive calendars.</td>
+            <td><span class="session-stamp">Update</span> No user or admin action required. A shared calendar briefly disappearing during migration is expected, not data loss.</td>
+          </tr>
+          <tr class="session-new-row">
+            <td><strong>Outlook mobile availability sharing</strong></td>
+            <td>Retired. MC1393802 removed Send Availability from the mobile compose experience between mid-July and late July 2026.</td>
+            <td>Regression for assistants coordinating times from a phone.</td>
+            <td><span class="session-stamp">Update</span> Communicate proactively so it is not logged as a helpdesk bug.</td>
           </tr>
         </tbody>
       </table>
@@ -991,16 +1107,16 @@
             <li>Conditional Access and OWA mailbox policies can enforce device, MFA, and attachment-related controls.</li>
           </ul>
         </div>
-        <div class="card session-new">
-          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge purple">Copilot support</span></div>
+        <div class="card">
+          <div class="badge-row"><span class="badge purple">Copilot support</span></div>
           <h3>Prepare support for Copilot settings in classic Outlook</h3>
           <ul>
             <li>Copilot settings are being added under the File menu in classic Outlook for Windows, with preview in June and GA planned for July 2026.</li>
             <li>Support teams should know where users can toggle Copilot and how that differs from tenant licensing or admin controls.</li>
           </ul>
         </div>
-        <div class="card session-new">
-          <div class="badge-row"><span class="session-stamp">New since session</span><span class="badge amber">Adoption control</span></div>
+        <div class="card">
+          <div class="badge-row"><span class="badge amber">Adoption control</span></div>
           <h3>Use targeted Copilot adoption messages</h3>
           <ul>
             <li>Organizational Messages now supports email delivery and usage-based targeting for Copilot adoption segments.</li>
