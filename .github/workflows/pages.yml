@@ -2,7 +2,7 @@ name: Deploy static site to GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev"]
   workflow_dispatch:
 
 permissions:
@@ -21,8 +21,17 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout live content (main)
         uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main-src
+
+      - name: Checkout preview content (dev)
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          path: dev-src
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -32,8 +41,20 @@ jobs:
       - name: Prepare site artifact
         run: |
           mkdir _site
-          cp *.html .nojekyll shared-brand.css _site/
-          cp -R assets _site/assets
+          cp main-src/*.html main-src/.nojekyll main-src/shared-brand.css _site/
+          cp -R main-src/assets _site/assets
+
+          # The dev branch publishes to /dev/ so the live site stays untouched.
+          mkdir _site/dev
+          cp dev-src/*.html dev-src/.nojekyll dev-src/shared-brand.css _site/dev/
+          cp -R dev-src/assets _site/dev/assets
+
+          # Mark every preview page so it cannot be mistaken for the live site.
+          # Uses | as the sed delimiter because the banner contains # colour codes.
+          banner='<div style="position:fixed;left:12px;bottom:12px;z-index:9999;background:#0b5cad;color:#fff;font:600 12px/1 system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.45)">Preview build - not the live site</div>'
+          for f in _site/dev/*.html; do
+            sed -i "s|</body>|${banner}</body>|" "$f"
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
