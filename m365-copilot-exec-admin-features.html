@@ -438,7 +438,7 @@
         <strong>Updates in this refresh</strong>
         <span>Blue rail = added or materially changed since the last delivery.</span>
       </div>
-      <p>Look for the blue <span class="session-stamp">Update</span> tag to find the June and July 2026 changes: Outlook compose with Copilot, whole-mailbox Copilot Chat reasoning, Outlook emails in Notebooks, delegated calling controls, Assistant details on profile cards, scheduled agent prompts, and the Meeting Insights retirement. Items from March 2026 and earlier have moved to the archive at the bottom of this page.</p>
+      <p>Look for the blue <span class="session-stamp">Update</span> tag to find the June and July 2026 changes: Outlook compose with Copilot, Outlook emails in Notebooks, delegated calling controls, Assistant details on profile cards, agent co-ownership and Agent Store publishing, and the Meeting Insights retirement. Items from March 2026 and earlier have moved to the archive at the bottom of this page.</p>
     </section>
 
     <section class="panel" aria-label="Filters">
@@ -461,8 +461,8 @@
           <option value="Agents & automation">Agents & automation</option>
         </select>
         <select id="sort">
-          <option value="relevance">Sort by relevance</option>
           <option value="update">Sort by updates first</option>
+          <option value="relevance">Sort by relevance</option>
           <option value="date">Sort by date</option>
           <option value="source">Sort by source</option>
         </select>
@@ -529,17 +529,6 @@
         link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=564605"
       },
       {
-        title: "Copilot Chat in Outlook reasons across the whole inbox and calendar",
-        date: "2026-07-01",
-        source: "Release Notes",
-        impact: "Email & communications",
-        relevance: 5,
-        isUpdate: true,
-        summary: "Roadmap item 531910 expands Copilot Chat in Outlook from reasoning over a single thread to reasoning across the user's full mailbox, calendar, meetings, and other Microsoft 365 data.",
-        why: "Changes the question an assistant can ask from 'summarize this thread' to 'what has the exec committed to this month and what is still open' without leaving Outlook.",
-        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=531910"
-      },
-      {
         title: "Outlook emails can be added as references in Copilot Notebooks",
         date: "2026-06-15",
         source: "M365 Roadmap",
@@ -549,17 +538,6 @@
         summary: "Message Center post MC1392569 (Roadmap 564910) lets users add Outlook emails as Copilot Notebook references alongside files and links. GA rolls out mid-July through late July 2026.",
         why: "Lets an EA build a durable notebook for an initiative that includes the actual email decisions - then generate briefs, summaries, and decks grounded in that thread history.",
         link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=564910"
-      },
-      {
-        title: "Schedule recurring prompts for Copilot agents",
-        date: "2026-07-01",
-        source: "Release Notes",
-        impact: "Agents & automation",
-        relevance: 5,
-        isUpdate: true,
-        summary: "Roadmap item 531759 lets users schedule prompts to declarative agents - including Analyst, Idea Coach, and agents built in Agent Builder - on an hourly, daily, weekly, or monthly recurrence.",
-        why: "The missing piece for the daily briefing agent pattern: the agent can run itself each morning instead of waiting for the assistant to prompt it.",
-        link: "https://www.microsoft.com/en-us/microsoft-365/roadmap?searchterms=531759"
       },
       {
         title: "Generate PowerPoint, Word, and Excel files from Copilot Notebooks",
@@ -648,17 +626,6 @@
         summary: "Message Center post MC1393471 confirms Copilot Cowork reached general availability worldwide with multi-model support, plugins, updated skill management, and Microsoft Purview integration. It requires a Microsoft 365 Copilot license plus usage-based billing through Copilot Credits.",
         why: "Cowork handles the long-running, multi-step assembly work - board packet prep, event logistics, cross-system research - but the Copilot Credits requirement needs a budget conversation first.",
         link: "https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/16/copilot-cowork-is-now-generally-available/"
-      },
-      {
-        title: "Microsoft Scout introduces always-on Autopilot agents",
-        date: "2026-06-02",
-        source: "Microsoft Learn",
-        impact: "Agents & automation",
-        relevance: 4,
-        isUpdate: true,
-        summary: "Message Center post MC1332811 introduces Autopilots - always-on agents with their own identity that act on a user's behalf within set permissions. Microsoft Scout is the first, available through Frontier as a desktop experience on Windows and macOS, working across Teams, Outlook, OneDrive, and SharePoint.",
-        why: "The clearest signal of where executive support automation is heading. Worth previewing as a direction-setting item rather than something to deploy this quarter.",
-        link: "https://learn.microsoft.com/en-us/microsoft-365/copilot/release-notes"
       },
       {
         title: "Open Office and PDF files directly inside Copilot Chat",
@@ -1287,8 +1254,10 @@
       filtered.sort((a, b) => {
         if (sort.value === "date") return b.date.localeCompare(a.date) || b.relevance - a.relevance;
         if (sort.value === "source") return a.source.localeCompare(b.source) || b.relevance - a.relevance;
-        if (sort.value === "update") return (b.isUpdate === true) - (a.isUpdate === true) || b.relevance - a.relevance;
-        return b.relevance - a.relevance || b.date.localeCompare(a.date);
+        if (sort.value === "relevance") return b.relevance - a.relevance || b.date.localeCompare(a.date);
+        return (b.isUpdate === true) - (a.isUpdate === true)
+          || b.relevance - a.relevance
+          || b.date.localeCompare(a.date);
       });
 
       cards.innerHTML = filtered.length
