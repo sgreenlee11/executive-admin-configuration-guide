@@ -2171,8 +2171,20 @@
         <div class="exp-col-header calendar">🧑‍💼 Executive's content — delegated mailbox &amp; calendar</div>
         <div class="exp-col-body">
 
+          <div class="prompt-card delegate session-new">
+            <h3>1. Build a full Executive Day Brief <span class="badge exec">Executive content</span> <span class="session-stamp">Update</span></h3>
+            <div class="action-label">To perform this action:</div>
+            <ul class="action-list">
+              <li>Set the Copilot model picker to <strong>Think Deeper</strong> — this prompt asks for a lot of reasoning across the day and the deeper model handles it noticeably better</li>
+              <li>Type <strong>/</strong> and choose the Executive's calendar, then replace [Insert Executive] with their name</li>
+              <li>Run it first thing in the morning; it replaces several of the smaller prompts below</li>
+              <li>Treat conflicts and reschedule suggestions as recommendations — confirm before you change anything</li>
+            </ul>
+            <div class="prompt-box"><pre>Review my [Insert Executive] calendar for today and provide an Executive Day Brief. Identify any scheduling conflicts, double bookings, insufficient travel or transition time, overlapping priorities, and meetings that may require delegation or rescheduling. For each meeting, provide a concise preparation summary including purpose, key attendees, open action items, relevant email or chat context, and any decisions that may require the executive's attention. Highlight any customer-facing, executive-level, or high-priority engagements that warrant additional preparation. Conclude with a prioritized list of recommended actions for me as the Executive Admin to help ensure the day runs smoothly and efficiently.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+          </div>
+
           <div class="prompt-card delegate">
-            <h3>1. Triage the Executive's mailbox <span class="badge exec">Executive content</span></h3>
+            <h3>2. Triage the Executive's mailbox <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Type <strong>/</strong> and choose the Executive's mailbox</li>
@@ -2183,7 +2195,7 @@
           </div>
 
           <div class="prompt-card delegate">
-            <h3>2. Find a leader thread <span class="badge exec">Executive content</span></h3>
+            <h3>3. Find a leader thread <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Use when the Executive asks, "Where did we land on this?"</li>
@@ -2194,7 +2206,7 @@
           </div>
 
           <div class="prompt-card delegate">
-            <h3>3. Draft in the Executive's voice <span class="badge exec">Executive content</span></h3>
+            <h3>4. Draft in the Executive's voice <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Open the relevant message or cite the latest sender</li>
@@ -2205,7 +2217,7 @@
           </div>
 
           <div class="prompt-card delegate">
-            <h3>4. Summarize the Executive's day <span class="badge exec">Executive content</span></h3>
+            <h3>5. Summarize the Executive's day <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Type <strong>/</strong> and choose the Executive's calendar</li>
@@ -2216,7 +2228,7 @@
           </div>
 
           <div class="prompt-card delegate">
-            <h3>5. Find open time for the Executive <span class="badge exec">Executive content</span></h3>
+            <h3>6. Find open time for the Executive <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Use when coordinating meetings from chat</li>
@@ -2227,7 +2239,7 @@
           </div>
 
           <div class="prompt-card delegate">
-            <h3>6. Take a delegated calendar action <span class="badge exec">Executive content</span></h3>
+            <h3>7. Take a delegated calendar action <span class="badge exec">Executive content</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
               <li>Use only when you have Editor delegate access</li>
