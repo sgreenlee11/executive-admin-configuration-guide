@@ -2110,7 +2110,7 @@
   <!-- ============ TAB: COPILOT (TODAY) ============ -->
   <div class="tab-panel" id="tab-copilot">
     <h2 class="section-title">Copilot Experiences &amp; Prompts</h2>
-    <p class="section-subtitle">Available today in Outlook and Copilot Chat. Use the left column for your own mailbox and calendar; use the right column only when working in your executive's delegated mailbox or calendar.</p>
+    <p class="section-subtitle">Available today in Outlook and Copilot Chat. Use the left column for your own mailbox and calendar; use the right column only when working in your executive's delegated mailbox or calendar. The group at the bottom covers prompts that run in other apps.</p>
     <div class="availability-banner green">✅ Available today · Type / to invoke Context IQ and choose the Executive's mailbox or calendar · Delegate prompts require existing Outlook delegate access; Editor is recommended for accept/decline/reschedule actions.</div>
 
     <div class="exp-columns">
@@ -2187,8 +2187,9 @@
             <h3>2. Build a prep package for an event <span class="badge exec">Executive content</span> <span class="session-stamp">Update</span></h3>
             <div class="action-label">To perform this action:</div>
             <ul class="action-list">
+              <li>Run it with the <strong>Researcher</strong> agent — it is built for exactly this kind of multi-source, cited deep dive and will do a far better job than standard chat</li>
               <li>Replace [Insert event details] with the meeting, briefing, or engagement name plus the date</li>
-              <li>Run it in Copilot Chat with web search enabled — it deliberately blends your work content with public context</li>
+              <li>Researcher blends your work content with public web context, so expect it to take longer than a normal prompt</li>
               <li>Type <strong>/</strong> to point it at the Executive's calendar or mailbox when the prep is for them rather than you</li>
               <li>Check the cited sources and the flagged evidence gaps before you pass anything to your executive</li>
               <li>The artifacts are formatted to paste straight into Outlook, Teams, Word, or PowerPoint</li>
@@ -2263,6 +2264,26 @@
           </div>
 
         </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 26px;">
+      <div class="exp-col-header instructions">📊 Beyond email and calendar — turning prep into a deliverable</div>
+      <div class="exp-col-body">
+
+        <div class="prompt-card frontier session-new">
+          <h3>Build a deck from a document <span class="badge ea">EA content</span> <span class="session-stamp">Update</span></h3>
+          <div class="action-label">To perform this action:</div>
+          <ul class="action-list">
+            <li>Use this one inside <strong>Copilot in PowerPoint</strong>, not Copilot Chat — it needs the open deck to read your template from</li>
+            <li>Start from a deck that already uses the branding and layouts you want, then replace [Insert Document] with the source file</li>
+            <li>Pairs with the prep package prompt above — generate the slide outline first, then hand the document to PowerPoint</li>
+            <li>The final line clears the original slides, so work in a copy if you need the starting deck kept intact</li>
+            <li>Review the generated slides before sharing; Copilot follows the template but still needs an editorial pass</li>
+          </ul>
+          <div class="prompt-box"><pre>Please create a presentation based on [Insert Document]. Use the existing template, fonts, layouts and content slides as guidelines for the new deck. When finalizing, all existing slides should be removed and only new content remaining.</pre><button class="copy-btn" onclick="copyPrompt(this)">Copy</button></div>
+        </div>
+
       </div>
     </div>
   </div>
